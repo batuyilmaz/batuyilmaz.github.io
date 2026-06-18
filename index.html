@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem | Donanım | Fikir</title>
+    <title>Batu Yılmaz | Sistem & Donanım</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&family=Orbitron:wght@400;700&display=swap');
 
@@ -47,11 +47,34 @@
             z-index: 1;
         }
 
-        /* Başlık ve Glitch Efekti */
+        /* Başlık ve İsim Efekti */
         header {
             text-align: center;
             margin-bottom: 5rem;
             animation: fadeInDown 1.5s ease-out;
+        }
+
+        .user-identity {
+            font-size: 1rem;
+            color: var(--secondary-glow);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-identity::before, .user-identity::after {
+            content: '';
+            display: block;
+            width: 30px;
+            height: 2px;
+            background-color: var(--secondary-glow);
+            box-shadow: 0 0 8px var(--secondary-glow);
         }
 
         h1 {
@@ -61,10 +84,11 @@
             position: relative;
             display: inline-block;
             text-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow);
+            margin-bottom: 0.5rem;
         }
 
         .subtitle {
-            margin-top: 1rem;
+            margin-top: 0.5rem;
             font-size: 1.2rem;
             color: #888;
             border-right: 2px solid var(--primary-glow);
@@ -178,6 +202,8 @@
 
     <div class="container">
         <header>
+            <!-- İsim Eklentisi Buraya Yapıldı -->
+            <div class="user-identity">Batu Yılmaz</div>
             <h1>{ ROOT_ACCESS }</h1>
             <div class="subtitle">Sistemler // Donanım // Analitik Perspektif</div>
         </header>
@@ -205,7 +231,7 @@
         </div>
 
         <footer>
-            <p>System initialized. V.1.0. | Tüm sistemler normal parametrelerde çalışıyor.</p>
+            <p>System initialized. V.1.1. | Tüm sistemler normal parametrelerde çalışıyor.</p>
         </footer>
     </div>
 
