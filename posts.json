@@ -1,23 +1,16 @@
 [
   {
-    "slug": "merhaba",
-    "title": "Merhaba",
-    "date": "2026-06-19",
-    "excerpt": "Bu defterin ilk sayfası. Neden burada olduğumu ve burada ne bulacağını kısaca anlatıyorum.",
-    "body": "Bu blogun ilk yazısı.\n\nYeni bir yazı eklemek için yapman gereken tek şey, posts.json dosyasına yeni bir nesne eklemek. Kodun başka hiçbir yerine dokunmana gerek yok.\n\nBaşlıkları boş satırla ayırırsan otomatik olarak paragraflara bölünür. Tasarım, ilk yazıyı ana sayfada büyük bir 'öne çıkan yazı' olarak gösterir; diğerleri altında ince bir liste halinde sıralanır."
+    "id": "1",
+    "title": "ESP32 ile Akıllı Ev Sistemlerine Giriş",
+    "date": "2026-06-15",
+    "summary": "IoT dünyasına adım atarken ESP32'nin neden en iyi seçenek olduğunu ve donanım limitlerini nasıl zorlayabileceğimizi inceliyoruz.",
+    "content": "Buraya yazının uzun içeriği gelecek. HTML etiketleri (<b>kalın</b>, <br> vb.) de kullanabilirsin veya doğrudan metin girebilirsin."
   },
   {
-    "slug": "ikinci-yazi",
-    "title": "İkinci bir deneme",
+    "id": "2",
+    "title": "Linux Mint Üzerinde Geliştirme Ortamı Kurulumu",
     "date": "2026-06-18",
-    "excerpt": "Kısa bir not: sıralama nasıl çalışıyor ve neden tarih önemli.",
-    "body": "İkinci yazı örneği. Tarihe göre otomatik sıralanır, en yeni en üstte ve ana sayfada öne çıkan konumda görünür."
-  },
-  {
-    "slug": "ucuncu-yazi",
-    "title": "Üçüncü not",
-    "date": "2026-06-10",
-    "excerpt": "Daha eski bir yazı örneği, listenin nasıl uzadığını göstermek için.",
-    "body": "Bu, listede daha aşağıda görünen bir yazı örneği. excerpt alanı isteğe bağlıdır; eklenmezse ana sayfada özet gösterilmez, sadece başlık ve tarih görünür."
+    "summary": "Stabilite ve performans arayanlar için ideal Linux Mint konfigürasyonları ve terminal ipuçları.",
+    "content": "Kendi sunucularımızı yönetirken stabilite her şeydir. Bu yazıda..."
   }
 ]
