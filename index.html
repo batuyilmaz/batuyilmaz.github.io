@@ -3,44 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Batu Yılmaz - Notlar & Projeler</title>
+    <title>Batu Yılmaz | Biyografi</title>
     <link rel="stylesheet" href="style.css">
+    <!-- İkonlar için FontAwesome ekliyoruz -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <header>
-        <a href="index.html">
-            <h1>Batu Yılmaz</h1>
-        </a>
-    </header>
+    <div class="container">
+        <main class="bio-card">
+            
+            <!-- Üst Kısım: Fotoğraf ve İsim -->
+            <section class="profile-section">
+                <!-- Kendi fotoğrafının linkini veya dosya adını src içine yaz -->
+                <img src="https://via.placeholder.com/180" alt="Batu Yılmaz" class="profile-pic">
+                <div class="title-section">
+                    <h1>Merhaba, Ben <span>Batu.</span></h1>
+                    <h2>Yazılım Geliştirici & Teknoloji Tutkunu</h2>
+                </div>
+            </section>
 
-    <main>
-        <div id="posts-container">
-            </div>
-    </main>
+            <!-- Orta Kısım: Hakkımda ve Yetenekler -->
+            <section class="about-section">
+                <h3>Hakkımda</h3>
+                <p>
+                    Teknolojiye ve tasarıma tutkuyla bağlı bir yazılım geliştiriciyim. Sürekli yeni şeyler öğrenmeyi, 
+                    karmaşık problemleri çözmeyi ve estetik arayüzler tasarlamayı seviyorum. Açık kaynak kodlu projelere 
+                    katkıda bulunmaktan ve fikirleri koda dökmekten keyif alıyorum.
+                </p>
 
-    <script>
-        // JSON dosyasını çekip kartları oluşturma
-        fetch('posts.json')
-            .then(response => response.json())
-            .then(posts => {
-                const container = document.getElementById('posts-container');
-                posts.forEach(post => {
-                    const card = document.createElement('article');
-                    card.className = 'post-card';
-                    card.innerHTML = `
-                        <div class="post-date">${post.date}</div>
-                        <h2 class="post-title">${post.title}</h2>
-                        <p class="post-summary">${post.summary}</p>
-                        <a href="post.html?id=${post.id}" class="read-more">Devamını Oku →</a>
-                    `;
-                    container.appendChild(card);
-                });
-            })
-            .catch(error => {
-                document.getElementById('posts-container').innerHTML = '<p>Yazılar yüklenirken bir hata oluştu.</p>';
-                console.error('Hata:', error);
-            });
-    </script>
+                <h3>Uzmanlık Alanlarım</h3>
+                <div class="skills">
+                    <span class="skill-tag">JavaScript / TypeScript</span>
+                    <span class="skill-tag">React.js</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">UI / UX Tasarım</span>
+                    <span class="skill-tag">Linux</span>
+                </div>
+            </section>
+
+            <!-- Alt Kısım: Sosyal Medya İkonları -->
+            <section class="contact-section">
+                <div class="social-links">
+                    <a href="https://github.com/KULLANICI_ADIN" target="_blank" class="social-btn" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/KULLANICI_ADIN" target="_blank" class="social-btn" title="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://twitter.com/KULLANICI_ADIN" target="_blank" class="social-btn" title="Twitter">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                    <a href="mailto:mailadresin@gmail.com" class="social-btn" title="E-posta Gönder">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
 </body>
 </html>
