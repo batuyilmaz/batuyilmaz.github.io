@@ -1,117 +1,46 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Batu</title>
-<meta name="description" content="Notlar, denemeler, fikirler.">
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batu Yılmaz - Notlar & Projeler</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="scroll-progress" id="scroll-progress"></div>
+    <header>
+        <a href="index.html">
+            <h1>Batu Yılmaz</h1>
+        </a>
+    </header>
 
-  <header class="site-header">
-    <div class="brand">
-      <span class="brand-mark"></span>
-      <a href="index.html" class="site-title">Batu</a>
-    </div>
-    <p class="site-tagline">Notlar &amp; Denemeler</p>
-  </header>
+    <main>
+        <div id="posts-container">
+            </div>
+    </main>
 
-  <main>
-    <div id="featured-wrap"></div>
-
-    <p class="section-label" id="archive-label" hidden>Arşiv</p>
-    <ul id="post-list" class="post-list"></ul>
-
-    <p id="empty-state" class="empty-state" hidden>Henüz yazı yok. <code>posts.json</code> dosyasına ilk yazını ekle.</p>
-  </main>
-
-  <footer class="site-footer">
-    <span>&copy; <span id="year"></span> Batu</span>
-    <span>Ankara</span>
-  </footer>
-
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Scroll progress bar
-  window.addEventListener('scroll', () => {
-    const h = document.documentElement;
-    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
-    document.getElementById('scroll-progress').style.width = (scrolled || 0) + '%';
-  });
-
-  fetch('posts.json')
-    .then(res => res.json())
-    .then(posts => {
-      const featuredWrap = document.getElementById('featured-wrap');
-      const list = document.getElementById('post-list');
-      const empty = document.getElementById('empty-state');
-      const archiveLabel = document.getElementById('archive-label');
-
-      if (!posts.length) {
-        empty.hidden = false;
-        return;
-      }
-
-      posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-      const [featured, ...rest] = posts;
-
-      // Featured (en yeni yazı)
-      featuredWrap.innerHTML = `
-        <section class="featured">
-          <p class="featured-label">Son yazı</p>
-          <h1 class="featured-title">
-            <a href="post.html?slug=${encodeURIComponent(featured.slug)}">${escapeHtml(featured.title)}</a>
-          </h1>
-          ${featured.excerpt ? `<p class="featured-excerpt">${escapeHtml(featured.excerpt)}</p>` : ''}
-          <div class="featured-meta">
-            <time datetime="${featured.date}">${formatDate(featured.date)}</time>
-          </div>
-          <a class="read-link" href="post.html?slug=${encodeURIComponent(featured.slug)}">
-            Devamını oku <span class="arrow">&rarr;</span>
-          </a>
-        </section>
-      `;
-
-      if (!rest.length) return;
-
-      archiveLabel.hidden = false;
-
-      rest.forEach(post => {
-        const li = document.createElement('li');
-        li.className = 'post-item';
-        li.innerHTML = `
-          <a class="post-item-link" href="post.html?slug=${encodeURIComponent(post.slug)}">
-            <time class="post-item-date" datetime="${post.date}">${formatDate(post.date)}</time>
-            <span class="post-item-title">${escapeHtml(post.title)}</span>
-            <span class="post-item-arrow">&rarr;</span>
-          </a>
-        `;
-        list.appendChild(li);
-      });
-    })
-    .catch(() => {
-      const empty = document.getElementById('empty-state');
-      empty.hidden = false;
-      empty.textContent = 'Yazılar yüklenemedi. posts.json dosyasını kontrol et.';
-    });
-
-  function formatDate(iso) {
-    const d = new Date(iso);
-    const aylar = ['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
-    return `${d.getDate()} ${aylar[d.getMonth()]} ${d.getFullYear()}`;
-  }
-
-  function escapeHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-  }
-</script>
-
+    <script>
+        // JSON dosyasını çekip kartları oluşturma
+        fetch('posts.json')
+            .then(response => response.json())
+            .then(posts => {
+                const container = document.getElementById('posts-container');
+                posts.forEach(post => {
+                    const card = document.createElement('article');
+                    card.className = 'post-card';
+                    card.innerHTML = `
+                        <div class="post-date">${post.date}</div>
+                        <h2 class="post-title">${post.title}</h2>
+                        <p class="post-summary">${post.summary}</p>
+                        <a href="post.html?id=${post.id}" class="read-more">Devamını Oku →</a>
+                    `;
+                    container.appendChild(card);
+                });
+            })
+            .catch(error => {
+                document.getElementById('posts-container').innerHTML = '<p>Yazılar yüklenirken bir hata oluştu.</p>';
+                console.error('Hata:', error);
+            });
+    </script>
 </body>
 </html>
