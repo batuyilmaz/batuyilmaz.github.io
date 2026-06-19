@@ -3,12 +3,21 @@
     "slug": "merhaba",
     "title": "Merhaba",
     "date": "2026-06-19",
-    "body": "Bu blogun ilk yazısı.\n\nYeni bir yazı eklemek için yapman gereken tek şey, bu posts.json dosyasına yeni bir nesne eklemek. Kodun başka hiçbir yerine dokunmana gerek yok.\n\nBaşlıkları boş satırla ayırırsan paragraflara bölünür."
+    "excerpt": "Bu defterin ilk sayfası. Neden burada olduğumu ve burada ne bulacağını kısaca anlatıyorum.",
+    "body": "Bu blogun ilk yazısı.\n\nYeni bir yazı eklemek için yapman gereken tek şey, posts.json dosyasına yeni bir nesne eklemek. Kodun başka hiçbir yerine dokunmana gerek yok.\n\nBaşlıkları boş satırla ayırırsan otomatik olarak paragraflara bölünür. Tasarım, ilk yazıyı ana sayfada büyük bir 'öne çıkan yazı' olarak gösterir; diğerleri altında ince bir liste halinde sıralanır."
   },
   {
     "slug": "ikinci-yazi",
     "title": "İkinci bir deneme",
     "date": "2026-06-18",
-    "body": "İkinci yazı örneği. Tarihe göre otomatik sıralanır, en yeni en üstte görünür."
+    "excerpt": "Kısa bir not: sıralama nasıl çalışıyor ve neden tarih önemli.",
+    "body": "İkinci yazı örneği. Tarihe göre otomatik sıralanır, en yeni en üstte ve ana sayfada öne çıkan konumda görünür."
+  },
+  {
+    "slug": "ucuncu-yazi",
+    "title": "Üçüncü not",
+    "date": "2026-06-10",
+    "excerpt": "Daha eski bir yazı örneği, listenin nasıl uzadığını göstermek için.",
+    "body": "Bu, listede daha aşağıda görünen bir yazı örneği. excerpt alanı isteğe bağlıdır; eklenmezse ana sayfada özet gösterilmez, sadece başlık ve tarih görünür."
   }
 ]
