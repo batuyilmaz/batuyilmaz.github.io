@@ -1,101 +1,58 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title id="page-title">Yazı — Batu</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yazı Detayı</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="scroll-progress" id="scroll-progress"></div>
+    <header>
+        <a href="index.html">
+            <h1>Batu Yılmaz</h1>
+        </a>
+    </header>
 
-  <header class="site-header">
-    <div class="brand">
-      <span class="brand-mark"></span>
-      <a href="index.html" class="site-title">Batu</a>
-    </div>
-    <p class="site-tagline">Notlar &amp; Denemeler</p>
-  </header>
+    <main>
+        <a href="index.html" class="back-btn">← Geri Dön</a>
+        <article class="post-content-wrapper" id="post-content">
+            <p>Yükleniyor...</p>
+        </article>
+    </main>
 
-  <main>
-    <div class="narrow">
-      <article id="post-article">
-        <p class="loading">Yükleniyor…</p>
-      </article>
-      <a href="index.html" class="back-link">&larr; Tüm yazılar</a>
-    </div>
-  </main>
+    <script>
+        // URL'den ID'yi al
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = urlParams.get('id');
 
-  <footer class="site-footer">
-    <span>&copy; <span id="year"></span> Batu</span>
-    <span>Ankara</span>
-  </footer>
+        const contentDiv = document.getElementById('post-content');
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  window.addEventListener('scroll', () => {
-    const h = document.documentElement;
-    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
-    document.getElementById('scroll-progress').style.width = (scrolled || 0) + '%';
-  });
-
-  const params = new URLSearchParams(window.location.search);
-  const slug = params.get('slug');
-  const article = document.getElementById('post-article');
-
-  if (!slug) {
-    article.innerHTML = '<p class="error">Yazı belirtilmedi.</p>';
-  } else {
-    fetch('posts.json')
-      .then(res => res.json())
-      .then(posts => {
-        const post = posts.find(p => p.slug === slug);
-        if (!post) {
-          article.innerHTML = '<p class="error">Yazı bulunamadı.</p>';
-          return;
+        if (postId) {
+            fetch('posts.json')
+                .then(response => response.json())
+                .then(posts => {
+                    // ID'si eşleşen postu bul
+                    const post = posts.find(p => p.id === postId);
+                    
+                    if (post) {
+                        document.title = post.title; // Sekme başlığını güncelle
+                        contentDiv.innerHTML = `
+                            <div class="post-date">${post.date}</div>
+                            <h1>${post.title}</h1>
+                            <div class="post-body">${post.content}</div>
+                        `;
+                    } else {
+                        contentDiv.innerHTML = '<h1>Yazı bulunamadı.</h1>';
+                    }
+                })
+                .catch(error => {
+                    contentDiv.innerHTML = '<p>Yazı yüklenirken bir hata oluştu.</p>';
+                    console.error('Hata:', error);
+                });
+        } else {
+            contentDiv.innerHTML = '<h1>Geçersiz bağlantı.</h1>';
         }
-
-        document.getElementById('page-title').textContent = post.title + ' — Batu';
-
-        const wordCount = post.body.trim().split(/\s+/).length;
-        const readMins = Math.max(1, Math.round(wordCount / 180));
-
-        const bodyHtml = post.body
-          .split('\n\n')
-          .map(para => `<p>${escapeHtml(para).replace(/\n/g, '<br>')}</p>`)
-          .join('');
-
-        article.innerHTML = `
-          <header class="post-header">
-            <div class="post-eyebrow">
-              <time datetime="${post.date}">${formatDate(post.date)}</time>
-              <span class="dot"></span>
-              <span>${readMins} dk okuma</span>
-            </div>
-            <h1 class="post-title">${escapeHtml(post.title)}</h1>
-          </header>
-          <div class="post-body">${bodyHtml}</div>
-        `;
-      })
-      .catch(() => {
-        article.innerHTML = '<p class="error">Yazı yüklenirken bir hata oluştu.</p>';
-      });
-  }
-
-  function formatDate(iso) {
-    const d = new Date(iso);
-    const aylar = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
-    return `${d.getDate()} ${aylar[d.getMonth()]} ${d.getFullYear()}`;
-  }
-
-  function escapeHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-  }
-</script>
-
+    </script>
 </body>
 </html>
