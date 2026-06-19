@@ -1,0 +1,14 @@
+[
+  {
+    "slug": "merhaba",
+    "title": "Merhaba",
+    "date": "2026-06-19",
+    "body": "Bu blogun ilk yazısı.\n\nYeni bir yazı eklemek için yapman gereken tek şey, bu posts.json dosyasına yeni bir nesne eklemek. Kodun başka hiçbir yerine dokunmana gerek yok.\n\nBaşlıkları boş satırla ayırırsan paragraflara bölünür."
+  },
+  {
+    "slug": "ikinci-yazi",
+    "title": "İkinci bir deneme",
+    "date": "2026-06-18",
+    "body": "İkinci yazı örneği. Tarihe göre otomatik sıralanır, en yeni en üstte görünür."
+  }
+]

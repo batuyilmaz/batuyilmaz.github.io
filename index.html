@@ -1,1 +1,77 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Batu — Blog</title>
+<meta name="description" content="Kişisel notlar ve denemeler.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <header class="site-header">
+    <a href="index.html" class="site-title">Batu</a>
+    <p class="site-tagline">notlar, denemeler, fikirler</p>
+  </header>
+
+  <main>
+    <ul id="post-list" class="post-list">
+      <!-- yazılar buraya JS ile yüklenecek -->
+    </ul>
+    <p id="empty-state" class="empty-state" hidden>Henüz yazı yok. <code>posts.json</code> dosyasına ilk yazını ekle.</p>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Batu</p>
+  </footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  fetch('posts.json')
+    .then(res => res.json())
+    .then(posts => {
+      const list = document.getElementById('post-list');
+      const empty = document.getElementById('empty-state');
+
+      if (!posts.length) {
+        empty.hidden = false;
+        return;
+      }
+
+      // En yeni yazı en üstte
+      posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      posts.forEach(post => {
+        const li = document.createElement('li');
+        li.className = 'post-item';
+
+        const date = document.createElement('time');
+        date.className = 'post-date';
+        date.textContent = formatDate(post.date);
+        date.setAttribute('datetime', post.date);
+
+        const link = document.createElement('a');
+        link.className = 'post-link';
+        link.href = `post.html?slug=${encodeURIComponent(post.slug)}`;
+        link.textContent = post.title;
+
+        li.appendChild(date);
+        li.appendChild(link);
+        list.appendChild(li);
+      });
+    })
+    .catch(() => {
+      document.getElementById('empty-state').hidden = false;
+      document.getElementById('empty-state').textContent = 'Yazılar yüklenemedi. posts.json dosyasını kontrol et.';
+    });
+
+  function formatDate(iso) {
+    const d = new Date(iso);
+    const aylar = ['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
+    return `${d.getDate()} ${aylar[d.getMonth()]} ${d.getFullYear()}`;
+  }
+</script>
+
+</body>
+</html>

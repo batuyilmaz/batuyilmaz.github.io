@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Yazı — Batu</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="index.html" class="site-title">Batu</a>
+    <p class="site-tagline">notlar, denemeler, fikirler</p>
+  </header>
+
+  <main>
+    <article id="post-content">
+      <p class="loading">Yükleniyor…</p>
+    </article>
+    <p><a href="index.html" class="back-link">&larr; Tüm yazılar</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Batu</p>
+  </footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get('slug');
+  const content = document.getElementById('post-content');
+
+  if (!slug) {
+    content.innerHTML = '<p class="error">Yazı belirtilmedi.</p>';
+  } else {
+    fetch('posts.json')
+      .then(res => res.json())
+      .then(posts => {
+        const post = posts.find(p => p.slug === slug);
+        if (!post) {
+          content.innerHTML = '<p class="error">Yazı bulunamadı.</p>';
+          return;
+        }
+
+        document.getElementById('page-title').textContent = post.title + ' — Batu';
+
+        const date = formatDate(post.date);
+
+        // post.body içindeki paragrafları \n\n ile ayırarak <p> etiketlerine böl
+        const bodyHtml = post.body
+          .split('\n\n')
+          .map(para => `<p>${escapeHtml(para).replace(/\n/g, '<br>')}</p>`)
+          .join('');
+
+        content.innerHTML = `
+          <h1 class="post-title">${escapeHtml(post.title)}</h1>
+          <time class="post-date" datetime="${post.date}">${date}</time>
+          <div class="post-body">${bodyHtml}</div>
+        `;
+      })
+      .catch(() => {
+        content.innerHTML = '<p class="error">Yazı yüklenirken bir hata oluştu.</p>';
+      });
+  }
+
+  function formatDate(iso) {
+    const d = new Date(iso);
+    const aylar = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+    return `${d.getDate()} ${aylar[d.getMonth()]} ${d.getFullYear()}`;
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+</script>
+
+</body>
+</html>
