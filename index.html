@@ -1,68 +1,171 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Batu Yılmaz | Biyografi</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- İkonlar için FontAwesome ekliyoruz -->
+    <title>Batu | Dijital Portfolyo</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .code-font { font-family: 'Fira Code', monospace; }
+        /* Özel Neon Parlama Efekti */
+        .neon-glow:hover {
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+            border-color: rgba(6, 182, 212, 0.7);
+        }
+    </style>
 </head>
-<body>
+<body class="bg-slate-950 text-slate-100 min-h-screen relative overflow-x-hidden selection:bg-cyan-500 selection:text-slate-950">
 
-    <div class="container">
-        <main class="bio-card">
+    <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-cyan-900/20 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-[10%] right-[-10%] w-[45vw] h-[45vw] bg-indigo-900/20 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <header class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-slate-950/70 border-b border-slate-900">
+        <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#" class="code-font text-cyan-400 font-bold text-lg tracking-wider">&lt;BATU /&gt;</a>
+            <nav class="flex gap-6 text-sm font-medium text-slate-400">
+                <a href="#about" class="hover:text-cyan-400 transition-colors">Hakkımda</a>
+                <a href="#projects" class="hover:text-cyan-400 transition-colors">Projeler</a>
+                <a href="#contact" class="hover:text-cyan-400 transition-colors">İletişim</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="min-h-screen flex items-center justify-center pt-16 px-6 max-w-5xl mx-auto">
+        <div class="text-center space-y-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs text-cyan-400 code-font mb-4 animate-pulse">
+                <span class="w-2 h-2 rounded-full bg-cyan-400"></span> Sistem Çevrimiçi
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-500">
+                Merhaba, Ben <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">Batu</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto font-light leading-relaxed">
+                Teknoloji optimizasyonu, self-hosted altyapılar ve donanım projeleri geliştiren bir mekanik/dijital maker. Sistemlerin mimarisini çözmeyi ve sınırları zorlamayı severim.
+            </p>
             
-            <!-- Üst Kısım: Fotoğraf ve İsim -->
-            <section class="profile-section">
-                <!-- Kendi fotoğrafının linkini veya dosya adını src içine yaz -->
-                <img src="https://via.placeholder.com/180" alt="Batu Yılmaz" class="profile-pic">
-                <div class="title-section">
-                    <h1>Merhaba, Ben <span>Batu.</span></h1>
-                    <h2>Yazılım Geliştirici & Teknoloji Tutkunu</h2>
-                </div>
-            </section>
+            <div class="flex justify-center gap-4 pt-4">
+                <a href="#projects" class="px-6 py-3 bg-gradient-to-r from-cyan-500 to-indigo-500 text-slate-950 font-semibold rounded-xl hover:opacity-90 transition-all transform hover:-translate-y-1 shadow-lg shadow-cyan-500/10">
+                    Projelerimi Gör
+                </a>
+                <a href="#contact" class="px-6 py-3 bg-slate-900 border border-slate-800 text-slate-300 font-medium rounded-xl hover:bg-slate-850 transition-all transform hover:-translate-y-1">
+                    İletişime Geç
+                </a>
+            </div>
+        </div>
+    </section>
 
-            <!-- Orta Kısım: Hakkımda ve Yetenekler -->
-            <section class="about-section">
-                <h3>Hakkımda</h3>
-                <p>
-                    Teknolojiye ve tasarıma tutkuyla bağlı bir yazılım geliştiriciyim. Sürekli yeni şeyler öğrenmeyi, 
-                    karmaşık problemleri çözmeyi ve estetik arayüzler tasarlamayı seviyorum. Açık kaynak kodlu projelere 
-                    katkıda bulunmaktan ve fikirleri koda dökmekten keyif alıyorum.
+    <section id="about" class="py-24 px-6 max-w-4xl mx-auto scroll-mt-16">
+        <div class="bg-slate-900/40 border border-slate-900 backdrop-blur-xl rounded-3xl p-8 md:p-12 space-y-8 shadow-2xl">
+            <div class="flex items-center gap-4 border-b border-slate-800/60 pb-6">
+                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                <span class="code-font text-xs text-slate-500 ml-2">batu_bio.json</span>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 text-slate-400 text-sm md:text-base leading-relaxed">
+                <div class="space-y-4">
+                    <h3 class="text-white font-bold text-xl flex items-center gap-2">
+                        <i class="fa-solid fa-user text-cyan-400 text-base"></i> Profil
+                    </h3>
+                    <p>
+                        Dijital dünyada merkeziyetsizliğe, veri gizliliğine ve kendi altyapımı barındırmaya (self-hosting) odaklanıyorum. Büyük bulut şirketlerine bağımlı kalmak yerine kendi ağ ekosistemimi kurmayı tercih ederim.
+                    </p>
+                    <p>
+                        Aynı zamanda veri analitiği, iktisadi mantık ve sistem optimizasyonları üzerine çalışarak teknik bilgimi yapısal bir vizyonla birleştiriyorum.
+                    </p>
+                </div>
+                
+                <div class="space-y-4">
+                    <h3 class="text-white font-bold text-xl flex items-center gap-2">
+                        <i class="fa-solid fa-code text-indigo-400 text-base"></i> İlgi Alanları
+                    </h3>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs code-font text-slate-300">Microcontrollers (ESP32 / Pi)</span>
+                        <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs code-font text-slate-300">Self-Hosted Infrastructure</span>
+                        <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs code-font text-slate-300">Network Security & VPNs</span>
+                        <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs code-font text-slate-300">Data Analysis & Economics</span>
+                        <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs code-font text-slate-300">Tailwind CSS & Web Dev</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-24 px-6 max-w-5xl mx-auto scroll-mt-16">
+        <div class="text-center space-y-3 mb-16">
+            <h2 class="text-3xl font-bold tracking-tight md:text-4xl">Geliştirdiğim Projeler</h2>
+            <p class="text-slate-400 text-sm md:text-base max-w-xl mx-auto font-light">
+                Yazılım, donanım ve ağ optimizasyonu üzerine odaklandığım bazı teknik çalışmalar.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-slate-900/30 border border-slate-900/80 rounded-2xl p-6 space-y-4 transition-all duration-300 transform hover:-translate-y-1 neon-glow">
+                <div class="w-10 h-10 rounded-xl bg-cyan-950 border border-cyan-900/50 flex items-center justify-center text-cyan-400 text-lg">
+                    <i class="fa-solid fa-microchip"></i>
+                </div>
+                <h3 class="text-white font-semibold text-lg tracking-wide">IoT Donanım Otomasyonu</h3>
+                <p class="text-slate-400 text-xs md:text-sm font-light leading-relaxed">
+                    ESP32-S3 mimarisi ve ultrasonik sistemler kullanarak iklim ve süreç kontrolü sağlayan tam otomasyonlu donanım projeleri mühendisliği.
                 </p>
-
-                <h3>Uzmanlık Alanlarım</h3>
-                <div class="skills">
-                    <span class="skill-tag">JavaScript / TypeScript</span>
-                    <span class="skill-tag">React.js</span>
-                    <span class="skill-tag">Node.js</span>
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">UI / UX Tasarım</span>
-                    <span class="skill-tag">Linux</span>
+                <div class="flex gap-2 text-[10px] code-font text-cyan-500 pt-2">
+                    <span>C++</span> <span>•</span> <span>Arduino</span> <span>•</span> <span>Hardware</span>
                 </div>
-            </section>
+            </div>
 
-            <!-- Alt Kısım: Sosyal Medya İkonları -->
-            <section class="contact-section">
-                <div class="social-links">
-                    <a href="https://github.com/KULLANICI_ADIN" target="_blank" class="social-btn" title="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://linkedin.com/in/KULLANICI_ADIN" target="_blank" class="social-btn" title="LinkedIn">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="https://twitter.com/KULLANICI_ADIN" target="_blank" class="social-btn" title="Twitter">
-                        <i class="fab fa-x-twitter"></i>
-                    </a>
-                    <a href="mailto:mailadresin@gmail.com" class="social-btn" title="E-posta Gönder">
-                        <i class="fas fa-envelope"></i>
-                    </a>
+            <div class="bg-slate-900/30 border border-slate-900/80 rounded-2xl p-6 space-y-4 transition-all duration-300 transform hover:-translate-y-1 neon-glow">
+                <div class="w-10 h-10 rounded-xl bg-indigo-950 border border-indigo-900/50 flex items-center justify-center text-indigo-400 text-lg">
+                    <i class="fa-solid fa-server"></i>
                 </div>
-            </section>
+                <h3 class="text-white font-semibold text-lg tracking-wide">Self-Hosted Ağ Yönetimi</h3>
+                <p class="text-slate-400 text-xs md:text-sm font-light leading-relaxed">
+                    Üçüncü parti bulut servislerini baypas ederek, yerel ağ donanımları ve SSTP/WireGuard protokolleriyle CGNAT arkasından çalışan tam şifreli kişisel bulut yapılandırması.
+                </p>
+                <div class="flex gap-2 text-[10px] code-font text-indigo-500 pt-2">
+                    <span>Networking</span> <span>•</span> <span>VPN</span> <span>•</span> <span>NAS</span>
+                </div>
+            </div>
 
-        </main>
-    </div>
+            <div class="bg-slate-900/30 border border-slate-900/80 rounded-2xl p-6 space-y-4 transition-all duration-300 transform hover:-translate-y-1 neon-glow">
+                <div class="w-10 h-10 rounded-xl bg-emerald-950 border border-emerald-900/50 flex items-center justify-center text-emerald-400 text-lg">
+                    <i class="fa-solid fa-globe"></i>
+                </div>
+                <h3 class="text-white font-semibold text-lg tracking-wide">Modern Web Arayüzleri</h3>
+                <p class="text-slate-400 text-xs md:text-sm font-light leading-relaxed">
+                    Geliştirici portfolyoları ve dinamik bloglar için Tailwind CSS altyapılı, hafif, yüksek performanslı ve mobil optimizasyonlu web tasarımları.
+                </p>
+                <div class="flex gap-2 text-[10px] code-font text-emerald-500 pt-2">
+                    <span>HTML5</span> <span>•</span> <span>Tailwind</span> <span>•</span> <span>JS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="border-t border-slate-900 py-16 px-6 bg-slate-950 relative z-10 scroll-mt-16">
+        <div class="max-w-4xl mx-auto text-center space-y-8">
+            <div class="space-y-2">
+                <h2 class="text-2xl font-bold tracking-tight">Bağlantıda Kalalım</h2>
+                <p class="text-slate-400 text-sm font-light">Yeni fikirler, projeler veya teknik iş birlikleri için yazabilirsin.</p>
+            </div>
+            
+            <div class="flex justify-center gap-6 text-xl text-slate-400">
+                <a href="#" class="hover:text-cyan-400 transition-colors" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="hover:text-cyan-400 transition-colors" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#" class="hover:text-cyan-400 transition-colors" title="E-Posta"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+            
+            <hr class="border-slate-900 max-w-xs mx-auto">
+            
+            <p class="text-xs text-slate-600 code-font">
+                © 2026 Batu. Tüm hakları kendi sunucusunda saklıdır.
+            </p>
+        </div>
+    </footer>
 
 </body>
 </html>
