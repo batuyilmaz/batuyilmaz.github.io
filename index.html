@@ -1,171 +1,373 @@
 <!DOCTYPE html>
-<html lang="tr" class="scroll-smooth">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Batu | Dijital Portfolyo</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Batu Yılmaz | Links</title>
+    
+    <!-- İkonlar için FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .code-font { font-family: 'Fira Code', monospace; }
-        /* Özel Neon Parlama Efekti */
-        .neon-glow:hover {
-            box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
-            border-color: rgba(6, 182, 212, 0.7);
+        /* ========================================================
+           GENEL TEMA VE HAREKETLİ ARKA PLAN
+           ======================================================== */
+        :root {
+            --bg-dark: #020617;       
+            --accent-cyan: #0ea5e9;    
+            --accent-purple: #8b5cf6;  
+            --card-glass: rgba(30, 41, 59, 0.4);
+            --text-main: #f8fafc;      
+            --text-muted: #94a3b8;     
         }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            position: relative;
+        }
+
+        /* 1. ANİMASYONLU NEON KÜRELER (Arka Plan Etkileşimi) */
+        .background-orbs {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 15s infinite ease-in-out alternate;
+        }
+
+        .orb-1 {
+            width: 400px; height: 400px;
+            background: var(--accent-purple);
+            top: -100px; left: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 300px; height: 300px;
+            background: var(--accent-cyan);
+            bottom: -50px; right: -50px;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 30px) scale(1.1); }
+            100% { transform: translate(-30px, 50px) scale(0.9); }
+        }
+
+        /* ========================================================
+           ORTA KART (Glassmorphism Arayüzü)
+           ======================================================== */
+        .linktree-container {
+            width: 100%;
+            max-width: 420px; 
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+        }
+
+        /* Profil Resmi (Dönen Çerçeve Animasyonu) */
+        .profile-wrapper {
+            position: relative;
+            margin-bottom: 25px;
+            animation: fadeInDown 1s ease forwards;
+        }
+
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--bg-dark);
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -4px; left: -4px; right: -4px; bottom: -4px;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple), var(--accent-cyan));
+            border-radius: 50%;
+            z-index: 1;
+            background-size: 200% 200%;
+            animation: spinGradient 4s linear infinite;
+        }
+
+        @keyframes spinGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .profile-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+            animation: fadeInDown 1s ease forwards 0.2s;
+            opacity: 0;
+        }
+
+        /* Daktilo Efekti İçin Kutu */
+        .profile-bio {
+            font-size: 0.95rem;
+            color: var(--accent-cyan);
+            margin-bottom: 40px;
+            height: 20px; /* Sabit yükseklik sıçramayı önler */
+            opacity: 0;
+            animation: fadeInDown 1s ease forwards 0.4s;
+        }
+
+        /* ========================================================
+           3D ETKİLEŞİMLİ BUTONLAR
+           ======================================================== */
+        .links-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            perspective: 1000px; /* 3D Efekti için Derinlik */
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 600;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.1s; /* JS 3D için transform hızlı olmalı */
+            position: relative;
+            transform-style: preserve-3d; /* 3D Yapıyı koru */
+            
+            /* Gecikmeli Yüklenme (Staggered Animation) */
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUpFade 0.6s ease forwards;
+        }
+
+        /* Her butona farklı gecikme süresi */
+        .link-btn:nth-child(1) { animation-delay: 0.5s; }
+        .link-btn:nth-child(2) { animation-delay: 0.6s; }
+        .link-btn:nth-child(3) { animation-delay: 0.7s; }
+        .link-btn:nth-child(4) { animation-delay: 0.8s; }
+        .link-btn:nth-child(5) { animation-delay: 0.9s; }
+
+        .link-btn i {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            width: 40px;
+            text-align: center;
+            transition: color 0.3s ease, transform 0.3s ease;
+            transform: translateZ(20px); /* 3D pop-out efekti */
+        }
+
+        .link-btn span {
+            flex-grow: 1;
+            text-align: center;
+            padding-right: 40px; /* İkonu dengelemek için */
+            transform: translateZ(10px); /* Metin de hafif öne çıkar */
+        }
+
+        /* Sadece fare hover olduğundaki aydınlanma (Eğim işini JS yapacak) */
+        .link-btn:hover {
+            border-color: rgba(14, 165, 233, 0.5);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 
+                        0 0 20px rgba(14, 165, 233, 0.2);
+            z-index: 10;
+        }
+
+        .link-btn:hover i {
+            color: var(--accent-cyan);
+            transform: translateZ(30px) scale(1.1); /* İkon daha da öne fırlar */
+        }
+
+        /* ========================================================
+           SOSYAL MEDYA
+           ======================================================== */
+        .social-icons {
+            display: flex;
+            gap: 25px;
+            margin-top: 40px;
+            opacity: 0;
+            animation: slideUpFade 0.6s ease forwards 1s;
+        }
+
+        .social-icon {
+            color: var(--text-muted);
+            font-size: 1.6rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .social-icon:hover {
+            color: var(--text-main);
+            transform: translateY(-5px) scale(1.2);
+            text-shadow: 0 0 15px var(--accent-purple);
+        }
+
+        /* Animasyon Keyframeleri */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Footer */
+        .footer-text {
+            margin-top: 30px;
+            font-size: 0.85rem;
+            color: rgba(148, 163, 184, 0.4);
+            opacity: 0;
+            animation: fadeInDown 1s ease forwards 1.2s;
+        }
+
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen relative overflow-x-hidden selection:bg-cyan-500 selection:text-slate-950">
+<body>
 
-    <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-cyan-900/20 rounded-full blur-[120px] pointer-events-none"></div>
-    <div class="absolute bottom-[10%] right-[-10%] w-[45vw] h-[45vw] bg-indigo-900/20 rounded-full blur-[120px] pointer-events-none"></div>
+    <!-- Arka Plan Animasyonlu Küreler -->
+    <div class="background-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
 
-    <header class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-slate-950/70 border-b border-slate-900">
-        <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#" class="code-font text-cyan-400 font-bold text-lg tracking-wider">&lt;BATU /&gt;</a>
-            <nav class="flex gap-6 text-sm font-medium text-slate-400">
-                <a href="#about" class="hover:text-cyan-400 transition-colors">Hakkımda</a>
-                <a href="#projects" class="hover:text-cyan-400 transition-colors">Projeler</a>
-                <a href="#contact" class="hover:text-cyan-400 transition-colors">İletişim</a>
-            </nav>
+    <div class="linktree-container">
+        
+        <!-- PROFİL -->
+        <div class="profile-wrapper">
+            <!-- Profil Fotoğrafını Buraya Ekle -->
+            <img src="https://via.placeholder.com/150/0f172a/38bdf8?text=BY" alt="Batu Yılmaz" class="profile-pic">
         </div>
-    </header>
+        
+        <h1 class="profile-name">Batu Yılmaz</h1>
+        <!-- Daktilo Efekti İçin Boş Kutu (İçeriği JS dolduracak) -->
+        <div class="profile-bio" id="typewriter"></div>
 
-    <section class="min-h-screen flex items-center justify-center pt-16 px-6 max-w-5xl mx-auto">
-        <div class="text-center space-y-6">
-            <div class="inline-flex items-center gap-2 px-3 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs text-cyan-400 code-font mb-4 animate-pulse">
-                <span class="w-2 h-2 rounded-full bg-cyan-400"></span> Sistem Çevrimiçi
-            </div>
-            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-500">
-                Merhaba, Ben <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">Batu</span>
-            </h1>
-            <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto font-light leading-relaxed">
-                Teknoloji optimizasyonu, self-hosted altyapılar ve donanım projeleri geliştiren bir mekanik/dijital maker. Sistemlerin mimarisini çözmeyi ve sınırları zorlamayı severim.
-            </p>
+        <!-- BAĞLANTI BUTONLARI -->
+        <div class="links-wrapper">
             
-            <div class="flex justify-center gap-4 pt-4">
-                <a href="#projects" class="px-6 py-3 bg-gradient-to-r from-cyan-500 to-indigo-500 text-slate-950 font-semibold rounded-xl hover:opacity-90 transition-all transform hover:-translate-y-1 shadow-lg shadow-cyan-500/10">
-                    Projelerimi Gör
-                </a>
-                <a href="#contact" class="px-6 py-3 bg-slate-900 border border-slate-800 text-slate-300 font-medium rounded-xl hover:bg-slate-850 transition-all transform hover:-translate-y-1">
-                    İletişime Geç
-                </a>
-            </div>
-        </div>
-    </section>
+            <a href="https://batuyilmaz.me" class="link-btn" target="_blank">
+                <i class="fa-solid fa-code"></i>
+                <span>Kişisel Web Sitem</span>
+            </a>
 
-    <section id="about" class="py-24 px-6 max-w-4xl mx-auto scroll-mt-16">
-        <div class="bg-slate-900/40 border border-slate-900 backdrop-blur-xl rounded-3xl p-8 md:p-12 space-y-8 shadow-2xl">
-            <div class="flex items-center gap-4 border-b border-slate-800/60 pb-6">
-                <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                <span class="code-font text-xs text-slate-500 ml-2">batu_bio.json</span>
-            </div>
+            <a href="https://hickimse.com/nostraticnumbers" class="link-btn" target="_blank">
+                <i class="fa-solid fa-diagram-project"></i>
+                <span>Nostratic Numbers</span>
+            </a>
+
+            <a href="https://github.com/batuyilmaz" class="link-btn" target="_blank">
+                <i class="fa-brands fa-github"></i>
+                <span>GitHub Projeleri</span>
+            </a>
+
+            <a href="https://hickimse.com/outis" class="link-btn" target="_blank">
+                <i class="fa-solid fa-feather"></i>
+                <span>Outis</span>
+            </a>
+
+            <a href="mailto:iletisim@batuyilmaz.me" class="link-btn">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Bana Ulaşın</span>
+            </a>
+
+        </div>
+
+        <!-- SOSYAL MEDYA -->
+        <div class="social-icons">
+            <a href="#" class="social-icon" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="social-icon" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="social-icon" target="_blank"><i class="fa-brands fa-reddit"></i></a>
+        </div>
+
+        <div class="footer-text">
+            © 2026 Batu Yılmaz
+        </div>
+    </div>
+
+    <!-- SİSTEM MOTORU: 3D EĞİM (TILT) VE DAKTİLO EFEKTİ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
             
-            <div class="grid md:grid-cols-2 gap-8 text-slate-400 text-sm md:text-base leading-relaxed">
-                <div class="space-y-4">
-                    <h3 class="text-white font-bold text-xl flex items-center gap-2">
-                        <i class="fa-solid fa-user text-cyan-400 text-base"></i> Profil
-                    </h3>
-                    <p>
-                        Dijital dünyada merkeziyetsizliğe, veri gizliliğine ve kendi altyapımı barındırmaya (self-hosting) odaklanıyorum. Büyük bulut şirketlerine bağımlı kalmak yerine kendi ağ ekosistemimi kurmayı tercih ederim.
-                    </p>
-                    <p>
-                        Aynı zamanda veri analitiği, iktisadi mantık ve sistem optimizasyonları üzerine çalışarak teknik bilgimi yapısal bir vizyonla birleştiriyorum.
-                    </p>
-                </div>
-                
-                <div class="space-y-4">
-                    <h3 class="text-white font-bold text-xl flex items-center gap-2">
-                        <i class="fa-solid fa-code text-indigo-400 text-base"></i> İlgi Alanları
-                    </h3>
-                    <div class="flex flex-wrap gap-2 pt-2">
-                        <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs code-font text-slate-300">Microcontrollers (ESP32 / Pi)</span>
-                        <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs code-font text-slate-300">Self-Hosted Infrastructure</span>
-                        <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs code-font text-slate-300">Network Security & VPNs</span>
-                        <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs code-font text-slate-300">Data Analysis & Economics</span>
-                        <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs code-font text-slate-300">Tailwind CSS & Web Dev</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            // 1. DAKTİLO (TYPING) EFEKTİ
+            const textToType = "Logistics Student | Maker | Researcher";
+            const typeTarget = document.getElementById('typewriter');
+            let i = 0;
 
-    <section id="projects" class="py-24 px-6 max-w-5xl mx-auto scroll-mt-16">
-        <div class="text-center space-y-3 mb-16">
-            <h2 class="text-3xl font-bold tracking-tight md:text-4xl">Geliştirdiğim Projeler</h2>
-            <p class="text-slate-400 text-sm md:text-base max-w-xl mx-auto font-light">
-                Yazılım, donanım ve ağ optimizasyonu üzerine odaklandığım bazı teknik çalışmalar.
-            </p>
-        </div>
+            // Animasyonların bitmesini bekle ve yazmaya başla (1.2 saniye sonra)
+            setTimeout(() => {
+                function typeWriter() {
+                    if (i < textToType.length) {
+                        typeTarget.innerHTML += textToType.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 50); // Yazma hızı (50ms)
+                    }
+                }
+                typeWriter();
+            }, 1200);
 
-        <div class="grid md:grid-cols-3 gap-6">
-            <div class="bg-slate-900/30 border border-slate-900/80 rounded-2xl p-6 space-y-4 transition-all duration-300 transform hover:-translate-y-1 neon-glow">
-                <div class="w-10 h-10 rounded-xl bg-cyan-950 border border-cyan-900/50 flex items-center justify-center text-cyan-400 text-lg">
-                    <i class="fa-solid fa-microchip"></i>
-                </div>
-                <h3 class="text-white font-semibold text-lg tracking-wide">IoT Donanım Otomasyonu</h3>
-                <p class="text-slate-400 text-xs md:text-sm font-light leading-relaxed">
-                    ESP32-S3 mimarisi ve ultrasonik sistemler kullanarak iklim ve süreç kontrolü sağlayan tam otomasyonlu donanım projeleri mühendisliği.
-                </p>
-                <div class="flex gap-2 text-[10px] code-font text-cyan-500 pt-2">
-                    <span>C++</span> <span>•</span> <span>Arduino</span> <span>•</span> <span>Hardware</span>
-                </div>
-            </div>
+            // 2. 3D BUTON EĞİM (TILT) EFEKTİ
+            const buttons = document.querySelectorAll('.link-btn');
 
-            <div class="bg-slate-900/30 border border-slate-900/80 rounded-2xl p-6 space-y-4 transition-all duration-300 transform hover:-translate-y-1 neon-glow">
-                <div class="w-10 h-10 rounded-xl bg-indigo-950 border border-indigo-900/50 flex items-center justify-center text-indigo-400 text-lg">
-                    <i class="fa-solid fa-server"></i>
-                </div>
-                <h3 class="text-white font-semibold text-lg tracking-wide">Self-Hosted Ağ Yönetimi</h3>
-                <p class="text-slate-400 text-xs md:text-sm font-light leading-relaxed">
-                    Üçüncü parti bulut servislerini baypas ederek, yerel ağ donanımları ve SSTP/WireGuard protokolleriyle CGNAT arkasından çalışan tam şifreli kişisel bulut yapılandırması.
-                </p>
-                <div class="flex gap-2 text-[10px] code-font text-indigo-500 pt-2">
-                    <span>Networking</span> <span>•</span> <span>VPN</span> <span>•</span> <span>NAS</span>
-                </div>
-            </div>
+            buttons.forEach(btn => {
+                // Fare butonun üzerinde hareket ettiğinde
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    // Farenin butonun merkezine göre X ve Y koordinatlarını bul
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    
+                    // Eğimi hesapla (Bölen sayı ne kadar küçükse o kadar çok eğilir)
+                    const tiltX = (y / rect.height) * -20; 
+                    const tiltY = (x / rect.width) * 20;
 
-            <div class="bg-slate-900/30 border border-slate-900/80 rounded-2xl p-6 space-y-4 transition-all duration-300 transform hover:-translate-y-1 neon-glow">
-                <div class="w-10 h-10 rounded-xl bg-emerald-950 border border-emerald-900/50 flex items-center justify-center text-emerald-400 text-lg">
-                    <i class="fa-solid fa-globe"></i>
-                </div>
-                <h3 class="text-white font-semibold text-lg tracking-wide">Modern Web Arayüzleri</h3>
-                <p class="text-slate-400 text-xs md:text-sm font-light leading-relaxed">
-                    Geliştirici portfolyoları ve dinamik bloglar için Tailwind CSS altyapılı, hafif, yüksek performanslı ve mobil optimizasyonlu web tasarımları.
-                </p>
-                <div class="flex gap-2 text-[10px] code-font text-emerald-500 pt-2">
-                    <span>HTML5</span> <span>•</span> <span>Tailwind</span> <span>•</span> <span>JS</span>
-                </div>
-            </div>
-        </div>
-    </section>
+                    btn.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.05, 1.05, 1.05)`;
+                });
 
-    <footer id="contact" class="border-t border-slate-900 py-16 px-6 bg-slate-950 relative z-10 scroll-mt-16">
-        <div class="max-w-4xl mx-auto text-center space-y-8">
-            <div class="space-y-2">
-                <h2 class="text-2xl font-bold tracking-tight">Bağlantıda Kalalım</h2>
-                <p class="text-slate-400 text-sm font-light">Yeni fikirler, projeler veya teknik iş birlikleri için yazabilirsin.</p>
-            </div>
-            
-            <div class="flex justify-center gap-6 text-xl text-slate-400">
-                <a href="#" class="hover:text-cyan-400 transition-colors" title="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="#" class="hover:text-cyan-400 transition-colors" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-                <a href="#" class="hover:text-cyan-400 transition-colors" title="E-Posta"><i class="fa-solid fa-envelope"></i></a>
-            </div>
-            
-            <hr class="border-slate-900 max-w-xs mx-auto">
-            
-            <p class="text-xs text-slate-600 code-font">
-                © 2026 Batu. Tüm hakları kendi sunucusunda saklıdır.
-            </p>
-        </div>
-    </footer>
+                // Fare butondan çıktığında sıfırla
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>
