@@ -3,22 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Batu Yılmaz | Links</title>
     
-    <!-- İkonlar için FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- [DÜZENLE] Tarayıcı sekmesinde görünecek sayfa başlığı -->
+    <title>Kişisel Bağlantılar</title>
+    
+    <!-- Modern Yazı Tipi (Plus Jakarta Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- İkon Kütüphanesi (FontAwesome 6.5.2 - Güncel Sürüm) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
-        /* ========================================================
-           GENEL TEMA VE HAREKETLİ ARKA PLAN
-           ======================================================== */
+        /* ==========================================================================
+           1. RENK PALETİ VE TEMEL AYARLAR
+           [DÜZENLE] Sitenin ana renklerini buradaki kodları değiştirerek ayarlayabilirsiniz.
+           ========================================================================== */
         :root {
-            --bg-dark: #020617;       
-            --accent-cyan: #0ea5e9;    
-            --accent-purple: #8b5cf6;  
-            --card-glass: rgba(30, 41, 59, 0.4);
-            --text-main: #f8fafc;      
-            --text-muted: #94a3b8;     
+            --bg-base: #0b132b;           /* Ana zemin rengi (Ferah derin lacivert) */
+            --orb-1: #00b4d8;             /* 1. Hareketli ışık küresi (Canlı Turkuaz/Mavi) */
+            --orb-2: #6366f1;             /* 2. Hareketli ışık küresi (Modern İndigo) */
+            --orb-3: #10b981;             /* 3. Hareketli ışık küresi (Zümrüt/Su Yeşili) */
+            --card-bg: rgba(255, 255, 255, 0.06); /* Buton içi buzlu cam rengi */
+            --card-border: rgba(255, 255, 255, 0.14); /* Buton çerçeve rengi */
+            --card-hover: rgba(255, 255, 255, 0.12);  /* Buton üzerine gelince oluşan renk */
+            --text-primary: #ffffff;      /* Ana yazı rengi */
+            --text-secondary: #cbd5e1;    /* Alt başlık ve ikincil yazı rengi */
+            --accent-color: #38bdf8;      /* İkon ve vurgu rengi */
         }
 
         * {
@@ -28,344 +40,447 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
             position: relative;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* 1. ANİMASYONLU NEON KÜRELER (Arka Plan Etkileşimi) */
-        .background-orbs {
+        /* ==========================================================================
+           2. ANİMASYONLU ARKA PLAN (Aurora Işıkları + Mikro Izgara)
+           ========================================================================== */
+        .animated-bg {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -1;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0; /* İçeriğin arkasında, ana zeminin önünde durur */
             overflow: hidden;
+            background: linear-gradient(-45deg, #0b132b, #1c2541, #0f172a, #1e1b4b);
+            background-size: 400% 400%;
+            animation: gradientFlow 18s ease infinite;
         }
 
+        /* Arka plan üzerindeki modern teknik ızgara dokusu */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 36px 36px;
+            mask-image: radial-gradient(circle at center, black 40%, transparent 95%);
+            -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 95%);
+            pointer-events: none;
+        }
+
+        /* Yüzen ışık küreleri (Mobil ve masaüstü donanım hızlandırmalı) */
         .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.5;
-            animation: float 15s infinite ease-in-out alternate;
+            filter: blur(70px);
+            -webkit-filter: blur(70px);
+            opacity: 0.55;
+            will-change: transform;
         }
 
         .orb-1 {
-            width: 400px; height: 400px;
-            background: var(--accent-purple);
-            top: -100px; left: -100px;
-            animation-delay: 0s;
+            width: 380px;
+            height: 380px;
+            background: var(--orb-1);
+            top: -10%;
+            left: -10%;
+            animation: moveOrb1 14s infinite alternate ease-in-out;
         }
 
         .orb-2 {
-            width: 300px; height: 300px;
-            background: var(--accent-cyan);
-            bottom: -50px; right: -50px;
-            animation-delay: -5s;
+            width: 340px;
+            height: 340px;
+            background: var(--orb-2);
+            bottom: -10%;
+            right: -10%;
+            animation: moveOrb2 18s infinite alternate ease-in-out;
         }
 
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(50px, 30px) scale(1.1); }
-            100% { transform: translate(-30px, 50px) scale(0.9); }
+        .orb-3 {
+            width: 260px;
+            height: 260px;
+            background: var(--orb-3);
+            top: 40%;
+            left: 55%;
+            opacity: 0.35;
+            animation: moveOrb3 16s infinite alternate ease-in-out;
         }
 
-        /* ========================================================
-           ORTA KART (Glassmorphism Arayüzü)
-           ======================================================== */
-        .linktree-container {
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes moveOrb1 {
+            0% { transform: translate3d(0, 0, 0) scale(1); }
+            100% { transform: translate3d(120px, 80px, 0) scale(1.15); }
+        }
+
+        @keyframes moveOrb2 {
+            0% { transform: translate3d(0, 0, 0) scale(1); }
+            100% { transform: translate3d(-120px, -90px, 0) scale(1.1); }
+        }
+
+        @keyframes moveOrb3 {
+            0% { transform: translate3d(-80px, -40px, 0) scale(0.9); }
+            100% { transform: translate3d(60px, 70px, 0) scale(1.2); }
+        }
+
+        /* ==========================================================================
+           3. ANA KART VE PROFİL ALANI
+           ========================================================================== */
+        .container {
             width: 100%;
-            max-width: 420px; 
-            padding: 40px 20px;
+            max-width: 440px;
+            padding: 45px 24px;
             display: flex;
             flex-direction: column;
             align-items: center;
             z-index: 10;
         }
 
-        /* Profil Resmi (Dönen Çerçeve Animasyonu) */
         .profile-wrapper {
             position: relative;
-            margin-bottom: 25px;
-            animation: fadeInDown 1s ease forwards;
+            margin-bottom: 20px;
+            animation: fadeDown 0.8s ease forwards;
         }
 
         .profile-pic {
-            width: 120px;
-            height: 120px;
+            width: 115px;
+            height: 115px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid var(--bg-dark);
+            border: 3px solid rgba(255, 255, 255, 0.2);
             position: relative;
             z-index: 2;
+            background-color: #1e293b;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
+        /* Profil etrafındaki dönen halka */
         .profile-wrapper::before {
             content: '';
             position: absolute;
-            top: -4px; left: -4px; right: -4px; bottom: -4px;
-            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple), var(--accent-cyan));
+            inset: -4px;
+            background: linear-gradient(45deg, var(--orb-1), var(--orb-2), var(--orb-3), var(--orb-1));
             border-radius: 50%;
             z-index: 1;
-            background-size: 200% 200%;
-            animation: spinGradient 4s linear infinite;
-        }
-
-        @keyframes spinGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            background-size: 300% 300%;
+            animation: gradientFlow 6s linear infinite;
         }
 
         .profile-name {
-            font-size: 1.8rem;
+            font-size: 1.75rem;
             font-weight: 800;
-            margin-bottom: 5px;
-            letter-spacing: 0.5px;
-            animation: fadeInDown 1s ease forwards 0.2s;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+            text-align: center;
             opacity: 0;
+            animation: fadeDown 0.8s ease forwards 0.15s;
         }
 
-        /* Daktilo Efekti İçin Kutu */
         .profile-bio {
             font-size: 0.95rem;
-            color: var(--accent-cyan);
-            margin-bottom: 40px;
-            height: 20px; /* Sabit yükseklik sıçramayı önler */
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 35px;
+            min-height: 22px;
+            text-align: center;
             opacity: 0;
-            animation: fadeInDown 1s ease forwards 0.4s;
+            animation: fadeDown 0.8s ease forwards 0.3s;
         }
 
-        /* ========================================================
-           3D ETKİLEŞİMLİ BUTONLAR
-           ======================================================== */
+        /* Daktilo imleci animasyonu */
+        .profile-bio::after {
+            content: '|';
+            margin-left: 3px;
+            color: var(--accent-color);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* ==========================================================================
+           4. BAĞLANTI BUTONLARI (Buzlu Cam & Parlama Efekti)
+           ========================================================================== */
         .links-wrapper {
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 16px;
-            perspective: 1000px; /* 3D Efekti için Derinlik */
+            gap: 14px;
+            perspective: 1000px;
         }
 
         .link-btn {
             display: flex;
             align-items: center;
             width: 100%;
-            padding: 16px 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            color: var(--text-main);
+            padding: 16px 22px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            color: var(--text-primary);
             text-decoration: none;
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 600;
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.1s; /* JS 3D için transform hızlı olmalı */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
             position: relative;
-            transform-style: preserve-3d; /* 3D Yapıyı koru */
+            overflow: hidden;
+            transform-style: preserve-3d;
             
-            /* Gecikmeli Yüklenme (Staggered Animation) */
+            /* Sıralı açılış animasyonu */
             opacity: 0;
             transform: translateY(20px);
-            animation: slideUpFade 0.6s ease forwards;
+            animation: slideUp 0.6s ease forwards;
         }
 
-        /* Her butona farklı gecikme süresi */
-        .link-btn:nth-child(1) { animation-delay: 0.5s; }
-        .link-btn:nth-child(2) { animation-delay: 0.6s; }
-        .link-btn:nth-child(3) { animation-delay: 0.7s; }
-        .link-btn:nth-child(4) { animation-delay: 0.8s; }
-        .link-btn:nth-child(5) { animation-delay: 0.9s; }
+        .link-btn:nth-child(1) { animation-delay: 0.4s; }
+        .link-btn:nth-child(2) { animation-delay: 0.5s; }
+        .link-btn:nth-child(3) { animation-delay: 0.6s; }
+        .link-btn:nth-child(4) { animation-delay: 0.7s; }
+        .link-btn:nth-child(5) { animation-delay: 0.8s; }
+
+        /* Buton üzerinden geçen ışık yansıması */
+        .link-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.12), transparent);
+            transform: skewX(-25deg);
+            transition: left 0.6s ease;
+        }
+
+        .link-btn:hover::before {
+            left: 150%;
+        }
 
         .link-btn i {
-            font-size: 1.4rem;
-            color: var(--text-muted);
-            width: 40px;
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            width: 36px;
             text-align: center;
-            transition: color 0.3s ease, transform 0.3s ease;
-            transform: translateZ(20px); /* 3D pop-out efekti */
+            transition: transform 0.3s ease, color 0.3s ease;
         }
 
         .link-btn span {
             flex-grow: 1;
             text-align: center;
-            padding-right: 40px; /* İkonu dengelemek için */
-            transform: translateZ(10px); /* Metin de hafif öne çıkar */
+            padding-right: 36px; /* İkon genişliğini dengeleyerek metni tam ortalar */
         }
 
-        /* Sadece fare hover olduğundaki aydınlanma (Eğim işini JS yapacak) */
         .link-btn:hover {
-            border-color: rgba(14, 165, 233, 0.5);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 
-                        0 0 20px rgba(14, 165, 233, 0.2);
-            z-index: 10;
+            background: var(--card-hover);
+            border-color: rgba(56, 189, 248, 0.45);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25), 0 0 15px rgba(56, 189, 248, 0.15);
         }
 
         .link-btn:hover i {
-            color: var(--accent-cyan);
-            transform: translateZ(30px) scale(1.1); /* İkon daha da öne fırlar */
+            color: #ffffff;
+            transform: scale(1.15);
         }
 
-        /* ========================================================
-           SOSYAL MEDYA
-           ======================================================== */
+        /* ==========================================================================
+           5. SOSYAL MEDYA VE ALT BİLGİ (FOOTER)
+           ========================================================================== */
         .social-icons {
             display: flex;
-            gap: 25px;
-            margin-top: 40px;
+            gap: 20px;
+            margin-top: 35px;
             opacity: 0;
-            animation: slideUpFade 0.6s ease forwards 1s;
+            animation: slideUp 0.6s ease forwards 0.9s;
         }
 
         .social-icon {
-            color: var(--text-muted);
-            font-size: 1.6rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
 
         .social-icon:hover {
-            color: var(--text-main);
-            transform: translateY(-5px) scale(1.2);
-            text-shadow: 0 0 15px var(--accent-purple);
+            color: var(--text-primary);
+            background: var(--card-hover);
+            border-color: var(--accent-color);
+            transform: translateY(-4px);
+            box-shadow: 0 5px 15px rgba(56, 189, 248, 0.25);
         }
 
-        /* Animasyon Keyframeleri */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideUpFade {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Footer */
         .footer-text {
-            margin-top: 30px;
-            font-size: 0.85rem;
-            color: rgba(148, 163, 184, 0.4);
+            margin-top: 28px;
+            font-size: 0.8rem;
+            color: rgba(203, 213, 225, 0.45);
             opacity: 0;
-            animation: fadeInDown 1s ease forwards 1.2s;
+            animation: fadeDown 0.8s ease forwards 1s;
         }
 
+        /* Giriş Animasyonları */
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobil Ekran İyileştirmeleri */
+        @media screen and (max-width: 480px) {
+            .container {
+                padding: 35px 18px;
+            }
+            .orb-1 { width: 260px; height: 260px; }
+            .orb-2 { width: 240px; height: 240px; }
+            .orb-3 { width: 180px; height: 180px; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Arka Plan Animasyonlu Küreler -->
-    <div class="background-orbs">
+    <!-- ARKA PLAN KATMANI -->
+    <div class="animated-bg">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
     </div>
+    <div class="bg-grid"></div>
 
-    <div class="linktree-container">
+    <!-- ANA İÇERİK KUTUSU -->
+    <main class="container">
         
-        <!-- PROFİL -->
+        <!-- [DÜZENLE] PROFİL FOTOĞRAFI: src="" kısmına kendi görselinizin yolunu (örn: images/profil.jpg) yazın -->
         <div class="profile-wrapper">
-            <!-- Profil Fotoğrafını Buraya Ekle -->
-            <img src="https://via.placeholder.com/150/0f172a/38bdf8?text=BY" alt="Batu Yılmaz" class="profile-pic">
+            <img src="https://ui-avatars.com/api/?name=BY&background=0f172a&color=38bdf8&size=200&font-size=0.4&bold=true" alt="Profil" class="profile-pic">
         </div>
         
+        <!-- [DÜZENLE] İSİM / BAŞLIK ALANI -->
         <h1 class="profile-name">Batu Yılmaz</h1>
-        <!-- Daktilo Efekti İçin Boş Kutu (İçeriği JS dolduracak) -->
+        
+        <!-- Alt metin alanı (Aşağıdaki script bölümünden otomatik yazdırılır) -->
         <div class="profile-bio" id="typewriter"></div>
 
-        <!-- BAĞLANTI BUTONLARI -->
+        <!-- [DÜZENLE] BAĞLANTI BUTONLARI: href="" kısımlarına yönlendirmek istediğiniz adresleri yazın -->
         <div class="links-wrapper">
             
-            <a href="https://batuyilmaz.me" class="link-btn" target="_blank">
-                <i class="fa-solid fa-code"></i>
+            <a href="#" class="link-btn" target="_blank" rel="noopener noreferrer">
+                <i class="fa-solid fa-globe"></i>
                 <span>Kişisel Web Sitem</span>
             </a>
 
-            <a href="https://hickimse.com/nostraticnumbers" class="link-btn" target="_blank">
+            <a href="#" class="link-btn" target="_blank" rel="noopener noreferrer">
                 <i class="fa-solid fa-diagram-project"></i>
                 <span>Nostratic Numbers</span>
             </a>
 
-            <a href="https://github.com/batuyilmaz" class="link-btn" target="_blank">
+            <a href="#" class="link-btn" target="_blank" rel="noopener noreferrer">
                 <i class="fa-brands fa-github"></i>
                 <span>GitHub Projeleri</span>
             </a>
 
-            <a href="https://hickimse.com/outis" class="link-btn" target="_blank">
+            <a href="#" class="link-btn" target="_blank" rel="noopener noreferrer">
                 <i class="fa-solid fa-feather"></i>
                 <span>Outis</span>
             </a>
 
-            <a href="mailto:iletisim@batuyilmaz.me" class="link-btn">
+            <a href="mailto:ornek@alanadi.com" class="link-btn">
                 <i class="fa-solid fa-envelope"></i>
-                <span>Bana Ulaşın</span>
+                <span>İletişim</span>
             </a>
 
         </div>
 
-        <!-- SOSYAL MEDYA -->
+        <!-- [DÜZENLE] SOSYAL MEDYA İKONLARI (İstemediğinizi silebilir veya yenisini ekleyebilirsiniz) -->
         <div class="social-icons">
-            <a href="#" class="social-icon" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="#" class="social-icon" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="#" class="social-icon" target="_blank"><i class="fa-brands fa-reddit"></i></a>
+            <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="X">
+                <i class="fa-brands fa-x-twitter"></i>
+            </a>
         </div>
 
+        <!-- [DÜZENLE] ALT BİLGİ -->
         <div class="footer-text">
-            © 2026 Batu Yılmaz
+            © 2026 Tüm hakları saklıdır.
         </div>
-    </div>
 
-    <!-- SİSTEM MOTORU: 3D EĞİM (TILT) VE DAKTİLO EFEKTİ -->
+    </main>
+
+    <!-- ETKİLEŞİM SCRIPTİ -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // 1. DAKTİLO (TYPING) EFEKTİ
-            const textToType = "Logistics Student | Maker | Researcher";
+            // [DÜZENLE] İsim altında harf harf yazılacak metni buradan değiştirebilirsiniz:
+            const bioText = "Projeler & Kişisel Bağlantılar";
             const typeTarget = document.getElementById('typewriter');
-            let i = 0;
+            let index = 0;
 
-            // Animasyonların bitmesini bekle ve yazmaya başla (1.2 saniye sonra)
             setTimeout(() => {
-                function typeWriter() {
-                    if (i < textToType.length) {
-                        typeTarget.innerHTML += textToType.charAt(i);
-                        i++;
-                        setTimeout(typeWriter, 50); // Yazma hızı (50ms)
+                function typeEffect() {
+                    if (index < bioText.length) {
+                        typeTarget.textContent += bioText.charAt(index);
+                        index++;
+                        setTimeout(typeEffect, 55);
                     }
                 }
-                typeWriter();
-            }, 1200);
+                typeEffect();
+            }, 900);
 
-            // 2. 3D BUTON EĞİM (TILT) EFEKTİ
-            const buttons = document.querySelectorAll('.link-btn');
+            // 3D Buton Eğim Efekti (Sadece fare kullanılan cihazlarda devreye girer, mobilde takılmaz)
+            if (window.matchMedia("(hover: hover)").matches) {
+                const buttons = document.querySelectorAll('.link-btn');
 
-            buttons.forEach(btn => {
-                // Fare butonun üzerinde hareket ettiğinde
-                btn.addEventListener('mousemove', (e) => {
-                    const rect = btn.getBoundingClientRect();
-                    // Farenin butonun merkezine göre X ve Y koordinatlarını bul
-                    const x = e.clientX - rect.left - rect.width / 2;
-                    const y = e.clientY - rect.top - rect.height / 2;
-                    
-                    // Eğimi hesapla (Bölen sayı ne kadar küçükse o kadar çok eğilir)
-                    const tiltX = (y / rect.height) * -20; 
-                    const tiltY = (x / rect.width) * 20;
+                buttons.forEach(btn => {
+                    btn.addEventListener('mousemove', (e) => {
+                        const rect = btn.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+                        
+                        const tiltX = (y / rect.height) * -12;
+                        const tiltY = (x / rect.width) * 12;
 
-                    btn.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.05, 1.05, 1.05)`;
+                        btn.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
+                    });
+
+                    btn.addEventListener('mouseleave', () => {
+                        btn.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                    });
                 });
-
-                // Fare butondan çıktığında sıfırla
-                btn.addEventListener('mouseleave', () => {
-                    btn.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-                });
-            });
+            }
         });
     </script>
 
