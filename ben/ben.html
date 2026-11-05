@@ -1,1 +1,374 @@
-Yakında...
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B5N7JLQ6DZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B5N7JLQ6DZ');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#090f24">
+<title>ben</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#090f24;--o1:#00b4d8;--o2:#6366f1;--o3:#10b981;--tx:#f8fafc;--tx2:#94a3b8;--ac:#38bdf8;--bd:rgba(255,255,255,.12);--bt:rgba(255,255,255,.05)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--bg);color:var(--tx);overflow:hidden;-webkit-font-smoothing:antialiased}
+
+/* arka plan */
+.bg{position:fixed;inset:0;overflow:hidden;background:linear-gradient(-45deg,#090f24,#16203a,#0b132b,#1b1742);background-size:400% 400%;animation:flow 18s ease infinite}
+.grid{position:fixed;inset:0;z-index:1;pointer-events:none;background-image:linear-gradient(to right,rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.03) 1px,transparent 1px);background-size:36px 36px;-webkit-mask-image:radial-gradient(circle,#000 45%,transparent 95%);mask-image:radial-gradient(circle,#000 45%,transparent 95%)}
+.orb{position:absolute;border-radius:50%;filter:blur(75px);opacity:.5;transition:background-color 2.5s;will-change:transform}
+.o1{width:min(360px,70vw);height:min(360px,70vw);background-color:var(--o1);top:-8%;left:-8%;animation:m1 14s infinite alternate ease-in-out}
+.o2{width:min(340px,65vw);height:min(340px,65vw);background-color:var(--o2);bottom:-8%;right:-8%;animation:m2 18s infinite alternate ease-in-out}
+.o3{width:min(250px,50vw);height:min(250px,50vw);background-color:var(--o3);top:42%;left:52%;opacity:.3;animation:m3 16s infinite alternate ease-in-out}
+.scan{position:fixed;inset:0;z-index:3;pointer-events:none;background:repeating-linear-gradient(rgba(255,255,255,.025) 0 1px,transparent 1px 3px)}
+.glow{position:fixed;z-index:4;left:50%;top:50%;width:380px;height:380px;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(56,189,248,.16),transparent 65%);transition:left .35s ease-out,top .35s ease-out}
+
+/* sahne */
+.stage{position:fixed;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:calc(56px + env(safe-area-inset-top)) 24px calc(40px + env(safe-area-inset-bottom));max-width:560px;margin:0 auto;overflow-x:hidden;overflow-y:auto;scrollbar-width:none}
+.stage::-webkit-scrollbar{display:none}
+.stage.shake{animation:shake .6s}
+.line{font-size:clamp(1.25rem,5.4vw,1.9rem);font-weight:700;letter-spacing:-.3px;line-height:1.35;min-height:1.35em;max-width:100%;text-wrap:balance;text-shadow:0 2px 18px rgba(0,0,0,.5);opacity:0;animation:lin .6s ease forwards}
+.line.small{font-size:clamp(.9rem,3.8vw,1.05rem);font-weight:500;color:var(--tx2);letter-spacing:.4px}
+.line.big{font-size:clamp(2rem,10vw,3.4rem);font-weight:800}
+.line.num{color:var(--ac);font-variant-numeric:tabular-nums}
+.line.err{color:#fecaca;text-shadow:0 0 22px rgba(239,68,68,.6)}
+.stage>.out{animation:lout .7s ease forwards}
+.line:not(.glitch).typing::after,.whisper::after{content:'';display:inline-block;width:2px;height:1em;margin-left:4px;vertical-align:-.12em;background:var(--ac);animation:blink 1s steps(1) infinite}
+
+/* glitch */
+.glitch{position:relative}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;pointer-events:none}
+.glitch::before{color:#ff2d6f;clip-path:inset(0 0 100% 0);animation:g1 3.1s infinite steps(1)}
+.glitch::after{color:#22d3ee;clip-path:inset(100% 0 0 0);animation:g2 2.6s infinite steps(1)}
+
+/* harfler */
+.letters{display:flex;justify-content:center;font-size:clamp(3rem,16vw,5.2rem);font-weight:800;margin:6px 0}
+.letters span{display:inline-block;width:1.05em;text-align:center;opacity:0;animation:lett .7s ease forwards;animation-delay:calc(var(--i)*.18s)}
+
+/* yükleme */
+.loader{width:min(300px,76vw);display:flex;flex-direction:column;align-items:center;gap:10px}
+.bar{width:100%;height:8px;border-radius:99px;background:rgba(255,255,255,.08);border:1px solid var(--bd);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--o1),var(--o2),var(--o3));box-shadow:0 0 14px var(--ac)}
+.pct{font-size:2rem;font-weight:800;font-variant-numeric:tabular-nums}
+.loader.jit{animation:jit .12s steps(2) infinite}
+
+/* sorular */
+.drift{position:fixed;inset:0;z-index:8;pointer-events:none;overflow:hidden}
+.q{position:absolute;max-width:70vw;color:var(--tx2);font-weight:500;font-size:clamp(.95rem,3.6vw,1.2rem);opacity:0;animation:up 7s ease-in-out forwards}
+
+/* göz */
+.eye{position:relative;width:170px;height:92px;border-radius:50%;overflow:hidden;margin-bottom:8px;background:radial-gradient(ellipse at 50% 40%,#fff,#dbeafe 55%,#93c5fd);box-shadow:0 0 40px rgba(56,189,248,.35),inset 0 -8px 18px rgba(0,0,0,.25);transform:scaleY(.04);transition:transform .5s cubic-bezier(.2,.9,.3,1.2)}
+.eye.open{transform:scaleY(1)}
+.eye.blink{transform:scaleY(.06);transition-duration:.12s}
+.eye.shut{transform:scaleY(.02);transition-duration:.6s}
+.iris{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:radial-gradient(circle,#020617 0 30%,var(--ac) 32% 68%,#4338ca);transition:transform .14s ease-out}
+.iris::after{content:'';position:absolute;left:14px;top:10px;width:9px;height:9px;border-radius:50%;background:#fff;opacity:.9}
+
+/* final */
+.final{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;opacity:0;animation:fin 1.2s ease forwards}
+.ring{position:relative;width:92px;height:92px;margin-bottom:8px}
+.ring::before{content:'';position:absolute;inset:0;border-radius:50%;background:conic-gradient(var(--o1),var(--o2),var(--o3),var(--o1));animation:spin 5s linear infinite;box-shadow:0 0 30px rgba(56,189,248,.3)}
+.ring::after{content:'';position:absolute;inset:4px;border-radius:50%;background:#0b1226}
+.ring span{position:absolute;z-index:2;left:50%;top:50%;width:10px;height:10px;margin:-5px;border-radius:50%;background:var(--ac);animation:pulse 2.4s ease-in-out infinite}
+.whisper{font-size:.95rem;color:var(--tx2);letter-spacing:.4px;min-height:1.4em;transition:opacity .5s}
+.whisper.swap{opacity:0}
+.links{width:100%;max-width:340px;display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.btn{display:block;width:100%;padding:16px 18px;font:600 1rem 'Plus Jakarta Sans',sans-serif;color:var(--tx);text-align:center;text-decoration:none;cursor:pointer;background:var(--bt);border:1px solid var(--bd);border-radius:16px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;animation:fin .6s ease forwards;transition:background .25s,border-color .25s,box-shadow .25s}
+.btn:hover{background:rgba(255,255,255,.1);border-color:rgba(56,189,248,.45);box-shadow:0 0 18px rgba(56,189,248,.18)}
+.btn:active{transform:scale(.97)}
+
+.back{position:fixed;z-index:30;top:calc(14px + env(safe-area-inset-top));left:calc(14px + env(safe-area-inset-left));padding:9px 14px;border-radius:99px;background:var(--bt);border:1px solid var(--bd);color:var(--tx2);font-size:.8rem;font-weight:600;text-decoration:none;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:.55;transition:opacity .25s}
+.back:hover{opacity:1}
+.hint{position:fixed;z-index:20;left:0;right:0;text-align:center;bottom:calc(16px + env(safe-area-inset-bottom));font-size:.75rem;color:rgba(148,163,184,.55);opacity:0;transition:opacity 1.2s;pointer-events:none}
+.hint.show{opacity:1}
+
+@keyframes flow{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+@keyframes m1{to{transform:translate3d(100px,70px,0) scale(1.15)}}
+@keyframes m2{to{transform:translate3d(-100px,-80px,0) scale(1.1)}}
+@keyframes m3{0%{transform:translate3d(-60px,-30px,0) scale(.9)}100%{transform:translate3d(50px,60px,0) scale(1.2)}}
+@keyframes lin{from{opacity:0;translate:0 10px;filter:blur(6px)}to{opacity:1;translate:0 0;filter:blur(0)}}
+@keyframes lout{from{opacity:1;filter:blur(0)}to{opacity:0;translate:0 -10px;filter:blur(8px)}}
+@keyframes lett{from{opacity:0;filter:blur(10px)}to{opacity:1;filter:blur(0)}}
+@keyframes blink{50%{opacity:0}}
+@keyframes g1{0%,90%,100%{clip-path:inset(0 0 100% 0);transform:none}91%{clip-path:inset(12% 0 58% 0);transform:translate(-4px,0)}94%{clip-path:inset(55% 0 20% 0);transform:translate(3px,0)}97%{clip-path:inset(30% 0 40% 0);transform:translate(-2px,0)}}
+@keyframes g2{0%,86%,100%{clip-path:inset(100% 0 0 0);transform:none}88%{clip-path:inset(60% 0 8% 0);transform:translate(4px,0)}92%{clip-path:inset(8% 0 70% 0);transform:translate(-3px,0)}95%{clip-path:inset(40% 0 35% 0);transform:translate(2px,0)}}
+@keyframes shake{0%,100%{transform:none}20%{transform:translate(-6px,3px)}40%{transform:translate(5px,-4px)}60%{transform:translate(-4px,-2px)}80%{transform:translate(3px,4px)}}
+@keyframes jit{0%{transform:translate(2px,0)}50%{transform:translate(-3px,1px)}100%{transform:translate(1px,-1px)}}
+@keyframes up{0%{opacity:0;transform:translateY(40px) rotate(var(--r));filter:blur(6px)}20%{opacity:.9;filter:blur(0)}80%{opacity:.7}100%{opacity:0;transform:translateY(-120px) rotate(var(--r));filter:blur(6px)}}
+@keyframes fin{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{transform:scale(.7);opacity:.6}50%{transform:scale(1.3);opacity:1}}
+@media (max-height:560px){.ring{display:none}.stage{padding-top:56px}}
+@media (prefers-reduced-motion:reduce){.bg,.orb,.glitch::before,.glitch::after,.ring::before{animation:none!important}.glow{display:none}}
+</style>
+</head>
+<body>
+<div class="bg"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<div class="grid"></div><div class="scan"></div><div class="glow" id="glow"></div>
+<a class="back" href="/">← geri</a>
+<main class="stage" id="stage"><noscript><p class="line small" style="opacity:1">Bu sayfa animasyonla anlatılıyor. JavaScript kapalıyken tek söyleyebileceğim: ben Batu.</p></noscript></main>
+<div class="hint" id="hint">dokun: hızlansın</div>
+
+<script>
+(() => {
+'use strict';
+const stage = document.getElementById('stage'), hint = document.getElementById('hint'), glow = document.getElementById('glow');
+const root = document.documentElement, T0 = performance.now();
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* sekme başlığı */
+let cur = document.title;
+const setTitle = t => { cur = t; if (!document.hidden) document.title = t; };
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) document.title = 'gitme.';
+  else { document.title = 'geri geldin.'; setTimeout(() => document.title = cur, 1600); }
+});
+
+/* zaman: dokununca kısa süre hızlanır */
+let boost = 1, bt = 0, pending = null;
+const wait = ms => new Promise(res => {
+  const id = setTimeout(fin, ms * boost);
+  function fin(){ clearTimeout(id); if (pending === fin) pending = null; res(); }
+  pending = fin;
+});
+const rush = () => { boost = .12; clearTimeout(bt); bt = setTimeout(() => boost = 1, 1000); if (pending) pending(); };
+const tween = async (ms, fn) => { let t = 0; while (t < 1) { await wait(16); t = Math.min(1, t + 16 / ms); fn(t); } };
+
+/* yardımcılar */
+const mk = (tag, cls = '', txt = '') => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt) e.textContent = txt; return e; };
+const line = (cls = '') => { const e = mk('div', 'line ' + cls); stage.appendChild(e); return e; };
+const sync = el => { el.dataset.text = el.textContent; };
+const mood = (a, b, c) => { root.style.setProperty('--o1', a); root.style.setProperty('--o2', b); root.style.setProperty('--o3', c); };
+const CALM = ['#00b4d8', '#6366f1', '#10b981'];
+
+async function type(el, text, speed = 55){
+  el.classList.add('typing');
+  for (const ch of text) { el.textContent += ch; sync(el); await wait(speed * (.7 + Math.random() * .7)); }
+  el.classList.remove('typing');
+}
+async function erase(el, speed = 22){
+  el.classList.add('typing');
+  while (el.textContent.length) { el.textContent = el.textContent.slice(0, -1); sync(el); await wait(speed); }
+  el.classList.remove('typing');
+}
+async function retype(el, text, hold = 1200, speed = 45){
+  if (el.textContent) await erase(el, 18);
+  await type(el, text, speed);
+  await wait(hold);
+}
+async function say(text, { cls = '', hold = 1300, mode = 'fade', speed = 55 } = {}){
+  const el = line(cls);
+  await type(el, text, speed);
+  await wait(hold);
+  if (mode === 'erase') { await erase(el); el.remove(); }
+  else if (mode === 'fade') { el.classList.add('out'); await wait(700); el.remove(); }
+  return el;
+}
+async function clearStage(ms = 800){
+  const kids = [...stage.children];
+  kids.forEach(k => k.classList.add('out'));
+  await wait(ms);
+  kids.forEach(k => k.remove());
+}
+
+/* imleç / dokunuş */
+const look = { x: .5, y: .5 }; let lastMove = 0;
+const track = e => { look.x = e.clientX / innerWidth; look.y = e.clientY / innerHeight; lastMove = performance.now(); glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; };
+addEventListener('pointermove', track, { passive: true });
+addEventListener('pointerdown', e => { track(e); if (!e.target.closest('a,button')) rush(); });
+addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && !e.target.closest('a,button')) rush(); });
+
+/* 1 — giriş */
+async function intro(){
+  setTitle('ben');
+  await wait(1100);
+  await say('merhaba.', { hold: 900, mode: 'erase' });
+  await say('hayır, böyle başlamamalıydım.', { hold: 1100, mode: 'erase' });
+  await say('buraya “ben kimim” diye geldin.', { hold: 1500 });
+  setTitle('ben?');
+  await say('sana bir şey söyleyecektim.', { hold: 1300, mode: 'keep' });
+  await say('. . .', { speed: 420, hold: 1500, mode: 'keep' });
+  await say('unuttum.', { hold: 1700, mode: 'keep' });
+  await say('ama sen geldin. bu da bir şey.', { cls: 'small', hold: 2400, mode: 'keep' });
+  await clearStage();
+}
+
+/* 2 — isim, harfler, ünlüsüz ad */
+async function sceneName(){
+  setTitle('B A T U');
+  mood('#f59e0b', '#6366f1', '#ec4899');
+  const cap = line('small'), box = mk('div', 'letters');
+  [...'BATU'].forEach((ch, i) => { const s = mk('span', '', ch); s.style.setProperty('--i', i); s._x = 0; box.appendChild(s); });
+  stage.appendChild(box);
+  const place = order => {
+    const w = box.children[0].getBoundingClientRect().width;
+    [...box.children].forEach((s, i) => {
+      const from = s._x, to = (order[i] - i) * w, up = (i % 2 ? -1 : 1) * w * .55;
+      s.animate([{ transform: `translate(${from}px,0)` }, { transform: `translate(${(from + to) / 2}px,${up}px)`, offset: .5 }, { transform: `translate(${to}px,0)` }], { duration: reduce ? 1 : 1500, easing: 'ease-in-out', fill: 'forwards' });
+      s._x = to;
+    });
+  };
+  await retype(cap, 'bir isim var.', 1200);
+  place([2, 3, 0, 1]); await wait(1700);
+  await retype(cap, 'aynı harfler. başka biri: TUBA.', 1500);
+  place([0, 1, 2, 3]); await wait(1700);
+  await retype(cap, 'hangisi ben?', 2200);
+  await clearStage();
+  setTitle('btylmz');
+  const big = line('big glitch'); await type(big, 'btylmz', 130); await wait(900);
+  const c2 = line('small');
+  await retype(c2, 'içinde tek bir ünlü yok.', 1500);
+  await retype(c2, 'sesi sen ver.', 2400);
+  await clearStage();
+}
+
+/* 3 — yükleme */
+async function sceneLoad(){
+  setTitle('yükleniyor…');
+  mood('#38bdf8', '#8b5cf6', '#22d3ee');
+  const cap = line('small'), wrap = mk('div', 'loader'), bar = mk('div', 'bar'), fill = mk('i'), pct = mk('b', 'pct', '0%');
+  bar.appendChild(fill); wrap.append(bar, pct); stage.appendChild(wrap);
+  const set = v => { fill.style.width = v + '%'; pct.textContent = Math.round(v) + '%'; };
+  await retype(cap, 'ben yükleniyor', 500);
+  await tween(4200, t => set(t < .6 ? t / .6 * 70 : 70 + Math.pow((t - .6) / .4, 2) * 29));
+  await retype(cap, 'takıldı.', 1300);
+  await retype(cap, 'bazı şeyler %99’da kalır.', 2000);
+  await retype(cap, 'son yüzde sende.', 2300);
+  wrap.classList.add('jit');
+  await tween(1100, t => set(99 * (1 - t)));
+  wrap.classList.remove('jit');
+  await retype(cap, 'başa döndük.', 1500);
+  await clearStage();
+}
+
+/* 4 — zaman */
+async function sceneTime(){
+  setTitle('…');
+  mood('#10b981', '#0ea5e9', '#6366f1');
+  const cap = line('small'), big = line('big num');
+  const upd = () => { big.textContent = Math.floor((performance.now() - T0) / 1000) + ' saniye'; };
+  upd(); const iv = setInterval(upd, 250);
+  await retype(cap, 'sen geldiğinden beri', 3400);
+  await retype(cap, 'geçen süre bu.', 1700);
+  await retype(cap, 'benim saatim yok.', 1900);
+  await retype(cap, 'hep aynı an.', 2400);
+  clearInterval(iv);
+  await clearStage();
+}
+
+/* 5 — sorular */
+async function sceneQuestions(){
+  setTitle('?');
+  mood('#8b5cf6', '#06b6d4', '#f43f5e');
+  const layer = mk('div', 'drift'); document.body.appendChild(layer);
+  ['neden buradasın?', 'ne bulmayı umuyordun?', 'bir butona mı bastın?', 'hangisine?', 'ben kimdim?', 'peki ya sen?'].forEach((q, i) => setTimeout(() => {
+    const d = mk('div', 'q', q);
+    d.style.left = (5 + Math.random() * 22) + 'vw';
+    d.style.top = (12 + i * 12 + Math.random() * 4) + 'vh';
+    d.style.setProperty('--r', (Math.random() * 8 - 4) + 'deg');
+    layer.appendChild(d);
+  }, i * 700));
+  setTimeout(() => layer.remove(), 12500);
+  await wait(5200);
+  await say('o buton bendim.', { hold: 2600, mode: 'keep' });
+  await clearStage();
+}
+
+/* 6 — göz */
+async function sceneEye(){
+  setTitle('bakıyorsun');
+  mood('#f472b6', '#6366f1', '#38bdf8');
+  const eye = mk('div', 'eye'), iris = mk('div', 'iris'); eye.appendChild(iris); stage.appendChild(eye);
+  const cap = line(''); let alive = true;
+  requestAnimationFrame(() => requestAnimationFrame(() => eye.classList.add('open')));
+  (function loop(){
+    if (!alive) return;
+    const n = performance.now();
+    if (n - lastMove > 2200) { look.x = .5 + Math.sin(n / 900) * .4; look.y = .5 + Math.cos(n / 1300) * .35; }
+    iris.style.transform = `translate(${(look.x - .5) * 68}px,${(look.y - .5) * 28}px)`;
+    requestAnimationFrame(loop);
+  })();
+  const blink = () => { eye.classList.add('blink'); setTimeout(() => eye.classList.remove('blink'), 150); };
+  await wait(1500);
+  await retype(cap, 'bakıyorsun.', 1700);
+  cap.classList.add('glitch');
+  await retype(cap, 'bakılıyorsun.', 2300);
+  blink(); await wait(250); blink();
+  await retype(cap, 'göz kırptım.', 1300);
+  cap.classList.remove('glitch');
+  await retype(cap, 'sen de kırp.', 2000);
+  eye.classList.add('shut'); await wait(800);
+  alive = false;
+  await clearStage();
+}
+
+/* 7 — hata */
+async function sceneError(){
+  setTitle('HATA');
+  mood('#ef4444', '#7c3aed', '#f59e0b');
+  const big = line('big glitch err'), sm = line('small');
+  await wait(600);
+  stage.classList.add('shake'); setTimeout(() => stage.classList.remove('shake'), 700);
+  await type(big, 'HATA 404', 45);
+  await retype(sm, 'ben.html bulunamadı.', 1900);
+  await retype(sm, '…bulundu.', 1200);
+  big.classList.remove('err');
+  await retype(big, 'buradayım.', 800);
+  await retype(sm, 'sadece başka yerdeyim.', 2500);
+  await clearStage();
+}
+
+/* 8 — son */
+async function sceneEnd(){
+  setTitle('ben');
+  mood(...CALM);
+  await say('burada bir şey anlatacaktım.', { hold: 1400 });
+  await say('anlattım.', { hold: 1300 });
+  await say('anlamadıysan doğru yerdesin.', { hold: 1700 });
+  await say('ben de tam anlamış değilim.', { hold: 1500, mode: 'keep' });
+  await say('ama buradayım.', { cls: 'small', hold: 2200, mode: 'keep' });
+  await clearStage(900);
+  showFinal();
+}
+
+function showFinal(){
+  hint.classList.remove('show');
+  stage.innerHTML = '';
+  mood(...CALM);
+  const f = mk('div', 'final');
+  f.innerHTML =
+    '<div class="ring"><span></span></div>' +
+    '<h1 class="line big glitch" data-text="Batu Yılmaz">Batu Yılmaz</h1>' +
+    '<div class="whisper">btylmz</div>' +
+    '<div class="links">' +
+    '<a class="btn" href="/" style="animation-delay:.6s">Ana sayfa</a>' +
+    '<a class="btn" href="mailto:btylmz8@gmail.com" style="animation-delay:.75s">Yaz bana</a>' +
+    '<button class="btn" type="button" id="again" style="animation-delay:.9s">Baştan</button>' +
+    '</div>';
+  stage.appendChild(f);
+  f.querySelector('#again').addEventListener('click', () => location.reload());
+  const w = f.querySelector('.whisper'), msgs = ['hâlâ buradasın.', 'gitmedin.', 'iyi.', 'ben de.', 'btylmz']; let k = 0;
+  setInterval(() => { w.classList.add('swap'); setTimeout(() => { w.textContent = msgs[k++ % msgs.length]; w.classList.remove('swap'); }, 600); }, 4200);
+}
+
+(async () => {
+  setTimeout(() => hint.classList.add('show'), 7000);
+  setTimeout(() => hint.classList.remove('show'), 13000);
+  try {
+    await intro(); await sceneName(); await sceneLoad(); await sceneTime();
+    await sceneQuestions(); await sceneEye(); await sceneError(); await sceneEnd();
+  } catch (e) { console.error(e); showFinal(); }
+})();
+})();
+</script>
+</body>
+</html>
