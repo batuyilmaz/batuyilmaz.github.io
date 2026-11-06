@@ -567,18 +567,11 @@ async function copyText(text) {
     return ok;
   } catch { return false; }
 }
-const QUOTES = [
-  '“Söz perdedir, anlam ise sırdır.”',
-  '“Kopyalanan yalnızca harflerdir, öz değil.”',
-  '“İletişim, iki yalnızlığın birbirine değmesidir.”',
-  '“Yazacağın her cümle önce kendi nefsine düşer.”'
-];
-let qi = 0;
 $('copy').addEventListener('click', async e => {
   const use = e.currentTarget.querySelector('use');
   if (!(await copyText(MAIL))) { toast('Kopyalanamadı. Adres: ' + MAIL, 4500); return; }
   use.setAttribute('href', '#i-check');
-  toast(MAIL + ' kopyalandı\n' + QUOTES[qi++ % QUOTES.length]);
+  toast('Kopyalandı');
   setTimeout(() => use.setAttribute('href', '#i-copy'), 3200);
 });
 
@@ -596,7 +589,7 @@ $('share').addEventListener('click', async () => {
     if (err && err.name === 'AbortError') return;
   }
   if (await copyText(url)) {
-    toast('Bağlantı kopyalandı\n' + url);
+    toast('Kopyalandı');
     track('share', { method: 'copy_link', content_type: 'page' });
   }
 });
