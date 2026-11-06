@@ -413,6 +413,7 @@ let idn = 0;
 const cycle = () => {
   if (busy) return;
   idn = (idn + 1) % IDS.length;
+  if (window.buzz) window.buzz(12);
   base = IDS[idn].m;
   mood(base);
   decrypt(IDS[idn].t);
@@ -572,6 +573,7 @@ $('copy').addEventListener('click', async e => {
   if (!(await copyText(MAIL))) { toast('Kopyalanamadı. Adres: ' + MAIL, 4500); return; }
   use.setAttribute('href', '#i-check');
   toast('Kopyalandı');
+  if (window.buzz) window.buzz(18);
   setTimeout(() => use.setAttribute('href', '#i-copy'), 3200);
 });
 

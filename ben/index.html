@@ -1,171 +1,212 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-B5N7JLQ6DZ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-B5N7JLQ6DZ');
-</script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ben | btylmz</title>
+<meta name="description" content="btylmz kimdir? Cevap, kısa ve biraz tuhaf bir animasyonun içinde.">
 <meta name="theme-color" content="#090f24">
-<title>ben</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://btylmz.com/ben">
+
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="btylmz">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:url" content="https://btylmz.com/ben">
+<meta property="og:title" content="ben | btylmz">
+<meta property="og:description" content="btylmz kimdir? Cevap, kısa ve biraz tuhaf bir animasyonun içinde.">
+<meta property="og:image" content="https://btylmz.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Batu Yılmaz — btylmz.com">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ben | btylmz">
+<meta name="twitter:description" content="btylmz kimdir? Cevap, kısa ve biraz tuhaf bir animasyonun içinde.">
+<meta name="twitter:image" content="https://btylmz.com/assets/og.png">
+
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preload" href="/assets/fonts/pjs-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/pjs-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/base.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","url":"https://btylmz.com/ben","mainEntity":{"@type":"Person","name":"Batu Yılmaz","alternateName":"btylmz","url":"https://btylmz.com/"}}</script>
+<noscript><style>.skip,.hint{display:none!important}</style></noscript>
+
 <style>
-:root{--bg:#090f24;--o1:#00b4d8;--o2:#6366f1;--o3:#10b981;--tx:#f8fafc;--tx2:#94a3b8;--ac:#38bdf8;--bd:rgba(255,255,255,.12);--bt:rgba(255,255,255,.05)}
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%}
-body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--bg);color:var(--tx);overflow:hidden;-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}
 
-/* arka plan */
-.bg{position:fixed;inset:0;overflow:hidden;background:linear-gradient(-45deg,#090f24,#16203a,#0b132b,#1b1742);background-size:400% 400%;animation:flow 18s ease infinite}
-.grid{position:fixed;inset:0;z-index:1;pointer-events:none;background-image:linear-gradient(to right,rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.03) 1px,transparent 1px);background-size:36px 36px;-webkit-mask-image:radial-gradient(circle,#000 45%,transparent 95%);mask-image:radial-gradient(circle,#000 45%,transparent 95%)}
-.orb{position:absolute;border-radius:50%;filter:blur(75px);opacity:.5;transition:background-color 2.5s;will-change:transform}
-.o1{width:min(360px,70vw);height:min(360px,70vw);background-color:var(--o1);top:-8%;left:-8%;animation:m1 14s infinite alternate ease-in-out}
-.o2{width:min(340px,65vw);height:min(340px,65vw);background-color:var(--o2);bottom:-8%;right:-8%;animation:m2 18s infinite alternate ease-in-out}
-.o3{width:min(250px,50vw);height:min(250px,50vw);background-color:var(--o3);top:42%;left:52%;opacity:.3;animation:m3 16s infinite alternate ease-in-out}
-.scan{position:fixed;inset:0;z-index:3;pointer-events:none;background:repeating-linear-gradient(rgba(255,255,255,.025) 0 1px,transparent 1px 3px)}
-.glow{position:fixed;z-index:4;left:50%;top:50%;width:380px;height:380px;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(56,189,248,.16),transparent 65%);transition:left .35s ease-out,top .35s ease-out}
-
-/* sahne */
-.stage{position:fixed;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:calc(56px + env(safe-area-inset-top)) 24px calc(40px + env(safe-area-inset-bottom));max-width:560px;margin:0 auto;overflow-x:hidden;overflow-y:auto;scrollbar-width:none}
-.stage::-webkit-scrollbar{display:none}
-.stage.shake{animation:shake .6s}
-.line{font-size:clamp(1.25rem,5.4vw,1.9rem);font-weight:700;letter-spacing:-.3px;line-height:1.35;min-height:1.35em;max-width:100%;text-wrap:balance;text-shadow:0 2px 18px rgba(0,0,0,.5);opacity:0;animation:lin .6s ease forwards}
-.line.small{font-size:clamp(.9rem,3.8vw,1.05rem);font-weight:500;color:var(--tx2);letter-spacing:.4px}
-.line.big{font-size:clamp(2rem,10vw,3.4rem);font-weight:800}
+/* ---- Sahne ---- */
+.ben.stage{justify-content:center;gap:14px;text-align:center;padding:calc(68px + env(safe-area-inset-top)) max(22px,calc((100vw - 560px) / 2)) calc(56px + env(safe-area-inset-bottom))}
+.ben.stage.shake{animation:shake .6s}
+.line{max-width:100%;min-height:1.35em;font-size:clamp(1.25rem,5.4vw,1.9rem);font-weight:700;letter-spacing:-.3px;line-height:1.35;text-wrap:balance;text-shadow:0 2px 18px rgba(0,0,0,.5);opacity:0;animation:lin .6s ease forwards}
+.line.small{font-size:clamp(.92rem,3.8vw,1.05rem);font-weight:500;letter-spacing:.4px;color:var(--tx2)}
+.line.big{font-size:clamp(2rem,10vw,3.4rem);font-weight:800;letter-spacing:-.5px}
 .line.num{color:var(--ac);font-variant-numeric:tabular-nums}
 .line.err{color:#fecaca;text-shadow:0 0 22px rgba(239,68,68,.6)}
-.stage>.out{animation:lout .7s ease forwards}
+.ben.stage>.out{animation:lout .7s ease forwards}
 .line:not(.glitch).typing::after,.whisper::after{content:'';display:inline-block;width:2px;height:1em;margin-left:4px;vertical-align:-.12em;background:var(--ac);animation:blink 1s steps(1) infinite}
 
-/* glitch */
-.glitch{position:relative}
-.glitch::before,.glitch::after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;pointer-events:none}
-.glitch::before{color:#ff2d6f;clip-path:inset(0 0 100% 0);animation:g1 3.1s infinite steps(1)}
-.glitch::after{color:#22d3ee;clip-path:inset(100% 0 0 0);animation:g2 2.6s infinite steps(1)}
+/* ---- Harfler ---- */
+.letters{display:flex;justify-content:center;margin:6px 0;font-size:clamp(3rem,16vw,5.2rem);font-weight:800}
+.letters span{display:inline-block;width:1.05em;text-align:center;opacity:0;animation:lett .7s ease forwards;animation-delay:calc(var(--i) * .18s)}
 
-/* harfler */
-.letters{display:flex;justify-content:center;font-size:clamp(3rem,16vw,5.2rem);font-weight:800;margin:6px 0}
-.letters span{display:inline-block;width:1.05em;text-align:center;opacity:0;animation:lett .7s ease forwards;animation-delay:calc(var(--i)*.18s)}
-
-/* yükleme */
+/* ---- Yükleme ---- */
 .loader{width:min(300px,76vw);display:flex;flex-direction:column;align-items:center;gap:10px}
-.bar{width:100%;height:8px;border-radius:99px;background:rgba(255,255,255,.08);border:1px solid var(--bd);overflow:hidden}
-.bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--o1),var(--o2),var(--o3));box-shadow:0 0 14px var(--ac)}
+.bar{width:100%;height:8px;overflow:hidden;border-radius:99px;background:rgba(255,255,255,.08);border:1px solid var(--bd)}
+.bar i{display:block;width:0;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--o1),var(--o2),var(--o3));box-shadow:0 0 14px var(--ac)}
 .pct{font-size:2rem;font-weight:800;font-variant-numeric:tabular-nums}
 .loader.jit{animation:jit .12s steps(2) infinite}
 
-/* sorular */
+/* ---- Sorular ---- */
 .drift{position:fixed;inset:0;z-index:8;pointer-events:none;overflow:hidden}
-.q{position:absolute;max-width:70vw;color:var(--tx2);font-weight:500;font-size:clamp(.95rem,3.6vw,1.2rem);opacity:0;animation:up 7s ease-in-out forwards}
+.q{position:absolute;max-width:70vw;font-size:clamp(.95rem,3.6vw,1.2rem);font-weight:500;color:var(--tx2);opacity:0;animation:up 7s ease-in-out forwards}
 
-/* göz */
-.eye{position:relative;width:170px;height:92px;border-radius:50%;overflow:hidden;margin-bottom:8px;background:radial-gradient(ellipse at 50% 40%,#fff,#dbeafe 55%,#93c5fd);box-shadow:0 0 40px rgba(56,189,248,.35),inset 0 -8px 18px rgba(0,0,0,.25);transform:scaleY(.04);transition:transform .5s cubic-bezier(.2,.9,.3,1.2)}
+/* ---- Göz ---- */
+.eye{position:relative;width:170px;height:92px;margin-bottom:8px;overflow:hidden;border-radius:50%;background:radial-gradient(ellipse at 50% 40%,#fff,#dbeafe 55%,#93c5fd);box-shadow:0 0 40px rgba(56,189,248,.35),inset 0 -8px 18px rgba(0,0,0,.25);transform:scaleY(.04);transition:transform .5s cubic-bezier(.2,.9,.3,1.2)}
 .eye.open{transform:scaleY(1)}
 .eye.blink{transform:scaleY(.06);transition-duration:.12s}
 .eye.shut{transform:scaleY(.02);transition-duration:.6s}
 .iris{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:radial-gradient(circle,#020617 0 30%,var(--ac) 32% 68%,#4338ca);transition:transform .14s ease-out}
 .iris::after{content:'';position:absolute;left:14px;top:10px;width:9px;height:9px;border-radius:50%;background:#fff;opacity:.9}
 
-/* final */
-.final{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;opacity:0;animation:fin 1.2s ease forwards}
-.ring{position:relative;width:92px;height:92px;margin-bottom:8px}
-.ring::before{content:'';position:absolute;inset:0;border-radius:50%;background:conic-gradient(var(--o1),var(--o2),var(--o3),var(--o1));animation:spin 5s linear infinite;box-shadow:0 0 30px rgba(56,189,248,.3)}
+/* ---- Son ekran ---- */
+.final{width:100%;display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;animation:fin 1.2s ease forwards}
+.ring{position:relative;width:92px;height:92px;margin-bottom:8px;cursor:pointer}
+.ring::before{content:'';position:absolute;inset:0;border-radius:50%;background:conic-gradient(var(--o1),var(--o2),var(--o3),var(--o1));box-shadow:0 0 30px rgba(56,189,248,.3);animation:spin 5s linear infinite}
 .ring::after{content:'';position:absolute;inset:4px;border-radius:50%;background:#0b1226}
 .ring span{position:absolute;z-index:2;left:50%;top:50%;width:10px;height:10px;margin:-5px;border-radius:50%;background:var(--ac);animation:pulse 2.4s ease-in-out infinite}
-.whisper{font-size:.95rem;color:var(--tx2);letter-spacing:.4px;min-height:1.4em;transition:opacity .5s}
+.whisper{min-height:1.4em;font-size:.95rem;letter-spacing:.4px;color:var(--tx2);transition:opacity .5s}
 .whisper.swap{opacity:0}
 .links{width:100%;max-width:340px;display:flex;flex-direction:column;gap:12px;margin-top:16px}
-.btn{display:block;width:100%;padding:16px 18px;font:600 1rem 'Plus Jakarta Sans',sans-serif;color:var(--tx);text-align:center;text-decoration:none;cursor:pointer;background:var(--bt);border:1px solid var(--bd);border-radius:16px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;animation:fin .6s ease forwards;transition:background .25s,border-color .25s,box-shadow .25s}
-.btn:hover{background:rgba(255,255,255,.1);border-color:rgba(56,189,248,.45);box-shadow:0 0 18px rgba(56,189,248,.18)}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:54px;padding:15px 18px;font:600 1rem var(--font);color:var(--tx);text-align:center;text-decoration:none;background:var(--bt);border:1px solid var(--bd);border-radius:16px;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);opacity:0;animation:fin .6s ease forwards;transition:background-color .25s,border-color .25s,box-shadow .25s}
+.btn:hover{background-color:rgba(255,255,255,.1);border-color:rgba(56,189,248,.45);box-shadow:0 0 18px rgba(56,189,248,.18)}
 .btn:active{transform:scale(.97)}
 
-.back{position:fixed;z-index:30;top:calc(14px + env(safe-area-inset-top));left:calc(14px + env(safe-area-inset-left));padding:9px 14px;border-radius:99px;background:var(--bt);border:1px solid var(--bd);color:var(--tx2);font-size:.8rem;font-weight:600;text-decoration:none;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:.55;transition:opacity .25s}
-.back:hover{opacity:1}
-.hint{position:fixed;z-index:20;left:0;right:0;text-align:center;bottom:calc(16px + env(safe-area-inset-bottom));font-size:.75rem;color:rgba(148,163,184,.55);opacity:0;transition:opacity 1.2s;pointer-events:none}
+/* ---- Düğmeler ve ipucu ---- */
+.skip{position:fixed;z-index:30;top:calc(12px + env(safe-area-inset-top));right:calc(12px + env(safe-area-inset-right));min-height:44px;padding:0 18px;border-radius:99px;background:var(--bt);border:1px solid var(--bd);color:var(--tx2);font-size:.82rem;font-weight:600;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);transition:color .25s,border-color .25s}
+.skip:hover{color:var(--tx);border-color:rgba(56,189,248,.45)}
+html.lite .skip{-webkit-backdrop-filter:none;backdrop-filter:none}
+.hint{position:fixed;z-index:20;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom));text-align:center;font-size:.75rem;color:var(--tx3);opacity:0;transition:opacity 1.2s;pointer-events:none}
 .hint.show{opacity:1}
+html.consent-open .hint{display:none}
 
-@keyframes flow{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
-@keyframes m1{to{transform:translate3d(100px,70px,0) scale(1.15)}}
-@keyframes m2{to{transform:translate3d(-100px,-80px,0) scale(1.1)}}
-@keyframes m3{0%{transform:translate3d(-60px,-30px,0) scale(.9)}100%{transform:translate3d(50px,60px,0) scale(1.2)}}
-@keyframes lin{from{opacity:0;translate:0 10px;filter:blur(6px)}to{opacity:1;translate:0 0;filter:blur(0)}}
-@keyframes lout{from{opacity:1;filter:blur(0)}to{opacity:0;translate:0 -10px;filter:blur(8px)}}
-@keyframes lett{from{opacity:0;filter:blur(10px)}to{opacity:1;filter:blur(0)}}
-@keyframes blink{50%{opacity:0}}
-@keyframes g1{0%,90%,100%{clip-path:inset(0 0 100% 0);transform:none}91%{clip-path:inset(12% 0 58% 0);transform:translate(-4px,0)}94%{clip-path:inset(55% 0 20% 0);transform:translate(3px,0)}97%{clip-path:inset(30% 0 40% 0);transform:translate(-2px,0)}}
-@keyframes g2{0%,86%,100%{clip-path:inset(100% 0 0 0);transform:none}88%{clip-path:inset(60% 0 8% 0);transform:translate(4px,0)}92%{clip-path:inset(8% 0 70% 0);transform:translate(-3px,0)}95%{clip-path:inset(40% 0 35% 0);transform:translate(2px,0)}}
+@keyframes lett{from{opacity:0;filter:blur(10px)}to{opacity:1;filter:none}}
 @keyframes shake{0%,100%{transform:none}20%{transform:translate(-6px,3px)}40%{transform:translate(5px,-4px)}60%{transform:translate(-4px,-2px)}80%{transform:translate(3px,4px)}}
 @keyframes jit{0%{transform:translate(2px,0)}50%{transform:translate(-3px,1px)}100%{transform:translate(1px,-1px)}}
-@keyframes up{0%{opacity:0;transform:translateY(40px) rotate(var(--r));filter:blur(6px)}20%{opacity:.9;filter:blur(0)}80%{opacity:.7}100%{opacity:0;transform:translateY(-120px) rotate(var(--r));filter:blur(6px)}}
+@keyframes up{0%{opacity:0;transform:translateY(40px) rotate(var(--r));filter:blur(6px)}20%{opacity:.9;filter:none}80%{opacity:.7}100%{opacity:0;transform:translateY(-120px) rotate(var(--r));filter:blur(6px)}}
 @keyframes fin{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes pulse{0%,100%{transform:scale(.7);opacity:.6}50%{transform:scale(1.3);opacity:1}}
-@media (max-height:560px){.ring{display:none}.stage{padding-top:56px}}
-@media (prefers-reduced-motion:reduce){.bg,.orb,.glitch::before,.glitch::after,.ring::before{animation:none!important}.glow{display:none}}
+@media (max-height:560px){.ring{display:none}}
 </style>
+<script src="/assets/site.js" defer></script>
 </head>
 <body>
 <div class="bg"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
-<div class="grid"></div><div class="scan"></div><div class="glow" id="glow"></div>
+<div class="grid"></div>
+<div class="scan"></div>
+<div class="void" id="void" aria-hidden="true"></div>
+<div class="glow" id="glow"></div>
+
 <a class="back" href="/">← geri</a>
-<main class="stage" id="stage"><noscript><p class="line small" style="opacity:1">Bu sayfa animasyonla anlatılıyor. JavaScript kapalıyken tek söyleyebileceğim: ben Batu.</p></noscript></main>
+<button type="button" class="skip" id="skip" aria-label="Animasyonu geç" hidden>geç →</button>
+
+<div class="sr-only">
+  <h1>Ben — Batu Yılmaz (btylmz)</h1>
+  <p>Bu sayfa kısa ve biraz tuhaf bir animasyonla anlatılır. Ben Batu Yılmaz, takma adım btylmz. Animasyonu "geç" düğmesiyle atlayabilirsin.</p>
+</div>
+
+<main class="stage ben" id="stage" aria-hidden="true">
+  <noscript>
+    <p class="line big" style="opacity:1">Batu Yılmaz</p>
+    <p class="line small" style="opacity:1">Bu sayfa animasyonla anlatılıyor. JavaScript kapalıyken tek söyleyebileceğim: ben Batu, takma adım btylmz.</p>
+    <div class="links">
+      <a class="btn" href="/">Ana sayfa</a>
+      <a class="btn" href="mailto:btylmz8@gmail.com">Yaz bana</a>
+    </div>
+  </noscript>
+</main>
 <div class="hint" id="hint">dokun: hızlansın</div>
 
 <script>
 (() => {
 'use strict';
-const stage = document.getElementById('stage'), hint = document.getElementById('hint'), glow = document.getElementById('glow');
-const root = document.documentElement, T0 = performance.now();
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* sekme başlığı */
+const $ = id => document.getElementById(id);
+const stage = $('stage'), hint = $('hint'), glow = $('glow'), skipBtn = $('skip'), voidEl = $('void');
+const root = document.documentElement;
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const T0 = performance.now();
+const KEY = 'btylmz.ben';
+const SK = { skip: true };
+
+const track = (n, p) => window.track && window.track(n, p);
+const buzz = p => window.buzz && window.buzz(p);
+const isLite = () => root.classList.contains('lite');
+const seen = (() => { try { return sessionStorage.getItem(KEY) === '1'; } catch { return false; } })();
+const markSeen = () => { try { sessionStorage.setItem(KEY, '1'); } catch { /* özel mod vb. */ } };
+
+/* ---- Sekme başlığı ---- */
 let cur = document.title;
 const setTitle = t => { cur = t; if (!document.hidden) document.title = t; };
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden) document.title = 'gitme.';
-  else { document.title = 'geri geldin.'; setTimeout(() => document.title = cur, 1600); }
+  if (document.hidden) { document.title = 'gitme.'; return; }
+  document.title = 'geri geldin.';
+  setTimeout(() => { if (!document.hidden) document.title = cur; }, 1600);
 });
 
-/* zaman: dokununca kısa süre hızlanır */
-let boost = 1, bt = 0, pending = null;
-const wait = ms => new Promise(res => {
-  const id = setTimeout(fin, ms * boost);
-  function fin(){ clearTimeout(id); if (pending === fin) pending = null; res(); }
-  pending = fin;
+/* ---- Zaman: dokununca hızlanır, "geç" ile iptal olur ---- */
+let boost = 1, bt = 0, pending = null, skipped = false, finalShown = false, curScene = 'giris';
+const wait = ms => new Promise((res, rej) => {
+  if (skipped) return rej(SK);
+  const id = setTimeout(done, ms * boost);
+  function done() {
+    clearTimeout(id);
+    if (pending === done) pending = null;
+    if (skipped) rej(SK); else res();
+  }
+  pending = done;
 });
-const rush = () => { boost = .12; clearTimeout(bt); bt = setTimeout(() => boost = 1, 1000); if (pending) pending(); };
+const rush = () => { boost = .12; clearTimeout(bt); bt = setTimeout(() => { boost = 1; }, 1000); if (pending) pending(); };
 const tween = async (ms, fn) => { let t = 0; while (t < 1) { await wait(16); t = Math.min(1, t + 16 / ms); fn(t); } };
 
-/* yardımcılar */
+const cleanups = [];
+const onClean = f => cleanups.push(f);
+const runClean = () => { while (cleanups.length) { try { cleanups.pop()(); } catch { /* sorun değil */ } } };
+
+function doSkip() {
+  if (skipped || finalShown) return;
+  skipped = true;
+  track('ben_skip', { scene: curScene });
+  buzz(10);
+  if (pending) pending();
+}
+
+/* ---- Yardımcılar ---- */
 const mk = (tag, cls = '', txt = '') => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt) e.textContent = txt; return e; };
 const line = (cls = '') => { const e = mk('div', 'line ' + cls); stage.appendChild(e); return e; };
 const sync = el => { el.dataset.text = el.textContent; };
 const mood = (a, b, c) => { root.style.setProperty('--o1', a); root.style.setProperty('--o2', b); root.style.setProperty('--o3', c); };
 const CALM = ['#00b4d8', '#6366f1', '#10b981'];
+const CIPHER = Array.from('01∆◊§×÷=+#?');
 
-async function type(el, text, speed = 55){
+async function type(el, text, speed = 55) {
   el.classList.add('typing');
   for (const ch of text) { el.textContent += ch; sync(el); await wait(speed * (.7 + Math.random() * .7)); }
   el.classList.remove('typing');
 }
-async function erase(el, speed = 22){
+async function erase(el, speed = 22) {
   el.classList.add('typing');
   while (el.textContent.length) { el.textContent = el.textContent.slice(0, -1); sync(el); await wait(speed); }
   el.classList.remove('typing');
 }
-async function retype(el, text, hold = 1200, speed = 45){
+async function retype(el, text, hold = 1200, speed = 45) {
   if (el.textContent) await erase(el, 18);
   await type(el, text, speed);
   await wait(hold);
 }
-async function say(text, { cls = '', hold = 1300, mode = 'fade', speed = 55 } = {}){
+async function say(text, { cls = '', hold = 1300, mode = 'fade', speed = 55 } = {}) {
   const el = line(cls);
   await type(el, text, speed);
   await wait(hold);
@@ -173,22 +214,69 @@ async function say(text, { cls = '', hold = 1300, mode = 'fade', speed = 55 } = 
   else if (mode === 'fade') { el.classList.add('out'); await wait(700); el.remove(); }
   return el;
 }
-async function clearStage(ms = 800){
+async function clearStage(ms = 800) {
   const kids = [...stage.children];
   kids.forEach(k => k.classList.add('out'));
   await wait(ms);
   kids.forEach(k => k.remove());
 }
+async function scramble(el, text, steps = 11) {
+  const target = Array.from(text);
+  for (let s = 0; s < steps; s++) {
+    el.textContent = target.map((c, i) => c === ' ' ? ' ' : (s >= 3 + i % 5 ? c : CIPHER[Math.floor(Math.random() * CIPHER.length)])).join('');
+    sync(el);
+    await wait(40);
+  }
+  el.textContent = text;
+  sync(el);
+}
 
-/* imleç / dokunuş */
-const look = { x: .5, y: .5 }; let lastMove = 0;
-const track = e => { look.x = e.clientX / innerWidth; look.y = e.clientY / innerHeight; lastMove = performance.now(); glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; };
-addEventListener('pointermove', track, { passive: true });
-addEventListener('pointerdown', e => { track(e); if (!e.target.closest('a,button')) rush(); });
-addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && !e.target.closest('a,button')) rush(); });
+/* ---- İmleç / dokunuş ---- */
+const look = { x: .5, y: .5 };
+let lastMove = 0;
+const follow = e => {
+  look.x = e.clientX / innerWidth; look.y = e.clientY / innerHeight; lastMove = performance.now();
+  glow.style.setProperty('--gx', e.clientX + 'px');
+  glow.style.setProperty('--gy', e.clientY + 'px');
+};
+addEventListener('pointermove', follow, { passive: true });
+addEventListener('pointerdown', e => {
+  follow(e);
+  if (!finalShown && !e.target.closest('a,button')) { rush(); buzz(6); }
+}, { passive: true });
+addEventListener('keydown', e => {
+  if (finalShown) return;
+  if (e.key === 'Escape') doSkip();
+  else if ((e.key === ' ' || e.key === 'Enter') && !e.target.closest('a,button')) rush();
+});
+skipBtn.addEventListener('click', doSkip);
+
+/* ---- Ölü diller ve kavram fısıltıları (arka planda) ---- */
+const FRAGS = [
+  '𐰇𐰔 • öz (cevher)', 'نَفْس • nefs (soluk)', 'فَنَاء • fenâ (hiçlik)', 'مَنْ عَرَفَ نَفْسَهُ • kendini bilen',
+  '𐱅𐰃𐰤 • tin (ruh)', 'memento mori', 'الْمَوْجُود • el-mevcûd', 'gnothi seauton',
+  'أَنَا • enâniyet (ego)', 'hiç • 0x00'
+];
+function startFragments() {
+  if (reduce) return;
+  let k = 0;
+  const iv = setInterval(() => {
+    if (document.hidden || isLite()) return;
+    const f = mk('div', 'frag', FRAGS[k++ % FRAGS.length]);
+    f.style[Math.random() > .5 ? 'left' : 'right'] = (4 + Math.random() * 10) + 'vw';
+    f.style.top = (15 + Math.random() * 70) + 'vh';
+    f.addEventListener('animationend', () => f.remove());
+    voidEl.appendChild(f);
+  }, 3800);
+  onClean(() => clearInterval(iv));
+}
+
+/* ==========================================================================
+   Sahneler
+   ========================================================================== */
 
 /* 1 — giriş */
-async function intro(){
+async function intro() {
   setTitle('ben');
   await wait(1100);
   await say('merhaba.', { hold: 900, mode: 'erase' });
@@ -202,37 +290,56 @@ async function intro(){
   await clearStage();
 }
 
-/* 2 — isim, harfler, ünlüsüz ad */
-async function sceneName(){
+/* 2 — isim: harfler çözülür, geriye ses kalır */
+async function sceneName() {
   setTitle('B A T U');
   mood('#f59e0b', '#6366f1', '#ec4899');
   const cap = line('small'), box = mk('div', 'letters');
-  [...'BATU'].forEach((ch, i) => { const s = mk('span', '', ch); s.style.setProperty('--i', i); s._x = 0; box.appendChild(s); });
+  [...'BATU'].forEach((ch, i) => { const s = mk('span', '', ch); s.style.setProperty('--i', i); box.appendChild(s); });
   stage.appendChild(box);
-  const place = order => {
-    const w = box.children[0].getBoundingClientRect().width;
-    [...box.children].forEach((s, i) => {
-      const from = s._x, to = (order[i] - i) * w, up = (i % 2 ? -1 : 1) * w * .55;
-      s.animate([{ transform: `translate(${from}px,0)` }, { transform: `translate(${(from + to) / 2}px,${up}px)`, offset: .5 }, { transform: `translate(${to}px,0)` }], { duration: reduce ? 1 : 1500, easing: 'ease-in-out', fill: 'forwards' });
-      s._x = to;
-    });
-  };
-  await retype(cap, 'bir isim var.', 1200);
-  place([2, 3, 0, 1]); await wait(1700);
-  await retype(cap, 'aynı harfler. başka biri: TUBA.', 1500);
-  place([0, 1, 2, 3]); await wait(1700);
-  await retype(cap, 'hangisi ben?', 2200);
+  await retype(cap, 'bir isim var.', 1700);
+  await retype(cap, 'sana verilmiş. sen seçmedin.', 2000);
+  await retype(cap, 'çağrılmak için.', 1500);
+  const letters = [...box.children];
+  await retype(cap, 'çağıran susunca…', 700);
+  letters.forEach((s, i) => {
+    s.animate(
+      [{ opacity: 1, transform: 'none', filter: 'blur(0)' }, { opacity: 0, transform: `translate(${(i - 1.5) * 14}px,-46px) rotate(${(i - 1.5) * 9}deg)`, filter: 'blur(12px)' }],
+      { duration: 1700, delay: i * 420, easing: 'ease-in', fill: 'forwards' }
+    );
+  });
+  await wait(2600);
+  await retype(cap, 'geriye ne kalır?', 2300);
+  await retype(cap, 'bir ses. belki o da değil.', 2400);
   await clearStage();
   setTitle('btylmz');
-  const big = line('big glitch'); await type(big, 'btylmz', 130); await wait(900);
+  const big = line('big glitch');
+  await type(big, 'btylmz', 130);
+  await wait(900);
   const c2 = line('small');
   await retype(c2, 'içinde tek bir ünlü yok.', 1500);
   await retype(c2, 'sesi sen ver.', 2400);
   await clearStage();
 }
 
-/* 3 — yükleme */
-async function sceneLoad(){
+/* 3 — kimlik: adlar değişir */
+async function sceneIdentity() {
+  setTitle('kim?');
+  mood('#10b981', '#0ea5e9', '#6366f1');
+  const cap = line('small'), big = line('big glitch');
+  big.textContent = 'Batu Yılmaz'; sync(big);
+  await retype(cap, 'adlar değişir.', 1300);
+  for (const n of ['btylmz', 'hiç kimse', 'sen', 'ben']) {
+    await scramble(big, n);
+    await wait(n === 'sen' ? 1700 : 1100);
+  }
+  await retype(cap, 'bakan değişmez.', 2000);
+  await retype(cap, 'bakan kim?', 2500);
+  await clearStage();
+}
+
+/* 4 — yükleme */
+async function sceneLoad() {
   setTitle('yükleniyor…');
   mood('#38bdf8', '#8b5cf6', '#22d3ee');
   const cap = line('small'), wrap = mk('div', 'loader'), bar = mk('div', 'bar'), fill = mk('i'), pct = mk('b', 'pct', '0%');
@@ -250,14 +357,21 @@ async function sceneLoad(){
   await clearStage();
 }
 
-/* 4 — zaman */
-async function sceneTime(){
+/* 5 — zaman */
+async function sceneTime() {
   setTitle('…');
   mood('#10b981', '#0ea5e9', '#6366f1');
-  const cap = line('small'), big = line('big num');
+  const cap = line('small');
+  const d = new Date();
+  const hh = String(d.getHours()).padStart(2, '0'), mm = String(d.getMinutes()).padStart(2, '0');
+  await retype(cap, `şu an saat ${hh}:${mm}.`, 1800);
+  await retype(cap, 'bunu okurken geçti.', 1700);
+  const big = line('big num');
   const upd = () => { big.textContent = Math.floor((performance.now() - T0) / 1000) + ' saniye'; };
-  upd(); const iv = setInterval(upd, 250);
-  await retype(cap, 'sen geldiğinden beri', 3400);
+  upd();
+  const iv = setInterval(upd, 250);
+  onClean(() => clearInterval(iv));
+  await retype(cap, 'sen geldiğinden beri', 3200);
   await retype(cap, 'geçen süre bu.', 1700);
   await retype(cap, 'benim saatim yok.', 1900);
   await retype(cap, 'hep aynı an.', 2400);
@@ -265,17 +379,20 @@ async function sceneTime(){
   await clearStage();
 }
 
-/* 5 — sorular */
-async function sceneQuestions(){
+/* 6 — sorular */
+async function sceneQuestions() {
   setTitle('?');
   mood('#8b5cf6', '#06b6d4', '#f43f5e');
-  const layer = mk('div', 'drift'); document.body.appendChild(layer);
+  const layer = mk('div', 'drift');
+  document.body.appendChild(layer);
+  onClean(() => layer.remove());
   ['neden buradasın?', 'ne bulmayı umuyordun?', 'bir butona mı bastın?', 'hangisine?', 'ben kimdim?', 'peki ya sen?'].forEach((q, i) => setTimeout(() => {
-    const d = mk('div', 'q', q);
-    d.style.left = (5 + Math.random() * 22) + 'vw';
-    d.style.top = (12 + i * 12 + Math.random() * 4) + 'vh';
-    d.style.setProperty('--r', (Math.random() * 8 - 4) + 'deg');
-    layer.appendChild(d);
+    if (skipped) return;
+    const el = mk('div', 'q', q);
+    el.style.left = (5 + Math.random() * 22) + 'vw';
+    el.style.top = (12 + i * 12 + Math.random() * 4) + 'vh';
+    el.style.setProperty('--r', (Math.random() * 8 - 4) + 'deg');
+    layer.appendChild(el);
   }, i * 700));
   setTimeout(() => layer.remove(), 12500);
   await wait(5200);
@@ -283,14 +400,17 @@ async function sceneQuestions(){
   await clearStage();
 }
 
-/* 6 — göz */
-async function sceneEye(){
+/* 7 — göz */
+async function sceneEye() {
   setTitle('bakıyorsun');
   mood('#f472b6', '#6366f1', '#38bdf8');
-  const eye = mk('div', 'eye'), iris = mk('div', 'iris'); eye.appendChild(iris); stage.appendChild(eye);
-  const cap = line(''); let alive = true;
+  const eye = mk('div', 'eye'), iris = mk('div', 'iris');
+  eye.appendChild(iris); stage.appendChild(eye);
+  const cap = line('');
+  let alive = true;
+  onClean(() => { alive = false; });
   requestAnimationFrame(() => requestAnimationFrame(() => eye.classList.add('open')));
-  (function loop(){
+  (function loop() {
     if (!alive) return;
     const n = performance.now();
     if (n - lastMove > 2200) { look.x = .5 + Math.sin(n / 900) * .4; look.y = .5 + Math.cos(n / 1300) * .35; }
@@ -306,20 +426,23 @@ async function sceneEye(){
   await retype(cap, 'göz kırptım.', 1300);
   cap.classList.remove('glitch');
   await retype(cap, 'sen de kırp.', 2000);
-  eye.classList.add('shut'); await wait(800);
+  eye.classList.add('shut');
+  await wait(800);
   alive = false;
   await clearStage();
 }
 
-/* 7 — hata */
-async function sceneError(){
+/* 8 — hata */
+async function sceneError() {
   setTitle('HATA');
   mood('#ef4444', '#7c3aed', '#f59e0b');
   const big = line('big glitch err'), sm = line('small');
   await wait(600);
-  stage.classList.add('shake'); setTimeout(() => stage.classList.remove('shake'), 700);
+  stage.classList.add('shake');
+  buzz([30, 40, 30]);
+  setTimeout(() => stage.classList.remove('shake'), 700);
   await type(big, 'HATA 404', 45);
-  await retype(sm, 'ben.html bulunamadı.', 1900);
+  await retype(sm, 'ben bulunamadı.', 1900);
   await retype(sm, '…bulundu.', 1200);
   big.classList.remove('err');
   await retype(big, 'buradayım.', 800);
@@ -327,8 +450,8 @@ async function sceneError(){
   await clearStage();
 }
 
-/* 8 — son */
-async function sceneEnd(){
+/* 9 — son sözler */
+async function sceneEnd() {
   setTitle('ben');
   mood(...CALM);
   await say('burada bir şey anlatacaktım.', { hold: 1400 });
@@ -337,36 +460,99 @@ async function sceneEnd(){
   await say('ben de tam anlamış değilim.', { hold: 1500, mode: 'keep' });
   await say('ama buradayım.', { cls: 'small', hold: 2200, mode: 'keep' });
   await clearStage(900);
-  showFinal();
 }
 
-function showFinal(){
+/* Aynı oturumda tekrar gelenler için kısa sürüm */
+async function sceneShort() {
+  setTitle('ben');
+  await wait(700);
+  await say('yine mi geldin.', { hold: 1100 });
+  await say('bir kez anlatmıştım.', { cls: 'small', hold: 1300 });
+  await say('anlatmadım sayılır.', { hold: 1500 });
+}
+
+const FULL = [
+  ['giris', intro], ['isim', sceneName], ['kimlik', sceneIdentity], ['yukleme', sceneLoad],
+  ['zaman', sceneTime], ['sorular', sceneQuestions], ['goz', sceneEye], ['hata', sceneError], ['son', sceneEnd]
+];
+
+/* ==========================================================================
+   Son ekran
+   ========================================================================== */
+function showFinal(via) {
+  if (finalShown) return;
+  finalShown = true;
+  skipped = true;
+  runClean();
+  markSeen();
   hint.classList.remove('show');
-  stage.innerHTML = '';
+  skipBtn.hidden = true;
+  voidEl.textContent = '';
+  stage.textContent = '';
+  stage.removeAttribute('aria-hidden');
+  setTitle('ben | btylmz');
   mood(...CALM);
+
   const f = mk('div', 'final');
-  f.innerHTML =
-    '<div class="ring"><span></span></div>' +
-    '<h1 class="line big glitch" data-text="Batu Yılmaz">Batu Yılmaz</h1>' +
-    '<div class="whisper">btylmz</div>' +
-    '<div class="links">' +
-    '<a class="btn" href="/" style="animation-delay:.6s">Ana sayfa</a>' +
-    '<a class="btn" href="mailto:btylmz8@gmail.com" style="animation-delay:.75s">Yaz bana</a>' +
-    '<button class="btn" type="button" id="again" style="animation-delay:.9s">Baştan</button>' +
-    '</div>';
+  const ring = mk('div', 'ring'); ring.setAttribute('aria-hidden', 'true'); ring.appendChild(mk('span'));
+  const name = mk('p', 'line big glitch', 'Batu Yılmaz'); name.dataset.text = 'Batu Yılmaz';
+  const whisper = mk('p', 'whisper', 'btylmz');
+  const links = mk('div', 'links');
+  const home = mk('a', 'btn', 'Ana sayfa'); home.href = '/'; home.dataset.track = 'ben_home'; home.style.animationDelay = '.6s';
+  const mail = mk('a', 'btn', 'Yaz bana'); mail.href = 'mailto:btylmz8@gmail.com'; mail.dataset.track = 'ben_mail'; mail.style.animationDelay = '.75s';
+  const again = mk('button', 'btn', 'Baştan'); again.type = 'button'; again.dataset.track = 'ben_replay'; again.style.animationDelay = '.9s';
+  links.append(home, mail, again);
+  f.append(ring, name, whisper, links);
   stage.appendChild(f);
-  f.querySelector('#again').addEventListener('click', () => location.reload());
-  const w = f.querySelector('.whisper'), msgs = ['hâlâ buradasın.', 'gitmedin.', 'iyi.', 'ben de.', 'btylmz']; let k = 0;
-  setInterval(() => { w.classList.add('swap'); setTimeout(() => { w.textContent = msgs[k++ % msgs.length]; w.classList.remove('swap'); }, 600); }, 4200);
+
+  again.addEventListener('click', () => {
+    try { sessionStorage.removeItem(KEY); } catch { /* özel mod vb. */ }
+    setTimeout(() => location.reload(), 120);
+  });
+  ring.addEventListener('click', () => {
+    stage.classList.add('shake');
+    buzz([16, 40, 16]);
+    whisper.textContent = 'hâlâ buradasın.';
+    setTimeout(() => stage.classList.remove('shake'), 650);
+  });
+
+  const msgs = ['hâlâ buradasın.', 'gitmedin.', 'iyi.', 'ben de.', 'btylmz'];
+  let k = 0;
+  if (!reduce) {
+    setInterval(() => {
+      whisper.classList.add('swap');
+      setTimeout(() => { whisper.textContent = msgs[k++ % msgs.length]; whisper.classList.remove('swap'); }, 600);
+    }, 4200);
+  }
+  track('ben_final', { via });
+  if (via === 'complete') buzz([14, 50, 14]);
 }
 
+/* ---- Başlat ---- */
 (async () => {
-  setTimeout(() => hint.classList.add('show'), 7000);
-  setTimeout(() => hint.classList.remove('show'), 13000);
+  if (reduce) { showFinal('reduced'); return; }
+
+  stage.innerHTML = '';
+  skipBtn.hidden = false;
+  startFragments();
+  let via = 'complete';
+  const list = seen ? [['kisa', sceneShort]] : FULL;
+  if (seen) via = 'short';
+  if (!seen) {
+    setTimeout(() => hint.classList.add('show'), 7000);
+    setTimeout(() => hint.classList.remove('show'), 13000);
+  }
   try {
-    await intro(); await sceneName(); await sceneLoad(); await sceneTime();
-    await sceneQuestions(); await sceneEye(); await sceneError(); await sceneEnd();
-  } catch (e) { console.error(e); showFinal(); }
+    for (const [n, fn] of list) {
+      curScene = n;
+      track('ben_scene', { scene: n });
+      await fn();
+    }
+  } catch (e) {
+    if (e === SK) via = 'skip';
+    else { console.error(e); via = 'error'; }
+  }
+  showFinal(via);
 })();
 })();
 </script>

@@ -83,6 +83,13 @@ function stopGA() {
   clearGaCookies();
 }
 
+/* Titreşim (yalnızca Android/Chrome, kullanıcı sayfaya dokunduktan sonra, hareket azaltma kapalıysa) */
+window.buzz = p => {
+  try {
+    if (navigator.vibrate && navigator.userActivation && navigator.userActivation.hasBeenActive && !matchMedia('(prefers-reduced-motion: reduce)').matches) navigator.vibrate(p);
+  } catch { /* desteklenmiyor */ }
+};
+
 /* Olay gönderimi: izin yoksa sessizce hiçbir şey yapmaz */
 window.track = (name, params) => {
   if (state === 'granted' && loaded) gtag('event', name, params || {});
