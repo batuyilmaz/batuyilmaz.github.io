@@ -169,7 +169,7 @@
         }
 
         /* ==========================================================================
-           3. BUZLU CAM KARTVİZİT & JİROSKOP DUYARLI IŞIK KIRILMASI
+           3. BUZLU CAM KARTVİZİT, PERLIN NOISE DOKUSU & JİROSKOP YANSIMASI
            ========================================================================== */
         .card-container {
             position: relative;
@@ -189,10 +189,25 @@
             align-items: center;
             z-index: 10;
             opacity: 0;
+            overflow: hidden;
             transform: rotateX(var(--rx)) rotateY(var(--ry));
             transform-style: preserve-3d;
             animation: lin 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             transition: opacity 0.45s ease, filter 0.45s ease, transform 0.18s ease-out;
+        }
+
+        /* Dinamik Film Greni (Perlin Noise) Katmanı */
+        .card-grain {
+            position: absolute;
+            inset: -20%;
+            width: 140%;
+            height: 140%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.055;
+            mix-blend-mode: overlay;
+            filter: url(#glassNoise);
+            animation: grainShift 8s steps(6) infinite;
         }
 
         /* İmleç ve Jiroskop duyarlı dinamik cam yansıması */
@@ -202,7 +217,7 @@
             inset: 0;
             border-radius: 28px;
             pointer-events: none;
-            background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 0%), rgba(56, 189, 248, 0.12), transparent 68%);
+            background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 0%), rgba(56, 189, 248, 0.13), transparent 68%);
             z-index: -1;
         }
 
@@ -211,7 +226,6 @@
             pointer-events: none;
         }
 
-        /* Viewport İzleme (IntersectionObserver) animasyon tetikleyicisi */
         .reveal-item {
             opacity: 0;
             transform: translateY(14px);
@@ -493,12 +507,62 @@
         }
 
         /* ==========================================================================
-           6. YUVARLAK YOUTUBE & SPOTIFY İKON YUVALARI
+           6. FİZİK MOTORLU ELASTİK VEKTÖR TEL (SVG SPRING WIRE)
+           ========================================================================== */
+        .wire-box {
+            width: 100%;
+            height: 38px;
+            margin: 10px 0 2px 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: pan-y;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .wire-box:active {
+            cursor: grabbing;
+        }
+
+        .elastic-wire {
+            width: 100%;
+            height: 54px;
+            overflow: visible;
+            display: block;
+        }
+
+        .wire-glow {
+            fill: none;
+            stroke: url(#wireGrad);
+            stroke-width: 4px;
+            stroke-linecap: round;
+            opacity: 0.22;
+            filter: blur(4px);
+            transition: opacity 0.2s ease;
+        }
+
+        .wire-core {
+            fill: none;
+            stroke: url(#wireGrad);
+            stroke-width: 1.5px;
+            stroke-linecap: round;
+            opacity: 0.75;
+        }
+
+        .wire-node {
+            fill: var(--ac);
+            opacity: 0.65;
+        }
+
+        /* ==========================================================================
+           7. YUVARLAK YOUTUBE & SPOTIFY İKON YUVALARI
            ========================================================================== */
         .social-icons {
             display: flex;
             gap: 18px;
-            margin-top: 28px;
+            margin-top: 6px;
         }
 
         .social-icon {
@@ -540,10 +604,10 @@
         }
 
         /* ==========================================================================
-           7. ALT BİLGİ, CANLI SÜRE SAYACI, SPA SAHNESİ VE TOAST
+           8. ALT BİLGİ, CANLI SÜRE SAYACI, SPA SAHNESİ VE TOAST
            ========================================================================== */
         .footer-meta {
-            margin-top: 26px;
+            margin-top: 24px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -595,7 +659,6 @@
             transform: translate(-50%, 0);
         }
 
-        /* SPA Dinamik Sahne Katmanı */
         #spaMount {
             position: fixed;
             inset: 0;
@@ -607,8 +670,15 @@
             display: block;
         }
 
+        .svg-defs {
+            position: absolute;
+            width: 0;
+            height: 0;
+            pointer-events: none;
+        }
+
         /* ==========================================================================
-           8. KEYFRAMES
+           9. KEYFRAMES
            ========================================================================== */
         @keyframes flow {
             0%, 100% { background-position: 0 50%; }
@@ -642,6 +712,12 @@
         @keyframes blink {
             50% { opacity: 0; }
         }
+        @keyframes grainShift {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-2%, 1.5%); }
+            50% { transform: translate(1.5%, -2%); }
+            75% { transform: translate(-1.5%, -1.5%); }
+        }
         @keyframes g1 {
             0%, 90%, 100% { clip-path: inset(0 0 100% 0); transform: none; }
             91% { clip-path: inset(12% 0 58% 0); transform: translate(-4px, 0); }
@@ -656,7 +732,7 @@
         }
 
         /* ==========================================================================
-           9. MOBİL UYUMLULUK & HAREKET AZALTMA TERCİHİ
+           10. MOBİL UYUMLULUK & HAREKET AZALTMA TERCİHİ
            ========================================================================== */
         @media screen and (max-width: 480px) {
             body {
@@ -677,7 +753,7 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .bg, .orb, .glitch::before, .glitch::after, .profile-wrapper::before {
+            .bg, .orb, .glitch::before, .glitch::after, .profile-wrapper::before, .card-grain {
                 animation: none !important;
             }
             .glow, #netCanvas {
@@ -687,6 +763,14 @@
     </style>
 </head>
 <body>
+
+    <!-- ÖZELLİK 4: PERLIN NOISE CAM DOKUSU FİLTRESİ -->
+    <svg class="svg-defs" aria-hidden="true">
+        <filter id="glassNoise">
+            <feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="3" stitchTiles="stitch" />
+            <feColorMatrix type="saturate" values="0" />
+        </filter>
+    </svg>
 
     <!-- ARKA PLAN KATMANI + AKIŞKAN AĞ CANVAS'I -->
     <div class="bg">
@@ -701,6 +785,7 @@
 
     <!-- ANA KARTVİZİT KUTUSU -->
     <main class="card-container" id="card">
+        <div class="card-grain" aria-hidden="true"></div>
 
         <!-- PROFİL FOTOĞRAFI -->
         <div class="profile-wrapper reveal-item" id="avatarBtn" title="Dokun: atmosferi değiştir">
@@ -737,6 +822,23 @@
                 </button>
             </div>
 
+        </div>
+
+        <!-- ÖZELLİK 3: ETKİLEŞİMLİ ELASTİK VEKTÖR TEL (FİZİK MOTORLU SVG) -->
+        <div class="wire-box reveal-item" id="wireBox" title="Dokun veya çek: elastik tel">
+            <svg class="elastic-wire" viewBox="0 0 340 54" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="wireGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="var(--o1)" stop-opacity="0.15" />
+                        <stop offset="50%" stop-color="var(--ac)" stop-opacity="1" />
+                        <stop offset="100%" stop-color="var(--o2)" stop-opacity="0.15" />
+                    </linearGradient>
+                </defs>
+                <path class="wire-glow" id="wireGlow" d="M 8 27 Q 170 27 332 27" />
+                <path class="wire-core" id="wireCore" d="M 8 27 Q 170 27 332 27" />
+                <circle class="wire-node" cx="8" cy="27" r="2" />
+                <circle class="wire-node" cx="332" cy="27" r="2" />
+            </svg>
         </div>
 
         <!-- YOUTUBE VE SPOTIFY LİNKLERİ -->
@@ -780,6 +882,9 @@
             const btnBen = document.getElementById('btnBen');
             const spaMount = document.getElementById('spaMount');
             const netCanvas = document.getElementById('netCanvas');
+            const wireBox = document.getElementById('wireBox');
+            const wireCore = document.getElementById('wireCore');
+            const wireGlow = document.getElementById('wireGlow');
 
             const CALM = ['#00b4d8', '#6366f1', '#10b981'];
             const T0 = performance.now();
@@ -819,7 +924,7 @@
             });
 
             /* ==========================================================================
-               2. ÖZELLİK 1: AKIŞKAN AĞ GÖRSELLEŞTİRİCİSİ (FLUID NODE NETWORK CANVAS)
+               2. AKIŞKAN AĞ GÖRSELLEŞTİRİCİSİ (FLUID NODE NETWORK CANVAS)
                ========================================================================== */
             if (!reduceMotion && netCanvas) {
                 const ctx = netCanvas.getContext('2d');
@@ -907,14 +1012,74 @@
             }
 
             /* ==========================================================================
-               3. ÖZELLİK 3: VIEWPORT İZLEME & JİROSKOP DUYARLI CAM YANSIMALARI
+               3. FİZİK MOTORLU ELASTİK VEKTÖR TEL (SVG BÉZIER YAY SİMÜLASYONU)
+               ========================================================================== */
+            if (wireBox && wireCore && wireGlow) {
+                let wireX = 170, wireY = 27;
+                let velX = 0, velY = 0;
+                let grabbing = false;
+
+                const updateWirePath = () => {
+                    if (!grabbing) {
+                        const spring = 0.22;
+                        const damping = 0.84;
+                        velX = (velX + (170 - wireX) * spring) * damping;
+                        velY = (velY + (27 - wireY) * spring) * damping;
+                        wireX += velX;
+                        wireY += velY;
+                    }
+
+                    const d = `M 8 27 Q ${wireX.toFixed(1)} ${wireY.toFixed(1)} 332 27`;
+                    wireCore.setAttribute('d', d);
+                    wireGlow.setAttribute('d', d);
+
+                    const tension = Math.min(1, Math.abs(wireY - 27) / 26);
+                    wireGlow.style.opacity = (0.22 + tension * 0.65).toFixed(2);
+
+                    requestAnimationFrame(animateWire);
+                };
+
+                const animateWire = () => updateWirePath();
+                requestAnimationFrame(animateWire);
+
+                const bendWire = (clientX, clientY) => {
+                    const rect = wireBox.getBoundingClientRect();
+                    const relX = ((clientX - rect.left) / rect.width) * 340;
+                    const relY = ((clientY - rect.top) / rect.height) * 54;
+                    if (relY >= -18 && relY <= 72) {
+                        grabbing = true;
+                        wireX = Math.max(30, Math.min(310, relX));
+                        const deltaY = Math.max(-28, Math.min(28, relY - 27));
+                        wireY = 27 + deltaY * 1.35;
+                    } else if (grabbing) {
+                        grabbing = false;
+                    }
+                };
+
+                wireBox.addEventListener('pointermove', e => bendWire(e.clientX, e.clientY), { passive: true });
+                wireBox.addEventListener('pointerdown', e => {
+                    bendWire(e.clientX, e.clientY);
+                }, { passive: true });
+                wireBox.addEventListener('pointerleave', () => { grabbing = false; });
+                window.addEventListener('pointerup', () => { grabbing = false; }, { passive: true });
+
+                wireBox.addEventListener('touchmove', e => {
+                    if (e.touches.length > 0) {
+                        bendWire(e.touches[0].clientX, e.touches[0].clientY);
+                    }
+                }, { passive: true });
+                wireBox.addEventListener('touchend', () => { grabbing = false; }, { passive: true });
+            }
+
+            /* ==========================================================================
+               4. VIEWPORT İZLEME & JİROSKOP DUYARLI CAM YANSIMALARI
                ========================================================================== */
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, idx) => {
                     if (entry.isIntersecting) {
                         setTimeout(() => {
                             entry.target.classList.add('in-view');
-                        }, idx * 75);
+                        }, idx * 70);
                     }
                 });
             }, { threshold: 0.15 });
@@ -986,7 +1151,7 @@
             window.addEventListener('touchstart', initGyro, { once: true, passive: true });
 
             /* ==========================================================================
-               4. ÖZELLİK 5: KİNETİK TİPOGRAFİ VE MANYETİK HARF FİZİĞİ
+               5. KİNETİK TİPOGRAFİ VE MANYETİK HARF FİZİĞİ
                ========================================================================== */
             let charSpans = [];
             const buildKineticTitle = (text) => {
@@ -1037,7 +1202,6 @@
                 requestAnimationFrame(animateKinetic);
             }
 
-            /* Profil / İsim Tıklama Sürprizi */
             const moods = [
                 ['#f59e0b', '#6366f1', '#ec4899'],
                 ['#38bdf8', '#8b5cf6', '#22d3ee'],
@@ -1055,7 +1219,7 @@
             profileName.addEventListener('click', toggleIdentity);
 
             /* ==========================================================================
-               5. DAKTİLO / FISILTI MOTORU, KOPYALAMA & SÜRE SAYACI
+               6. DAKTİLO / FISILTI MOTORU, KOPYALAMA & SÜRE SAYACI
                ========================================================================== */
             const phrases = [
                 'btylmz.',
@@ -1122,7 +1286,7 @@
             }, 500);
 
             /* ==========================================================================
-               6. ÖZELLİK 4: SPA (SINGLE PAGE APPLICATION) KESİNTİSİZ GEÇİŞ MİMARİSİ
+               7. SPA (SINGLE PAGE APPLICATION) KESİNTİSİZ GEÇİŞ MİMARİSİ
                ========================================================================== */
             const closeSpaView = (push = true) => {
                 spaMount.classList.remove('active');
@@ -1200,7 +1364,7 @@
                 }
             });
 
-            /* 7. Bilgisayar Faresi İçin 3B Buton Eğim Efekti */
+            /* 8. Bilgisayar Faresi İçin 3B Buton Eğim Efekti */
             if (window.matchMedia('(hover: hover)').matches) {
                 document.querySelectorAll('.link-btn').forEach(btn => {
                     btn.addEventListener('mousemove', (e) => {
