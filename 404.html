@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#090f24">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preload" href="/assets/fonts/pjs-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/base.css">
+<title>404 | btylmz</title>
+<meta name="robots" content="noindex">
+<style>
+.e{margin:6px 0 10px;font-size:clamp(3.4rem,18vw,5rem);font-weight:800;letter-spacing:-2px;line-height:1.1;display:inline-block}
+.t{min-height:3.2em;margin-bottom:20px;text-align:center;font-size:.92rem;line-height:1.6;color:var(--tx2)}
+.t::after{content:'';display:inline-block;width:2px;height:1em;margin-left:4px;vertical-align:-.12em;background:var(--ac);animation:blink 1s steps(1) infinite}
+.go{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 26px;border-radius:16px;border:1px solid var(--bd);background:var(--bt);color:var(--tx);font-weight:600;text-decoration:none;transition:border-color .25s,background .25s}
+.go:hover{border-color:rgba(56,189,248,.45);background:rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<div class="bg"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<div class="grid"></div>
+<div class="scan"></div>
+<div class="stage"><main class="card">
+  <p class="e glitch rv" data-text="404" style="--i:0">404</p>
+  <p class="t rv" id="t" style="--i:1" aria-label="Aradığın sayfa burada yok.">Aradığın sayfa burada yok.</p>
+  <a class="go rv" style="--i:2" href="/">Ana sayfaya dön</a>
+</main></div>
+<script src="/assets/site.js" defer></script>
+<script>
+(function(){
+var el=document.getElementById('t');
+var lines=['Aradığın sayfa burada yok.','Belki hiç olmadı.','Belki sen yanlış yere baktın.','Ya da aradığın sensin.'];
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+addEventListener('load',function(){ if(window.track) setTimeout(function(){window.track('page_not_found',{path:location.pathname})},1600); });
+if(reduce)return;
+var i=0;
+function wait(ms){return new Promise(function(r){setTimeout(r,ms)})}
+(async function(){
+  el.textContent='';
+  await wait(600);
+  for(;;){
+    var s=lines[i++%lines.length];
+    for(var k=0;k<s.length;k++){el.textContent+=s[k];await wait(48)}
+    await wait(2200);
+    while(el.textContent){el.textContent=el.textContent.slice(0,-1);await wait(18)}
+    await wait(300);
+  }
+})();
+})();
+</script>
+</body>
+</html>
