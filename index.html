@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>btylmz</title>
+<meta name="description" content="Batu Yılmaz'ın kişisel sayfası.">
+<meta name="theme-color" content="#090f24">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://btylmz.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="btylmz">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:url" content="https://btylmz.com/">
+<meta property="og:title" content="Batu Yılmaz | btylmz">
+<meta property="og:description" content="Batu Yılmaz'ın kişisel sayfası.">
+<meta property="og:image" content="https://btylmz.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Batu Yılmaz — btylmz.com">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Batu Yılmaz | btylmz">
+<meta name="twitter:description" content="Batu Yılmaz'ın kişisel sayfası.">
+<meta name="twitter:image" content="https://btylmz.com/assets/og.png">
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+
+<link rel="preload" href="assets/fonts/pjs-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/pjs-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/base.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Batu Yılmaz","alternateName":"btylmz","url":"https://btylmz.com/","sameAs":["https://www.youtube.com/@btylmz","https://open.spotify.com/user/lpq8eu1de9nyc91cpsnokgis8"]}</script>
+<noscript><style>.nefs-btn{display:none}.nefs-panel{grid-template-rows:1fr;visibility:visible}</style></noscript>
+
+<style>
+/* ---- Simgeler ---- */
+svg.i{display:block;width:1em;height:1em;fill:currentColor}
+
+/* ---- Profil ---- */
+.avatar{position:relative;display:block;width:100px;height:100px;margin-bottom:14px;padding:0;border-radius:50%;flex-shrink:0;-webkit-user-select:none;user-select:none}
+.avatar::before{content:'';position:absolute;inset:-4px;border-radius:50%;z-index:1;background:conic-gradient(var(--o1),var(--o2),var(--o3),var(--o1));box-shadow:0 0 28px rgba(56,189,248,.3);animation:spin 5s linear infinite}
+.avatar::after{content:'';position:absolute;inset:0;border-radius:50%;background:#0b1226;z-index:1}
+.avatar img{position:relative;z-index:2;display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid #0b1226;background:#0f172a;transition:transform .35s cubic-bezier(.2,.9,.3,1.2)}
+.avatar:hover img{transform:scale(.95)}
+.avatar:active img{transform:scale(.9)}
+.dot{position:absolute;z-index:3;right:4px;bottom:4px;width:18px;height:18px;border-radius:50%;background:#0b1226;display:grid;place-items:center;box-shadow:0 0 10px rgba(0,0,0,.6)}
+.dot span{width:9px;height:9px;border-radius:50%;background:var(--ac);animation:pulse 2.4s ease-in-out infinite}
+
+.name{position:relative;display:inline-flex;justify-content:center;white-space:nowrap;min-height:1.3em;margin-bottom:4px;cursor:pointer;-webkit-user-select:none;user-select:none;font-size:clamp(1.45rem,5.5vw,1.75rem);font-weight:800;letter-spacing:-.4px;text-shadow:0 2px 18px rgba(0,0,0,.5)}
+.k{display:inline-block;will-change:transform;transition:color .2s,text-shadow .2s}
+.k.hot{color:var(--ac);text-shadow:0 0 16px rgba(56,189,248,.65)}
+.bio{min-height:1.4em;margin-bottom:22px;text-align:center;font-size:.88rem;font-weight:500;letter-spacing:.35px;color:var(--tx2)}
+.bio::after{content:'';display:inline-block;width:2px;height:1em;margin-left:4px;vertical-align:-.12em;background:var(--ac);animation:blink 1s steps(1) infinite}
+
+/* ---- Düğmeler ---- */
+.links{width:100%;display:flex;flex-direction:column;gap:12px}
+.row{position:relative;width:100%;display:flex;align-items:center}
+.btn{position:relative;display:flex;align-items:center;justify-content:space-between;width:100%;min-height:54px;padding:15px 18px;overflow:hidden;color:var(--tx);text-decoration:none;font-size:.96rem;font-weight:600;border:1px solid var(--bd);border-radius:16px;background:radial-gradient(180px circle at var(--bx,50%) var(--by,50%),rgba(56,189,248,.12),transparent 75%),var(--bt);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 4px 15px rgba(0,0,0,.12);transition:background-color .25s,border-color .25s,box-shadow .25s,transform .2s cubic-bezier(.4,0,.2,1)}
+.btn.has-copy{padding-right:58px}
+.btn::before{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(to right,transparent,rgba(255,255,255,.12),transparent);transform:skewX(-25deg);transition:left .6s ease}
+.btn:hover::before{left:150%}
+.btn:hover{background-color:rgba(255,255,255,.1);border-color:rgba(56,189,248,.45);box-shadow:0 0 18px rgba(56,189,248,.18)}
+.btn:active{transform:scale(.97)!important}
+.lbl{flex:1;text-align:center;letter-spacing:.2px}
+.ic,.chev{width:26px;display:grid;place-items:center;flex-shrink:0}
+.ic{font-size:1.1rem;color:var(--ac);transition:transform .3s,color .3s}
+.chev{font-size:.82rem;color:var(--tx2);opacity:.55;transition:transform .3s,opacity .3s,color .3s}
+.btn:hover .ic{color:#fff;transform:scale(1.12)}
+.btn:hover .chev{opacity:1;color:var(--ac);transform:translateX(4px)}
+.copy{position:absolute;right:8px;top:50%;margin-top:-22px;width:44px;height:44px;display:grid;place-items:center;border:1px solid transparent;border-radius:12px;color:var(--tx2);font-size:.95rem;transition:background .2s,border-color .2s,color .2s,transform .2s}
+.copy:hover{background:rgba(56,189,248,.15);border-color:rgba(56,189,248,.35);color:var(--tx)}
+.copy:active{transform:scale(.9)}
+
+.social{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin-top:22px}
+.soc{width:46px;height:46px;display:grid;place-items:center;border-radius:50%;color:var(--tx2);font-size:1.2rem;text-decoration:none;background:var(--bt);border:1px solid var(--bd);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:all .3s cubic-bezier(.4,0,.2,1)}
+.soc:hover{color:#fff;transform:translateY(-3px) scale(1.05);background:rgba(56,189,248,.15);border-color:var(--ac);box-shadow:0 6px 20px rgba(56,189,248,.3)}
+.soc.yt:hover{background:rgba(255,0,51,.15);border-color:#ff0033;box-shadow:0 6px 20px rgba(255,0,51,.35)}
+.soc.sp:hover{background:rgba(29,185,84,.15);border-color:#1db954;box-shadow:0 6px 20px rgba(29,185,84,.35)}
+.soc:active{transform:scale(.93)}
+
+/* ---- Gizli söz ---- */
+.nefs{width:100%;margin-top:14px;padding-top:4px;text-align:center;border-top:1px solid rgba(255,255,255,.06)}
+.nefs-btn{width:44px;height:44px;border-radius:12px;display:inline-grid;place-items:center;font-size:.85rem;color:var(--tx3);transition:color .25s,background .25s,transform .5s cubic-bezier(.16,1,.3,1)}
+.nefs-btn:hover,.nefs.open .nefs-btn{color:var(--ac);background:rgba(56,189,248,.1)}
+.nefs.open .nefs-btn{transform:rotate(180deg)}
+.nefs-panel{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .55s cubic-bezier(.16,1,.3,1),visibility 0s linear .55s}
+.nefs.open .nefs-panel{grid-template-rows:1fr;visibility:visible;transition-delay:0s}
+.nefs-inner{min-height:0;overflow:hidden}
+.nefs-text{max-height:min(24vh,170px);margin:0;padding:8px 4px 0;overflow-y:auto;scrollbar-width:thin;font-size:.78rem;font-style:italic;line-height:1.6;color:#d5deea;text-wrap:pretty}
+.nefs-by{display:block;margin-top:8px;padding-bottom:6px;font-size:.62rem;font-style:normal;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:var(--ac)}
+.w{display:inline-block}
+.nefs.open .w{animation:word .5s ease both;animation-delay:calc(var(--i) * 22ms + 150ms)}
+@keyframes word{from{opacity:0;filter:blur(4px);translate:0 4px}to{opacity:1;filter:none;translate:0 0}}
+
+/* ---- Alt bilgi ---- */
+.foot{margin-top:10px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.timer{min-height:32px;padding:0 8px;font-size:.72rem;font-weight:500;letter-spacing:.3px;color:var(--tx3);font-variant-numeric:tabular-nums;transition:color .2s}
+.timer:hover{color:var(--tx)}
+.timer b{color:var(--ac);font-weight:700}
+.legal{font-size:.7rem;line-height:1.4;text-align:center;color:var(--tx3)}
+.legal a,.linkbtn{display:inline-block;padding:8px 6px;font-size:inherit;color:inherit;text-decoration:underline;text-underline-offset:3px}
+.legal a:hover,.linkbtn:hover{color:var(--tx)}
+
+/* ---- Zeno yazısı ---- */
+.zeno{position:fixed;left:0;right:0;bottom:calc(14px + env(safe-area-inset-bottom));z-index:15;padding:0 24px;text-align:center;pointer-events:none;font-size:.78rem;font-style:italic;letter-spacing:.4px;color:var(--ac);opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s}
+.zeno.on{opacity:1;transform:none}
+html.consent-open .zeno{display:none}
+
+/* ---- İletişim paneli ---- */
+.sheet{width:min(100%,520px);max-width:100%;max-height:92vh;max-height:92dvh;margin:auto auto 0;padding:0;overflow:auto;border:1px solid var(--bd);border-bottom:0;border-radius:26px 26px 0 0;background:rgba(11,18,38,.97);color:var(--tx);box-shadow:0 -20px 60px rgba(0,0,0,.6);overscroll-behavior:contain}
+.sheet::backdrop{background:rgba(3,6,18,.62);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.sheet[open]{animation:sheetIn .4s cubic-bezier(.16,1,.3,1)}
+.sheet-in{display:flex;flex-direction:column;gap:10px;padding:14px 20px calc(20px + env(safe-area-inset-bottom))}
+.sheet-head{display:flex;align-items:center;justify-content:space-between}
+.sheet h2{font-size:1.05rem;font-weight:800}
+.sheet-x{width:44px;height:44px;margin-right:-10px;border-radius:12px;display:grid;place-items:center;color:var(--tx2);font-size:1rem}
+.sheet-x:hover{color:var(--tx);background:var(--bt)}
+.sheet-mail{margin-bottom:4px;font-size:.9rem;color:var(--tx2);word-break:break-all;-webkit-user-select:all;user-select:all}
+.act{display:flex;align-items:center;gap:6px;width:100%;min-height:54px;padding:0 16px;border-radius:16px;border:1px solid var(--bd);background:var(--bt);color:var(--tx);text-decoration:none;font-size:.95rem;font-weight:600;transition:background .2s,border-color .2s}
+.act:hover{background:rgba(255,255,255,.1);border-color:rgba(56,189,248,.45)}
+.act .lbl{text-align:left}
+@keyframes sheetIn{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+@media (min-width:600px){.sheet{margin:auto;border-bottom:1px solid var(--bd);border-radius:26px}.sheet-in{padding-top:18px}}
+
+/* ---- Mobil ---- */
+@media (max-width:480px){
+  .card{padding:28px 18px 14px;border-radius:24px}
+  .avatar{width:90px;height:90px;margin-bottom:12px}
+  .bio{margin-bottom:18px}
+  .btn{padding:14px 16px;font-size:.94rem}
+  .btn.has-copy{padding-right:58px}
+  .social{margin-top:18px}
+}
+@media (max-height:670px){
+  .avatar{width:76px;height:76px;margin-bottom:8px}
+  .bio{margin-bottom:12px}
+  .social{margin-top:14px}
+  .nefs{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){.nefs.open .w{animation:none}}
+</style>
+<script src="assets/site.js" defer></script>
+</head>
+<body>
+<!-- İkonlar: Font Awesome Free 6.5.2 (https://fontawesome.com) — Lisans: https://fontawesome.com/license/free (ikonlar CC BY 4.0) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="i-user" viewBox="0 0 448 512"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></symbol><symbol id="i-envelope" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></symbol><symbol id="i-chevron-right" viewBox="0 0 320 512"><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></symbol><symbol id="i-check" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></symbol><symbol id="i-quote-left" viewBox="0 0 448 512"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V320 288 216zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H320c-35.3 0-64-28.7-64-64V320 288 216z"/></symbol><symbol id="i-share-nodes" viewBox="0 0 448 512"><path d="M352 224c53 0 96-43 96-96s-43-96-96-96s-96 43-96 96c0 4 .2 8 .7 11.9l-94.1 47C145.4 170.2 121.9 160 96 160c-53 0-96 43-96 96s43 96 96 96c25.9 0 49.4-10.2 66.6-26.9l94.1 47c-.5 3.9-.7 7.8-.7 11.9c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-25.9 0-49.4 10.2-66.6 26.9l-94.1-47c.5-3.9 .7-7.8 .7-11.9s-.2-8-.7-11.9l94.1-47C302.6 213.8 326.1 224 352 224z"/></symbol><symbol id="i-user-plus" viewBox="0 0 640 512"><path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/></symbol><symbol id="i-xmark" viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></symbol><symbol id="i-paper-plane" viewBox="0 0 512 512"><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/></symbol><symbol id="i-copy" viewBox="0 0 448 512"><path d="M384 336H192c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16l140.1 0L400 115.9V320c0 8.8-7.2 16-16 16zM192 384H384c35.3 0 64-28.7 64-64V115.9c0-12.7-5.1-24.9-14.1-33.9L366.1 14.1c-9-9-21.2-14.1-33.9-14.1H192c-35.3 0-64 28.7-64 64V320c0 35.3 28.7 64 64 64zM64 128c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H256c35.3 0 64-28.7 64-64V416H272v32c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192c0-8.8 7.2-16 16-16H96V128H64z"/></symbol><symbol id="i-youtube" viewBox="0 0 576 512"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></symbol><symbol id="i-spotify" viewBox="0 0 496 512"><path d="M248 8C111.1 8 0 119.1 0 256s111.1 248 248 248 248-111.1 248-248S384.9 8 248 8zm100.7 364.9c-4.2 0-6.8-1.3-10.7-3.6-62.4-37.6-135-39.2-206.7-24.5-3.9 1-9 2.6-11.9 2.6-9.7 0-15.8-7.7-15.8-15.8 0-10.3 6.1-15.2 13.6-16.8 81.9-18.1 165.6-16.5 237 26.2 6.1 3.9 9.7 7.4 9.7 16.5s-7.1 15.4-15.2 15.4zm26.9-65.6c-5.2 0-8.7-2.3-12.3-4.2-62.5-37-155.7-51.9-238.6-29.4-4.8 1.3-7.4 2.6-11.9 2.6-10.7 0-19.4-8.7-19.4-19.4s5.2-17.8 15.5-20.7c27.8-7.8 56.2-13.6 97.8-13.6 64.9 0 127.6 16.1 177 45.5 8.1 4.8 11.3 11 11.3 19.7-.1 10.8-8.5 19.5-19.4 19.5zm31-76.2c-5.2 0-8.4-1.3-12.9-3.9-71.2-42.5-198.5-52.7-280.9-29.7-3.6 1-8.1 2.6-12.9 2.6-13.2 0-23.3-10.3-23.3-23.6 0-13.6 8.4-21.3 17.4-23.9 35.2-10.3 74.6-15.2 117.5-15.2 73 0 149.5 15.2 205.4 47.8 7.8 4.5 12.9 10.7 12.9 22.6 0 13.6-11 23.3-23.2 23.3z"/></symbol></svg>
+
+<div class="bg"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<canvas id="net" aria-hidden="true"></canvas>
+<div class="grid"></div>
+<div class="scan"></div>
+<div class="void" id="void" aria-hidden="true"></div>
+<div class="glow" id="glow"></div>
+
+<div class="stage" id="stage">
+  <main class="card" id="card">
+
+    <!-- Profil görseli: gerçek fotoğraf için assets/avatar.jpg yükle ve src'yi "assets/avatar.jpg" yap -->
+    <button type="button" class="avatar rv" id="avatar" style="--i:0" aria-label="Kimliği değiştir" title="Ben, benim." data-track="identity_cycle">
+      <img src="assets/avatar.svg" width="200" height="200" alt="" decoding="async" fetchpriority="high">
+      <span class="dot" aria-hidden="true"><span></span></span>
+    </button>
+
+    <h1 class="name glitch rv" id="name" style="--i:1" data-text="Batu Yılmaz">Batu Yılmaz</h1>
+    <p class="bio rv" id="bio" style="--i:2" aria-hidden="true"><noscript>btylmz</noscript></p>
+
+    <nav class="links" aria-label="Bağlantılar">
+      <div class="row rv" style="--i:3">
+        <a class="btn" id="btnBen" href="/ben" data-mood="#f59e0b,#6366f1,#ec4899" data-track="click_ben">
+          <span class="ic"><svg class="i" aria-hidden="true"><use href="#i-user"/></svg></span>
+          <span class="lbl">Ben</span>
+          <span class="chev"><svg class="i" aria-hidden="true"><use href="#i-chevron-right"/></svg></span>
+        </a>
+      </div>
+      <div class="row rv" style="--i:4">
+        <a class="btn has-copy" id="btnMail" href="mailto:btylmz8@gmail.com" aria-haspopup="dialog" data-mood="#38bdf8,#8b5cf6,#22d3ee" data-track="contact_open">
+          <span class="ic"><svg class="i" aria-hidden="true"><use href="#i-envelope"/></svg></span>
+          <span class="lbl">İletişim</span>
+        </a>
+        <button type="button" class="copy" id="copy" aria-label="E-posta adresini kopyala" title="Adresi kopyala" data-track="copy_email">
+          <svg class="i" aria-hidden="true"><use href="#i-copy"/></svg>
+        </button>
+      </div>
+    </nav>
+
+    <div class="social rv" style="--i:5">
+      <a class="soc yt" href="https://www.youtube.com/@btylmz" target="_blank" rel="noopener noreferrer" aria-label="YouTube (yeni sekmede açılır)" data-mood="#ef4444,#f43f5e,#7c3aed" data-track="outbound_click" data-label="youtube"><svg class="i" aria-hidden="true"><use href="#i-youtube"/></svg></a>
+      <a class="soc sp" href="https://open.spotify.com/user/lpq8eu1de9nyc91cpsnokgis8" target="_blank" rel="noopener noreferrer" aria-label="Spotify (yeni sekmede açılır)" data-mood="#10b981,#0ea5e9,#22c55e" data-track="outbound_click" data-label="spotify"><svg class="i" aria-hidden="true"><use href="#i-spotify"/></svg></a>
+      <button type="button" class="soc" id="share" aria-label="Sayfayı paylaş" title="Paylaş"><svg class="i" aria-hidden="true"><use href="#i-share-nodes"/></svg></button>
+    </div>
+
+    <section class="nefs rv" id="nefs" style="--i:6" aria-label="Söz">
+      <button type="button" class="nefs-btn" id="nefsBtn" aria-expanded="false" aria-controls="nefsPanel" aria-label="Sözü göster"><svg class="i" aria-hidden="true"><use href="#i-quote-left"/></svg></button>
+      <div class="nefs-panel" id="nefsPanel">
+        <div class="nefs-inner">
+          <figure>
+            <blockquote class="nefs-text" id="nefsText">“Suskunluk, tahtadan binittir. Suskunluk, deniz ehline telkindir. Seni yorgun düşüren suskunluk, öte yanın aşkını haykırmaktadır. Sen dersin ki niçin suskun acaba? O da der ki acaba kulağı nerde? Ben bağırmaktan sağır oldum, o ise habersiz. Keskin kulaklılar bu sözden sağır oldu.”</blockquote>
+            <figcaption class="nefs-by">Mesnevi</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <div class="foot rv" style="--i:7">
+      <button type="button" class="timer" id="timer" title="Dokun: değiştir"><span id="timerLabel">ömründen eksilen:</span> <b id="timerVal">0 sn</b></button>
+      <p class="legal">© <span id="year">2026</span> Tüm hakları saklıdır. · <a href="/gizlilik">Gizlilik</a> · <button type="button" class="linkbtn" data-consent-open>Çerez tercihleri</button></p>
+    </div>
+
+  </main>
+</div>
+
+<dialog class="sheet" id="contact" aria-labelledby="contactTitle">
+  <form method="dialog" class="sheet-in">
+    <div class="sheet-head">
+      <h2 id="contactTitle">İletişim</h2>
+      <button type="submit" class="sheet-x" aria-label="Kapat"><svg class="i" aria-hidden="true"><use href="#i-xmark"/></svg></button>
+    </div>
+    <p class="sheet-mail">btylmz8@gmail.com</p>
+    <a class="act" href="mailto:btylmz8@gmail.com" data-track="contact_mailto">
+      <span class="ic"><svg class="i" aria-hidden="true"><use href="#i-envelope"/></svg></span><span class="lbl">Mail uygulamasında aç</span>
+    </a>
+    <a class="act" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=btylmz8%40gmail.com" target="_blank" rel="noopener noreferrer" data-track="contact_gmail">
+      <span class="ic"><svg class="i" aria-hidden="true"><use href="#i-paper-plane"/></svg></span><span class="lbl">Gmail'de yaz</span>
+    </a>
+    <button type="button" class="act" id="sheetCopy" data-track="copy_email">
+      <span class="ic"><svg class="i" aria-hidden="true"><use href="#i-copy"/></svg></span><span class="lbl">Adresi kopyala</span>
+    </button>
+  </form>
+</dialog>
+
+<div class="zeno" id="zeno" aria-hidden="true"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+'use strict';
+
+const $ = id => document.getElementById(id);
+const root = document.documentElement;
+const card = $('card'), stage = $('stage'), glow = $('glow'), nameEl = $('name'), bio = $('bio'), toastEl = $('toast');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canHover = matchMedia('(hover: hover)').matches;
+const MAIL = 'btylmz8@gmail.com';
+const T0 = performance.now();
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const awake = () => new Promise(res => {
+  if (!document.hidden) return res();
+  const f = () => { if (!document.hidden) { document.removeEventListener('visibilitychange', f); res(); } };
+  document.addEventListener('visibilitychange', f);
+});
+const track = (n, p) => window.track && window.track(n, p);
+const isLite = () => root.classList.contains('lite');
+
+/* ---- Sekme başlığı ---- */
+const homeTitle = document.title;
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) { document.title = 'geri dön.'; return; }
+  document.title = 'döndün.';
+  setTimeout(() => { if (!document.hidden) document.title = homeTitle; }, 1600);
+});
+
+/* ---- Atmosfer ---- */
+const CALM = ['#00b4d8', '#6366f1', '#10b981'];
+let base = CALM, colors = CALM;
+const mood = c => { colors = c; c.forEach((v, i) => root.style.setProperty('--o' + (i + 1), v)); };
+document.querySelectorAll('[data-mood]').forEach(el => {
+  const c = el.dataset.mood.split(',');
+  el.addEventListener('pointerenter', () => mood(c));
+  el.addEventListener('pointerleave', () => mood(base));
+});
+
+/* ---- İşaretçi ---- */
+const ptr = { x: innerWidth / 2, y: innerHeight / 2, on: false, dirty: false };
+const setPtr = e => { ptr.x = e.clientX; ptr.y = e.clientY; ptr.on = true; ptr.dirty = true; };
+addEventListener('pointermove', setPtr, { passive: true });
+addEventListener('pointerdown', setPtr, { passive: true });
+addEventListener('pointerup', e => { if (e.pointerType !== 'mouse') ptr.on = false; }, { passive: true });
+addEventListener('pointercancel', () => { ptr.on = false; }, { passive: true });
+root.addEventListener('mouseleave', () => { ptr.on = false; });
+
+const btns = [...document.querySelectorAll('.btn')];
+function paintLight() {
+  if (!ptr.dirty) return;
+  ptr.dirty = false;
+  glow.style.setProperty('--gx', ptr.x + 'px');
+  glow.style.setProperty('--gy', ptr.y + 'px');
+  const r = card.getBoundingClientRect();
+  card.style.setProperty('--mx', (ptr.x - r.left) + 'px');
+  card.style.setProperty('--my', (ptr.y - r.top) + 'px');
+  btns.forEach(b => {
+    const q = b.getBoundingClientRect();
+    b.style.setProperty('--bx', (ptr.x - q.left) + 'px');
+    b.style.setProperty('--by', (ptr.y - q.top) + 'px');
+  });
+}
+
+/* ---- Akışkan ağ ---- */
+const cv = $('net'), ctx = cv.getContext('2d');
+let W = 0, H = 0, nodes = [];
+function resize() {
+  if (!ctx) return;
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  W = innerWidth; H = innerHeight;
+  cv.width = W * dpr; cv.height = H * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const n = W < 600 ? 26 : 50;
+  if (nodes.length !== n) {
+    nodes = Array.from({ length: n }, (_, i) => ({
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random() - .5) * .5, vy: (Math.random() - .5) * .5,
+      r: 1.3 + (i % 3) * .55, c: i % 3
+    }));
+  }
+}
+function network() {
+  ctx.clearRect(0, 0, W, H);
+  const max = W < 600 ? 110 : 145;
+  ctx.lineWidth = .85;
+  for (let i = 0; i < nodes.length; i++) {
+    const n = nodes[i];
+    if (ptr.on) {
+      const dx = ptr.x - n.x, dy = ptr.y - n.y, d = Math.hypot(dx, dy);
+      if (d < 160 && d > 1) { const f = (160 - d) / 160 * .08; n.vx -= dx / d * f; n.vy -= dy / d * f; }
+    }
+    n.vx *= .99; n.vy *= .99;
+    if (Math.hypot(n.vx, n.vy) < .2) { n.vx += (Math.random() - .5) * .08; n.vy += (Math.random() - .5) * .08; }
+    n.x += n.vx; n.y += n.vy;
+    if (n.x < 0 || n.x > W) { n.vx *= -1; n.x = Math.max(0, Math.min(W, n.x)); }
+    if (n.y < 0 || n.y > H) { n.vy *= -1; n.y = Math.max(0, Math.min(H, n.y)); }
+    ctx.fillStyle = ctx.strokeStyle = colors[n.c];
+    ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, 6.283); ctx.fill();
+    for (let j = i + 1; j < nodes.length; j++) {
+      const m = nodes[j], d = Math.hypot(n.x - m.x, n.y - m.y);
+      if (d < max) {
+        ctx.globalAlpha = (1 - d / max) * .25;
+        ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y); ctx.stroke();
+      }
+    }
+    ctx.globalAlpha = 1;
+  }
+}
+resize();
+addEventListener('resize', resize, { passive: true });
+
+/* ---- İsim: çözülme + kinetik tipografi ---- */
+const CIPHER = Array.from('01∆◊§×÷=+#?');
+let chars = [], busy = false;
+
+function build(text) {
+  nameEl.textContent = '';
+  nameEl.dataset.text = text;
+  nameEl.setAttribute('aria-label', text);
+  chars = Array.from(text).map(ch => {
+    const s = document.createElement('span');
+    s.className = 'k';
+    s.setAttribute('aria-hidden', 'true');
+    s.textContent = ch === ' ' ? ' ' : ch;
+    s._x = s._y = 0;
+    nameEl.appendChild(s);
+    return s;
+  });
+}
+async function decrypt(text) {
+  if (busy) return;
+  busy = true;
+  build(text);
+  if (!reduce) {
+    const target = Array.from(text);
+    for (let step = 0; step < 9; step++) {
+      chars.forEach((s, i) => {
+        if (target[i] === ' ') return;
+        s.textContent = step >= 3 + i % 5 ? target[i] : CIPHER[Math.floor(Math.random() * CIPHER.length)];
+      });
+      await wait(36);
+    }
+    chars.forEach((s, i) => { s.textContent = target[i] === ' ' ? ' ' : target[i]; });
+  }
+  busy = false;
+}
+function kinetic() {
+  if (!chars.length) return;
+  const settled = !chars.some(s => Math.abs(s._x) > .05 || Math.abs(s._y) > .05);
+  if (!ptr.on && settled) return;
+  const r = nameEl.getBoundingClientRect(), R = 90;
+  for (const s of chars) {
+    let tx = 0, ty = 0, hot = false;
+    if (ptr.on) {
+      const dx = ptr.x - (r.left + s.offsetLeft + s.offsetWidth / 2);
+      const dy = ptr.y - (r.top + s.offsetTop + s.offsetHeight / 2);
+      const d = Math.hypot(dx, dy);
+      if (d < R && d > .1) {
+        const p = Math.pow((R - d) / R, 1.5);
+        tx = -dx / d * p * 8; ty = -dy / d * p * 8; hot = true;
+      }
+    }
+    s._x += (tx - s._x) * .18;
+    s._y += (ty - s._y) * .18;
+    s.style.transform = `translate3d(${s._x.toFixed(2)}px,${s._y.toFixed(2)}px,0)`;
+    s.classList.toggle('hot', hot);
+  }
+}
+
+const IDS = [
+  { t: 'Batu Yılmaz', m: CALM },
+  { t: 'btylmz', m: ['#f59e0b', '#6366f1', '#ec4899'] },
+  { t: 'hiç kimse', m: ['#10b981', '#0ea5e9', '#6366f1'] }
+];
+let idn = 0;
+const cycle = () => {
+  if (busy) return;
+  idn = (idn + 1) % IDS.length;
+  base = IDS[idn].m;
+  mood(base);
+  decrypt(IDS[idn].t);
+};
+$('avatar').addEventListener('click', cycle);
+nameEl.addEventListener('click', cycle);
+setTimeout(() => decrypt(IDS[0].t), 300);
+
+/* ---- Ana döngü ---- */
+(function frame() {
+  paintLight();
+  if (!reduce) { kinetic(); if (ctx && !isLite()) network(); }
+  requestAnimationFrame(frame);
+})();
+
+/* ---- Daktilo satırı ---- */
+const greet = () => {
+  const h = new Date().getHours();
+  return h < 5 ? 'iyi geceler.' : h < 12 ? 'günaydın.' : h < 18 ? 'iyi günler.' : h < 22 ? 'iyi akşamlar.' : 'iyi geceler.';
+};
+const PHRASES = ['btylmz.', 'hoş geldin.', greet(), 'buradasın.', 'buradayım.', 'buradayız.'];
+bio.textContent = '';
+if (reduce) {
+  bio.textContent = PHRASES[0];
+} else {
+  (async () => {
+    await wait(700);
+    for (let i = 0; ; i++) {
+      await awake();
+      const p = PHRASES[i % PHRASES.length], first = i % PHRASES.length === 0;
+      for (const ch of p) { bio.textContent += ch; await wait((first ? 80 : 52) * (.7 + Math.random() * .6)); }
+      await wait(first ? 3400 : 2300);
+      while (bio.textContent) { bio.textContent = bio.textContent.slice(0, -1); await wait(22); }
+      await wait(320);
+    }
+  })();
+}
+
+/* ---- Ölü diller ve kavram fısıltıları ---- */
+const FRAGS = [
+  '𐰇𐰔 • öz (cevher)', 'نَفْس • nefs (soluk)', 'فَنَاء • fenâ (hiçlik)', 'مَنْ عَرَفَ نَفْسَهُ • kendini bilen',
+  '𐱅𐰃𐰤 • tin (ruh)', 'memento mori', 'الْمَوْجُود • el-mevcûd', 'gnothi seauton',
+  'أَنَا • enâniyet (ego)', 'hiç • 0x00'
+];
+if (!reduce) {
+  const wrap = $('void');
+  let k = 0;
+  setInterval(() => {
+    if (document.hidden || isLite()) return;
+    const f = document.createElement('div');
+    f.className = 'frag';
+    f.textContent = FRAGS[k++ % FRAGS.length];
+    f.style[Math.random() > .5 ? 'left' : 'right'] = (4 + Math.random() * 10) + 'vw';
+    f.style.top = (15 + Math.random() * 70) + 'vh';
+    f.addEventListener('animationend', () => f.remove());
+    wrap.appendChild(f);
+  }, 4200);
+}
+
+/* ---- Gizli söz ---- */
+const nefs = $('nefs'), nefsBtn = $('nefsBtn'), nefsText = $('nefsText');
+(() => {
+  const words = nefsText.textContent.trim().split(/\s+/);
+  nefsText.textContent = '';
+  words.forEach((w, i) => {
+    const s = document.createElement('span');
+    s.className = 'w';
+    s.style.setProperty('--i', i);
+    s.textContent = w;
+    nefsText.append(s, i < words.length - 1 ? ' ' : '');
+  });
+})();
+nefsBtn.addEventListener('click', () => {
+  const open = nefs.classList.toggle('open');
+  nefsBtn.setAttribute('aria-expanded', String(open));
+  nefsBtn.setAttribute('aria-label', open ? 'Sözü gizle' : 'Sözü göster');
+  if (open) {
+    track('quote_open');
+    setTimeout(() => nefs.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' }), 380);
+  } else {
+    nefsText.scrollTop = 0;
+  }
+});
+
+/* ---- Android: telefonu eğince kart eğilir (iOS izin istediği için atlanır) ---- */
+if (!reduce && 'DeviceOrientationEvent' in window && typeof DeviceOrientationEvent.requestPermission !== 'function' && matchMedia('(pointer: coarse)').matches) {
+  const clamp = v => Math.max(-35, Math.min(35, v));
+  addEventListener('deviceorientation', e => {
+    if (e.gamma == null || e.beta == null || isLite()) return;
+    const g = clamp(e.gamma), b = clamp(e.beta - 45);
+    card.style.setProperty('--rx', (-b / 35 * 5.5).toFixed(2) + 'deg');
+    card.style.setProperty('--ry', (g / 35 * 5.5).toFixed(2) + 'deg');
+    card.style.setProperty('--mx', ((g + 35) / 70 * card.offsetWidth) + 'px');
+    card.style.setProperty('--my', ((b + 35) / 70 * card.offsetHeight) + 'px');
+  }, { passive: true });
+}
+
+/* ---- Zeno: kaydırınca direnç ---- */
+const zeno = $('zeno');
+const SECRETS = ['Ne arıyorsun?', 'Yukarı bak.', 'Kaydırma artık.'];
+let zi = 0, zt = 0, y0 = null;
+const scrollable = t => stage.scrollHeight > stage.clientHeight + 1 || !!(t && t.closest && t.closest('.nefs-text'));
+const release = () => { card.style.setProperty('--zy', '0px'); zeno.classList.remove('on'); };
+function pull(dy) {
+  card.style.setProperty('--zy', (-Math.sign(dy) * Math.min(22, Math.log1p(Math.abs(dy)) * 4.2)).toFixed(1) + 'px');
+  if (Math.abs(dy) > 18 && !zeno.classList.contains('on')) {
+    zeno.textContent = SECRETS[zi++ % SECRETS.length];
+    zeno.classList.add('on');
+  }
+  clearTimeout(zt);
+  zt = setTimeout(release, 650);
+}
+if (!reduce) {
+  addEventListener('wheel', e => { if (!scrollable(e.target)) pull(e.deltaY); }, { passive: true });
+  addEventListener('touchstart', e => { y0 = e.touches.length === 1 ? e.touches[0].clientY : null; }, { passive: true });
+  addEventListener('touchmove', e => {
+    if (y0 === null || e.touches.length !== 1 || scrollable(e.target)) return;
+    const dy = y0 - e.touches[0].clientY;
+    if (Math.abs(dy) > 8) pull(dy);
+  }, { passive: true });
+  addEventListener('touchend', () => { y0 = null; release(); }, { passive: true });
+}
+
+/* ---- Sayaç ve yıl ---- */
+const LABELS = ['ömründen eksilen:', 'bu an bir daha dönmeyecek:', 'fânîlikten geçen:'];
+let li = 0;
+const fmt = s => s < 60 ? s + ' sn' : Math.floor(s / 60) + ' dk ' + (s % 60) + ' sn';
+$('timer').addEventListener('click', () => { $('timerLabel').textContent = LABELS[++li % LABELS.length]; });
+setInterval(() => { $('timerVal').textContent = fmt(Math.floor((performance.now() - T0) / 1000)); }, 1000);
+$('year').textContent = new Date().getFullYear();
+
+/* ---- Bildirim ve kopyalama ---- */
+let tt = 0;
+function toast(msg, ms = 3200) {
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(tt);
+  tt = setTimeout(() => toastEl.classList.remove('show'), ms);
+}
+async function copyText(text) {
+  try { await navigator.clipboard.writeText(text); return true; } catch { /* eski tarayıcı veya izin yok */ }
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;pointer-events:none';
+    (document.querySelector('dialog[open]') || document.body).appendChild(ta);
+    ta.select();
+    ta.setSelectionRange(0, text.length);
+    const ok = document.execCommand('copy');
+    ta.remove();
+    return ok;
+  } catch { return false; }
+}
+const QUOTES = [
+  '“Söz perdedir, anlam ise sırdır.”',
+  '“Kopyalanan yalnızca harflerdir, öz değil.”',
+  '“İletişim, iki yalnızlığın birbirine değmesidir.”',
+  '“Yazacağın her cümle önce kendi nefsine düşer.”'
+];
+let qi = 0;
+$('copy').addEventListener('click', async e => {
+  const use = e.currentTarget.querySelector('use');
+  if (!(await copyText(MAIL))) { toast('Kopyalanamadı. Adres: ' + MAIL, 4500); return; }
+  use.setAttribute('href', '#i-check');
+  toast(MAIL + ' kopyalandı\n' + QUOTES[qi++ % QUOTES.length]);
+  setTimeout(() => use.setAttribute('href', '#i-copy'), 3200);
+});
+
+/* ---- Paylaş ---- */
+$('share').addEventListener('click', async () => {
+  const link = document.querySelector('link[rel="canonical"]');
+  const url = link ? link.href : location.href;
+  try {
+    if (navigator.share) {
+      await navigator.share({ title: 'Batu Yılmaz | btylmz', text: 'btylmz', url });
+      track('share', { method: 'web_share', content_type: 'page' });
+      return;
+    }
+  } catch (err) {
+    if (err && err.name === 'AbortError') return;
+  }
+  if (await copyText(url)) {
+    toast('Bağlantı kopyalandı\n' + url);
+    track('share', { method: 'copy_link', content_type: 'page' });
+  }
+});
+
+/* ---- İletişim paneli ---- */
+const dlg = $('contact');
+$('btnMail').addEventListener('click', e => {
+  if (typeof dlg.showModal !== 'function' || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+  e.preventDefault();
+  dlg.showModal();
+});
+dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+$('sheetCopy').addEventListener('click', async e => {
+  const b = e.currentTarget, use = b.querySelector('use'), lbl = b.querySelector('.lbl');
+  if (!(await copyText(MAIL))) { lbl.textContent = 'Kopyalanamadı'; return; }
+  use.setAttribute('href', '#i-check');
+  lbl.textContent = 'Kopyalandı';
+  setTimeout(() => { use.setAttribute('href', '#i-copy'); lbl.textContent = 'Adresi kopyala'; }, 2200);
+});
+
+/* ---- "Ben" sayfasına geçiş ---- */
+$('btnBen').addEventListener('click', e => {
+  if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button) return;
+  e.preventDefault();
+  const href = e.currentTarget.href;
+  mood(['#f59e0b', '#6366f1', '#ec4899']);
+  const vt = 'CSSViewTransitionRule' in window;
+  if (!vt && !reduce) card.classList.add('out');
+  setTimeout(() => location.assign(href), vt || reduce ? 160 : 420);
+});
+addEventListener('pageshow', e => {
+  if (e.persisted) { card.classList.remove('out'); mood(base); }
+});
+
+/* ---- Masaüstü: düğmelerde 3B eğim ---- */
+if (canHover && !reduce) {
+  btns.forEach(b => {
+    b.addEventListener('mousemove', e => {
+      const r = b.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width / 2, y = e.clientY - r.top - r.height / 2;
+      b.style.transform = `perspective(1000px) rotateX(${(y / r.height * -10).toFixed(2)}deg) rotateY(${(x / r.width * 10).toFixed(2)}deg) scale3d(1.02,1.02,1.02)`;
+    });
+    b.addEventListener('mouseleave', () => { b.style.transform = ''; });
+  });
+}
+})();
+</script>
+</body>
+</html>
