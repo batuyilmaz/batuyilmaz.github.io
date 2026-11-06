@@ -93,6 +93,27 @@ html.lite .skip{-webkit-backdrop-filter:none;backdrop-filter:none}
 .hint.show{opacity:1}
 html.consent-open .hint{display:none}
 
+/* ---- Tekrar ---- */
+.mantra{max-width:100%;display:flex;flex-wrap:wrap;justify-content:center;gap:2px 12px;font-size:clamp(1.05rem,4.6vw,1.4rem);font-weight:700}
+.mantra span{animation:lin .4s ease both}
+.mantra .rot{color:var(--tx3);font-weight:500;font-style:italic}
+
+/* ---- Kapı ---- */
+.door{position:relative;width:96px;height:150px;margin:6px 0 12px;perspective:600px}
+.door .frame{position:absolute;inset:0;overflow:hidden;border:2px solid rgba(255,255,255,.55);border-radius:6px 6px 0 0;background:#02040c;transition:box-shadow 1.6s}
+.door .light{position:absolute;inset:0;background:linear-gradient(180deg,#fff,#bae6fd 40%,#38bdf8);opacity:0;transition:opacity 1.6s}
+.door .leaf{position:absolute;inset:0;transform-origin:left center;border:2px solid rgba(255,255,255,.55);border-radius:6px 6px 0 0;background:#0b1226;transition:transform 1.4s cubic-bezier(.6,0,.2,1)}
+.door .leaf::after{content:'';position:absolute;right:10px;top:52%;width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.7)}
+.door.open .leaf{transform:rotateY(-78deg)}
+.door.open .light{opacity:.95}
+.door.open .frame{box-shadow:0 0 70px rgba(186,230,253,.55)}
+
+/* ---- Dokunuş ---- */
+.rip{position:fixed;z-index:20;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;border:2px solid var(--ac);pointer-events:none;animation:rip 1.2s ease-out forwards}
+.rw{position:fixed;z-index:21;pointer-events:none;font-size:1rem;font-weight:700;text-shadow:0 2px 12px rgba(0,0,0,.6);animation:rwf 1.6s ease-out forwards}
+@keyframes rip{from{transform:scale(1);opacity:.9}to{transform:scale(11);opacity:0}}
+@keyframes rwf{0%{opacity:0;transform:translate(-50%,-30%)}20%{opacity:1}100%{opacity:0;transform:translate(-50%,-190%)}}
+
 @keyframes lett{from{opacity:0;filter:blur(10px)}to{opacity:1;filter:none}}
 @keyframes shake{0%,100%{transform:none}20%{transform:translate(-6px,3px)}40%{transform:translate(5px,-4px)}60%{transform:translate(-4px,-2px)}80%{transform:translate(3px,4px)}}
 @keyframes jit{0%{transform:translate(2px,0)}50%{transform:translate(-3px,1px)}100%{transform:translate(1px,-1px)}}
@@ -189,7 +210,6 @@ const line = (cls = '') => { const e = mk('div', 'line ' + cls); stage.appendChi
 const sync = el => { el.dataset.text = el.textContent; };
 const mood = (a, b, c) => { root.style.setProperty('--o1', a); root.style.setProperty('--o2', b); root.style.setProperty('--o3', c); };
 const CALM = ['#00b4d8', '#6366f1', '#10b981'];
-const CIPHER = Array.from('01∆◊§×÷=+#?');
 
 async function type(el, text, speed = 55) {
   el.classList.add('typing');
@@ -220,17 +240,6 @@ async function clearStage(ms = 800) {
   await wait(ms);
   kids.forEach(k => k.remove());
 }
-async function scramble(el, text, steps = 11) {
-  const target = Array.from(text);
-  for (let s = 0; s < steps; s++) {
-    el.textContent = target.map((c, i) => c === ' ' ? ' ' : (s >= 3 + i % 5 ? c : CIPHER[Math.floor(Math.random() * CIPHER.length)])).join('');
-    sync(el);
-    await wait(40);
-  }
-  el.textContent = text;
-  sync(el);
-}
-
 /* ---- İmleç / dokunuş ---- */
 const look = { x: .5, y: .5 };
 let lastMove = 0;
@@ -240,14 +249,19 @@ const follow = e => {
   glow.style.setProperty('--gy', e.clientY + 'px');
 };
 addEventListener('pointermove', follow, { passive: true });
+let touchMode = false, onTap = null;
 addEventListener('pointerdown', e => {
   follow(e);
-  if (!finalShown && !e.target.closest('a,button')) { rush(); buzz(6); }
+  if (finalShown || e.target.closest('a,button')) return;
+  if (touchMode && onTap) { onTap(e.clientX, e.clientY); return; }
+  rush(); buzz(6);
 }, { passive: true });
 addEventListener('keydown', e => {
   if (finalShown) return;
-  if (e.key === 'Escape') doSkip();
-  else if ((e.key === ' ' || e.key === 'Enter') && !e.target.closest('a,button')) rush();
+  if (e.key === 'Escape') { doSkip(); return; }
+  if ((e.key === ' ' || e.key === 'Enter') && !e.target.closest('a,button')) {
+    if (touchMode && onTap) onTap(innerWidth / 2, innerHeight / 2); else rush();
+  }
 });
 skipBtn.addEventListener('click', doSkip);
 
@@ -290,51 +304,87 @@ async function intro() {
   await clearStage();
 }
 
-/* 2 — isim: harfler çözülür, geriye ses kalır */
+/* 2 — ad: ünlüsüz isim */
 async function sceneName() {
-  setTitle('B A T U');
-  mood('#f59e0b', '#6366f1', '#ec4899');
-  const cap = line('small'), box = mk('div', 'letters');
-  [...'BATU'].forEach((ch, i) => { const s = mk('span', '', ch); s.style.setProperty('--i', i); box.appendChild(s); });
-  stage.appendChild(box);
-  await retype(cap, 'bir isim var.', 1700);
-  await retype(cap, 'sana verilmiş. sen seçmedin.', 2000);
-  await retype(cap, 'çağrılmak için.', 1500);
-  const letters = [...box.children];
-  await retype(cap, 'çağıran susunca…', 700);
-  letters.forEach((s, i) => {
-    s.animate(
-      [{ opacity: 1, transform: 'none', filter: 'blur(0)' }, { opacity: 0, transform: `translate(${(i - 1.5) * 14}px,-46px) rotate(${(i - 1.5) * 9}deg)`, filter: 'blur(12px)' }],
-      { duration: 1700, delay: i * 420, easing: 'ease-in', fill: 'forwards' }
-    );
-  });
-  await wait(2600);
-  await retype(cap, 'geriye ne kalır?', 2300);
-  await retype(cap, 'bir ses. belki o da değil.', 2400);
-  await clearStage();
   setTitle('btylmz');
+  mood('#f59e0b', '#6366f1', '#ec4899');
   const big = line('big glitch');
+  await wait(400);
   await type(big, 'btylmz', 130);
   await wait(900);
-  const c2 = line('small');
-  await retype(c2, 'içinde tek bir ünlü yok.', 1500);
-  await retype(c2, 'sesi sen ver.', 2400);
+  const cap = line('small');
+  await retype(cap, 'içinde tek bir ünlü yok.', 1700);
+  await retype(cap, 'yalnızca sessiz harflerden bir ad.', 2000);
+  await retype(cap, 'sesi sen ver.', 2000);
+  await retype(cap, 'sen vermezsen ben yokum.', 2600);
   await clearStage();
 }
 
-/* 3 — kimlik: adlar değişir */
-async function sceneIdentity() {
-  setTitle('kim?');
-  mood('#10b981', '#0ea5e9', '#6366f1');
-  const cap = line('small'), big = line('big glitch');
-  big.textContent = 'Batu Yılmaz'; sync(big);
-  await retype(cap, 'adlar değişir.', 1300);
-  for (const n of ['btylmz', 'hiç kimse', 'sen', 'ben']) {
-    await scramble(big, n);
-    await wait(n === 'sen' ? 1700 : 1100);
+/* 3 — tekrar: bir kelime anlamını yitirir */
+async function sceneRepeat() {
+  setTitle('ben ben ben');
+  mood('#8b5cf6', '#ec4899', '#f59e0b');
+  const cap = line('small');
+  await retype(cap, 'bir kelimeyi yeterince çok tekrar edersen', 1500);
+  await retype(cap, 'anlamını yitirir.', 1300);
+  const box = mk('div', 'mantra');
+  stage.appendChild(box);
+  const words = [];
+  const rotten = ['bne', 'nbe', 'neb', 'b·n', 'e?n', 'ben?', 'b e n', '…', 'nen', 'bbb', 'be'];
+  for (let i = 0; i < 52; i++) {
+    const w = mk('span', '', 'ben');
+    box.appendChild(w);
+    words.push(w);
+    if (i > 8) {
+      const k = Math.floor(Math.random() * words.length);
+      words[k].textContent = rotten[Math.floor(Math.random() * rotten.length)];
+      words[k].classList.add('rot');
+    }
+    await wait(Math.max(30, 130 - i * 2));
   }
-  await retype(cap, 'bakan değişmez.', 2000);
-  await retype(cap, 'bakan kim?', 2500);
+  await wait(900);
+  await retype(cap, 'ben. ben. ben.', 1100);
+  await retype(cap, 'neydi bu?', 2200);
+  await clearStage();
+}
+
+/* 4 — yankı */
+async function sceneEcho() {
+  setTitle('…mu?');
+  mood('#0ea5e9', '#6366f1', '#22d3ee');
+  const parts = ['kimse yok mu?', 'yok mu?', 'mu?', '?'];
+  for (let i = 0; i < parts.length; i++) {
+    const el = line('');
+    el.style.fontSize = `calc(clamp(1.25rem,5.4vw,1.9rem) * ${1 - i * .17})`;
+    el.style.color = `rgba(248,250,252,${1 - i * .24})`;
+    await type(el, parts[i], 60);
+    await wait(i ? 450 : 900);
+  }
+  await wait(900);
+  const cap = line('small');
+  await retype(cap, 'yankı: kendi sesinin sana geri gelmesi.', 2400);
+  await retype(cap, 'bu sayfa da öyle.', 2400);
+  await clearStage();
+}
+
+/* 5 — kapı */
+async function sceneDoor() {
+  setTitle('kapı');
+  mood('#38bdf8', '#6366f1', '#0ea5e9');
+  const door = mk('div', 'door');
+  door.innerHTML = '<div class="frame"><div class="light"></div></div><div class="leaf"></div>';
+  stage.appendChild(door);
+  const cap = line('small');
+  await wait(600);
+  await retype(cap, 'bir kapı var.', 1600);
+  await retype(cap, 'açma.', 2400);
+  door.classList.add('open');
+  buzz(20);
+  await wait(1500);
+  await retype(cap, 'açtın.', 1500);
+  await retype(cap, 'içeride hiçbir şey yok.', 2100);
+  await retype(cap, 'ama ışık var.', 1700);
+  await retype(cap, 'içeriden değil, ekranından geliyor.', 3000);
   await clearStage();
 }
 
@@ -371,10 +421,9 @@ async function sceneTime() {
   upd();
   const iv = setInterval(upd, 250);
   onClean(() => clearInterval(iv));
-  await retype(cap, 'sen geldiğinden beri', 3200);
-  await retype(cap, 'geçen süre bu.', 1700);
-  await retype(cap, 'benim saatim yok.', 1900);
-  await retype(cap, 'hep aynı an.', 2400);
+  await retype(cap, 'sen geldiğinden beri', 3000);
+  await retype(cap, 'geçen süre bu.', 1600);
+  await retype(cap, 'benim saatim yok. hep aynı an.', 2600);
   clearInterval(iv);
   await clearStage();
 }
@@ -432,6 +481,54 @@ async function sceneEye() {
   await clearStage();
 }
 
+/* 8a — sessizlik */
+async function sceneSilence() {
+  setTitle('·');
+  mood('#0b1226', '#111827', '#0f172a');
+  await say('şimdi sessiz kalacağım.', { hold: 1200, mode: 'erase' });
+  const el = line('');
+  el.classList.add('typing');
+  await wait(6500);
+  el.remove();
+  mood('#00b4d8', '#6366f1', '#10b981');
+  setTitle('…');
+  await say('duydun mu?', { hold: 1800 });
+  await say('ben de duymadım.', { hold: 1700 });
+  await say('sessizlik de bir cümledir.', { cls: 'small', hold: 2400 });
+  await clearStage();
+}
+
+/* 8b — dokunuş */
+async function sceneTouch() {
+  setTitle('dokun');
+  mood('#10b981', '#06b6d4', '#6366f1');
+  const WORDS = ['hiç', 'var', 'yok', 'sen', 'ben', 'şimdi', 'burada'];
+  const cap = line('');
+  await type(cap, 'ekrana dokun.', 70);
+  let taps = 0;
+  onTap = (x, y) => {
+    taps++;
+    const r = mk('div', 'rip'); r.style.left = x + 'px'; r.style.top = y + 'px';
+    const w = mk('div', 'rw', WORDS[Math.floor(Math.random() * WORDS.length)]); w.style.left = x + 'px'; w.style.top = y + 'px';
+    document.body.append(r, w);
+    setTimeout(() => { r.remove(); w.remove(); }, 1700);
+    buzz(10);
+  };
+  touchMode = true;
+  onClean(() => { touchMode = false; onTap = null; });
+  const t0 = performance.now();
+  while (taps < 5 && performance.now() - t0 < 12000) await wait(100);
+  touchMode = false; onTap = null;
+  if (taps >= 5) {
+    await retype(cap, 'dokundun.', 1400);
+    await retype(cap, 'ben de sana.', 2300);
+  } else {
+    await retype(cap, 'dokunmadın.', 1500);
+    await retype(cap, 'o da bir cevap.', 2300);
+  }
+  await clearStage();
+}
+
 /* 8 — hata */
 async function sceneError() {
   setTitle('HATA');
@@ -472,8 +569,9 @@ async function sceneShort() {
 }
 
 const FULL = [
-  ['giris', intro], ['isim', sceneName], ['kimlik', sceneIdentity], ['yukleme', sceneLoad],
-  ['zaman', sceneTime], ['sorular', sceneQuestions], ['goz', sceneEye], ['hata', sceneError], ['son', sceneEnd]
+  ['giris', intro], ['ad', sceneName], ['ben', sceneRepeat], ['yanki', sceneEcho], ['kapi', sceneDoor],
+  ['yukleme', sceneLoad], ['zaman', sceneTime], ['sessizlik', sceneSilence], ['sorular', sceneQuestions],
+  ['goz', sceneEye], ['dokun', sceneTouch], ['hata', sceneError], ['son', sceneEnd]
 ];
 
 /* ==========================================================================
