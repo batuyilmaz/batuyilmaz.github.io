@@ -72,18 +72,58 @@
 .iris{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:radial-gradient(circle,#020617 0 30%,var(--ac) 32% 68%,#4338ca);transition:transform .14s ease-out}
 .iris::after{content:'';position:absolute;left:14px;top:10px;width:9px;height:9px;border-radius:50%;background:#fff;opacity:.9}
 
-/* ---- Son ekran ---- */
-.final{width:100%;display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;animation:fin 1.2s ease forwards}
-.ring{position:relative;width:92px;height:92px;margin-bottom:8px;cursor:pointer}
-.ring::before{content:'';position:absolute;inset:0;border-radius:50%;background:conic-gradient(var(--o1),var(--o2),var(--o3),var(--o1));box-shadow:0 0 30px rgba(56,189,248,.3);animation:spin 5s linear infinite}
-.ring::after{content:'';position:absolute;inset:4px;border-radius:50%;background:#0b1226}
-.ring span{position:absolute;z-index:2;left:50%;top:50%;width:10px;height:10px;margin:-5px;border-radius:50%;background:var(--ac);animation:pulse 2.4s ease-in-out infinite}
-.whisper{min-height:1.4em;font-size:.95rem;letter-spacing:.4px;color:var(--tx2);transition:opacity .5s}
-.whisper.swap{opacity:0}
-.links{width:100%;max-width:340px;display:flex;flex-direction:column;gap:12px;margin-top:16px}
-.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:54px;padding:15px 18px;font:600 1rem var(--font);color:var(--tx);text-align:center;text-decoration:none;background:var(--bt);border:1px solid var(--bd);border-radius:16px;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);opacity:0;animation:fin .6s ease forwards;transition:background-color .25s,border-color .25s,box-shadow .25s}
+/* ---- Son ekran: ana sayfadaki kartın aynısı ---- */
+svg.i{display:block;width:1em;height:1em;fill:currentColor}
+.ben.stage.done{justify-content:flex-start;gap:0;padding:calc(64px + env(safe-area-inset-top)) 18px calc(16px + env(safe-area-inset-bottom))}
+.avatar{position:relative;display:block;width:100px;height:100px;margin-bottom:14px;padding:0;border-radius:50%;flex-shrink:0;-webkit-user-select:none;user-select:none}
+.avatar::before{content:'';position:absolute;inset:-4px;border-radius:50%;z-index:1;background:conic-gradient(var(--o1),var(--o2),var(--o3),var(--o1));box-shadow:0 0 28px rgba(56,189,248,.3);animation:spin 5s linear infinite}
+.avatar::after{content:'';position:absolute;inset:0;border-radius:50%;background:#0b1226;z-index:1}
+.avatar img{position:relative;z-index:2;display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid #0b1226;background:#0f172a;transition:transform .35s cubic-bezier(.2,.9,.3,1.2)}
+.avatar:hover img{transform:scale(.95)}
+.avatar:active img{transform:scale(.9)}
+.dot{position:absolute;z-index:3;right:4px;bottom:4px;width:18px;height:18px;border-radius:50%;background:#0b1226;display:grid;place-items:center;box-shadow:0 0 10px rgba(0,0,0,.6)}
+.dot span{width:9px;height:9px;border-radius:50%;background:var(--ac);animation:pulse 2.4s ease-in-out infinite}
+.name{position:relative;display:inline-flex;justify-content:center;white-space:nowrap;min-height:1.3em;margin-bottom:4px;cursor:pointer;-webkit-user-select:none;user-select:none;font-size:clamp(1.45rem,5.5vw,1.75rem);font-weight:800;letter-spacing:-.4px;text-shadow:0 2px 18px rgba(0,0,0,.5)}
+.bio{min-height:1.4em;margin-bottom:22px;text-align:center;font-size:.88rem;font-weight:500;letter-spacing:.35px;color:var(--tx2)}
+.bio::after{content:'';display:inline-block;width:2px;height:1em;margin-left:4px;vertical-align:-.12em;background:var(--ac);animation:blink 1s steps(1) infinite}
+.links{width:100%;display:flex;flex-direction:column;gap:12px}
+.row{position:relative;width:100%;display:flex;align-items:center}
+.btn{position:relative;display:flex;align-items:center;justify-content:space-between;width:100%;min-height:54px;padding:15px 18px;overflow:hidden;color:var(--tx);text-decoration:none;font-size:.96rem;font-weight:600;border:1px solid var(--bd);border-radius:16px;background:radial-gradient(180px circle at var(--bx,50%) var(--by,50%),rgba(56,189,248,.12),transparent 75%),var(--bt);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 4px 15px rgba(0,0,0,.12);transition:background-color .25s,border-color .25s,box-shadow .25s,transform .2s cubic-bezier(.4,0,.2,1)}
+.btn::before{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(to right,transparent,rgba(255,255,255,.12),transparent);transform:skewX(-25deg);transition:left .6s ease}
+.btn:hover::before{left:150%}
 .btn:hover{background-color:rgba(255,255,255,.1);border-color:rgba(56,189,248,.45);box-shadow:0 0 18px rgba(56,189,248,.18)}
-.btn:active{transform:scale(.97)}
+.btn:active{transform:scale(.97)!important}
+.lbl{flex:1;text-align:center;letter-spacing:.2px}
+.ic,.chev{width:26px;display:grid;place-items:center;flex-shrink:0}
+.ic{font-size:1.1rem;color:var(--ac);transition:transform .3s,color .3s}
+.chev{font-size:.82rem;color:var(--tx2);opacity:.55;transition:transform .3s,opacity .3s,color .3s}
+.btn:hover .ic{color:#fff;transform:scale(1.12)}
+.btn:hover .chev{opacity:1;color:var(--ac);transform:translateX(4px)}
+.social{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin-top:22px}
+.soc{width:46px;height:46px;display:grid;place-items:center;border-radius:50%;color:var(--tx2);font-size:1.2rem;text-decoration:none;background:var(--bt);border:1px solid var(--bd);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:all .3s cubic-bezier(.4,0,.2,1)}
+.soc:hover{color:#fff;transform:translateY(-3px) scale(1.05);background:rgba(56,189,248,.15);border-color:var(--ac);box-shadow:0 6px 20px rgba(56,189,248,.3)}
+.soc.yt:hover{background:rgba(255,0,51,.15);border-color:#ff0033;box-shadow:0 6px 20px rgba(255,0,51,.35)}
+.soc.sp:hover{background:rgba(29,185,84,.15);border-color:#1db954;box-shadow:0 6px 20px rgba(29,185,84,.35)}
+.soc:active{transform:scale(.93)}
+.foot{margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.timer{min-height:32px;padding:0 8px;font-size:.72rem;font-weight:500;letter-spacing:.3px;color:var(--tx3);font-variant-numeric:tabular-nums;transition:color .2s}
+.timer:hover{color:var(--tx)}
+.timer b{color:var(--ac);font-weight:700}
+.legal{font-size:.7rem;line-height:1.4;text-align:center;color:var(--tx3)}
+.legal a,.linkbtn{display:inline-block;padding:8px 6px;font-size:inherit;color:inherit;text-decoration:underline;text-underline-offset:3px}
+.legal a:hover,.linkbtn:hover{color:var(--tx)}
+@media (max-width:480px){
+  .card{padding:28px 18px 14px;border-radius:24px}
+  .avatar{width:90px;height:90px;margin-bottom:12px}
+  .bio{margin-bottom:18px}
+  .btn{padding:14px 16px;font-size:.94rem}
+  .social{margin-top:18px}
+}
+@media (max-height:670px){
+  .avatar{width:76px;height:76px;margin-bottom:8px}
+  .bio{margin-bottom:12px}
+  .social{margin-top:14px}
+}
 
 /* ---- Düğmeler ve ipucu ---- */
 .skip{position:fixed;z-index:30;top:calc(12px + env(safe-area-inset-top));right:calc(12px + env(safe-area-inset-right));min-height:44px;padding:0 18px;border-radius:99px;background:var(--bt);border:1px solid var(--bd);color:var(--tx2);font-size:.82rem;font-weight:600;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);transition:color .25s,border-color .25s}
@@ -119,11 +159,12 @@ html.consent-open .hint{display:none}
 @keyframes jit{0%{transform:translate(2px,0)}50%{transform:translate(-3px,1px)}100%{transform:translate(1px,-1px)}}
 @keyframes up{0%{opacity:0;transform:translateY(40px) rotate(var(--r));filter:blur(6px)}20%{opacity:.9;filter:none}80%{opacity:.7}100%{opacity:0;transform:translateY(-120px) rotate(var(--r));filter:blur(6px)}}
 @keyframes fin{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
-@media (max-height:560px){.ring{display:none}}
 </style>
 <script src="/assets/site.js" defer></script>
 </head>
 <body>
+<!-- İkonlar: Font Awesome Free 6.5.2 (https://fontawesome.com) — Lisans: https://fontawesome.com/license/free (ikonlar CC BY 4.0) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="i-house" viewBox="0 0 576 512"><path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/></symbol><symbol id="i-arrow-rotate-left" viewBox="0 0 512 512"><path d="M125.7 160H176c17.7 0 32 14.3 32 32s-14.3 32-32 32H48c-17.7 0-32-14.3-32-32V64c0-17.7 14.3-32 32-32s32 14.3 32 32v51.2L97.6 97.6c87.5-87.5 229.3-87.5 316.8 0s87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3s-163.8-62.5-226.3 0L125.7 160z"/></symbol><symbol id="i-chevron-right" viewBox="0 0 320 512"><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></symbol><symbol id="i-share-nodes" viewBox="0 0 448 512"><path d="M352 224c53 0 96-43 96-96s-43-96-96-96s-96 43-96 96c0 4 .2 8 .7 11.9l-94.1 47C145.4 170.2 121.9 160 96 160c-53 0-96 43-96 96s43 96 96 96c25.9 0 49.4-10.2 66.6-26.9l94.1 47c-.5 3.9-.7 7.8-.7 11.9c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-25.9 0-49.4 10.2-66.6 26.9l-94.1-47c.5-3.9 .7-7.8 .7-11.9s-.2-8-.7-11.9l94.1-47C302.6 213.8 326.1 224 352 224z"/></symbol><symbol id="i-check" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></symbol><symbol id="i-youtube" viewBox="0 0 576 512"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></symbol><symbol id="i-spotify" viewBox="0 0 496 512"><path d="M248 8C111.1 8 0 119.1 0 256s111.1 248 248 248 248-111.1 248-248S384.9 8 248 8zm100.7 364.9c-4.2 0-6.8-1.3-10.7-3.6-62.4-37.6-135-39.2-206.7-24.5-3.9 1-9 2.6-11.9 2.6-9.7 0-15.8-7.7-15.8-15.8 0-10.3 6.1-15.2 13.6-16.8 81.9-18.1 165.6-16.5 237 26.2 6.1 3.9 9.7 7.4 9.7 16.5s-7.1 15.4-15.2 15.4zm26.9-65.6c-5.2 0-8.7-2.3-12.3-4.2-62.5-37-155.7-51.9-238.6-29.4-4.8 1.3-7.4 2.6-11.9 2.6-10.7 0-19.4-8.7-19.4-19.4s5.2-17.8 15.5-20.7c27.8-7.8 56.2-13.6 97.8-13.6 64.9 0 127.6 16.1 177 45.5 8.1 4.8 11.3 11 11.3 19.7-.1 10.8-8.5 19.5-19.4 19.5zm31-76.2c-5.2 0-8.4-1.3-12.9-3.9-71.2-42.5-198.5-52.7-280.9-29.7-3.6 1-8.1 2.6-12.9 2.6-13.2 0-23.3-10.3-23.3-23.6 0-13.6 8.4-21.3 17.4-23.9 35.2-10.3 74.6-15.2 117.5-15.2 73 0 149.5 15.2 205.4 47.8 7.8 4.5 12.9 10.7 12.9 22.6 0 13.6-11 23.3-23.2 23.3z"/></symbol></svg>
 <div class="bg"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
 <div class="grid"></div>
 <div class="scan"></div>
@@ -149,6 +190,7 @@ html.consent-open .hint{display:none}
   </noscript>
 </main>
 <div class="hint" id="hint">dokun: hızlansın</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 (() => {
@@ -577,6 +619,9 @@ const FULL = [
 /* ==========================================================================
    Son ekran
    ========================================================================== */
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const svg = id => `<svg class="i" aria-hidden="true"><use href="#i-${id}"/></svg>`;
+
 function showFinal(via) {
   if (finalShown) return;
   finalShown = true;
@@ -586,42 +631,132 @@ function showFinal(via) {
   hint.classList.remove('show');
   skipBtn.hidden = true;
   voidEl.textContent = '';
-  stage.textContent = '';
   stage.removeAttribute('aria-hidden');
+  stage.classList.add('done');
   setTitle('ben | btylmz');
   mood(...CALM);
 
-  const f = mk('div', 'final');
-  const ring = mk('div', 'ring'); ring.setAttribute('aria-hidden', 'true'); ring.appendChild(mk('span'));
-  const name = mk('p', 'line big glitch', 'Batu Yılmaz'); name.dataset.text = 'Batu Yılmaz';
-  const whisper = mk('p', 'whisper', 'btylmz');
-  const links = mk('div', 'links');
-  const home = mk('a', 'btn', 'Ana sayfa'); home.href = '/'; home.dataset.track = 'ben_home'; home.style.animationDelay = '.6s';
-  const mail = mk('a', 'btn', 'Yaz bana'); mail.href = 'mailto:btylmz8@gmail.com'; mail.dataset.track = 'ben_mail'; mail.style.animationDelay = '.75s';
-  const again = mk('button', 'btn', 'Baştan'); again.type = 'button'; again.dataset.track = 'ben_replay'; again.style.animationDelay = '.9s';
-  links.append(home, mail, again);
-  f.append(ring, name, whisper, links);
-  stage.appendChild(f);
+  stage.innerHTML =
+    '<div class="card" id="card">' +
+      '<button type="button" class="avatar rv" id="avatar" style="--i:0" aria-label="Kimliği değiştir" title="Ben, benim." data-track="ben_identity">' +
+        '<img src="/assets/avatar.svg" width="200" height="200" alt="" decoding="async"><span class="dot" aria-hidden="true"><span></span></span></button>' +
+      '<p class="name glitch rv" id="name" style="--i:1" data-text="Batu Yılmaz">Batu Yılmaz</p>' +
+      '<p class="bio rv" id="bio" style="--i:2" aria-hidden="true">btylmz.</p>' +
+      '<nav class="links" aria-label="Bağlantılar">' +
+        '<div class="row rv" style="--i:3"><a class="btn" href="/" data-mood="#38bdf8,#8b5cf6,#22d3ee" data-track="ben_home"><span class="ic">' + svg('house') + '</span><span class="lbl">Ana sayfa</span><span class="chev">' + svg('chevron-right') + '</span></a></div>' +
+        '<div class="row rv" style="--i:4"><button type="button" class="btn" id="again" data-mood="#f59e0b,#6366f1,#ec4899" data-track="ben_replay"><span class="ic">' + svg('arrow-rotate-left') + '</span><span class="lbl">Baştan</span><span class="chev">' + svg('chevron-right') + '</span></button></div>' +
+      '</nav>' +
+      '<div class="social rv" style="--i:5">' +
+        '<a class="soc yt" href="https://www.youtube.com/@btylmz" target="_blank" rel="noopener noreferrer" aria-label="YouTube (yeni sekmede açılır)" data-mood="#ef4444,#f43f5e,#7c3aed" data-track="outbound_click" data-label="youtube">' + svg('youtube') + '</a>' +
+        '<a class="soc sp" href="https://open.spotify.com/user/lpq8eu1de9nyc91cpsnokgis8" target="_blank" rel="noopener noreferrer" aria-label="Spotify (yeni sekmede açılır)" data-mood="#10b981,#0ea5e9,#22c55e" data-track="outbound_click" data-label="spotify">' + svg('spotify') + '</a>' +
+        '<button type="button" class="soc" id="share" aria-label="Sayfayı paylaş" title="Paylaş">' + svg('share-nodes') + '</button>' +
+      '</div>' +
+      '<div class="foot rv" style="--i:6">' +
+        '<button type="button" class="timer" id="timer" title="Dokun: değiştir"><span id="timerLabel">ömründen eksilen:</span> <b id="timerVal">0 sn</b></button>' +
+        '<p class="legal">© <span id="year"></span> Tüm hakları saklıdır. · <a href="/gizlilik">Gizlilik</a> · <button type="button" class="linkbtn" data-consent-open>Çerez tercihleri</button></p>' +
+      '</div>' +
+    '</div>';
 
-  again.addEventListener('click', () => {
+  const card = $('card'), nameEl = $('name'), bio = $('bio'), toastEl = $('toast');
+  $('year').textContent = new Date().getFullYear();
+
+  /* Tekrar / paylaş */
+  $('again').addEventListener('click', () => {
     try { sessionStorage.removeItem(KEY); } catch { /* özel mod vb. */ }
     setTimeout(() => location.reload(), 120);
   });
-  ring.addEventListener('click', () => {
-    stage.classList.add('shake');
-    buzz([16, 40, 16]);
-    whisper.textContent = 'hâlâ buradasın.';
-    setTimeout(() => stage.classList.remove('shake'), 650);
+  let tt = 0;
+  const toast = msg => {
+    toastEl.textContent = msg; toastEl.classList.add('show');
+    clearTimeout(tt); tt = setTimeout(() => toastEl.classList.remove('show'), 2600);
+  };
+  $('share').addEventListener('click', async () => {
+    const url = 'https://btylmz.com/';
+    try {
+      if (navigator.share) { await navigator.share({ title: 'Batu Yılmaz | btylmz', text: 'btylmz', url }); track('share', { method: 'web_share', content_type: 'page' }); return; }
+    } catch (err) { if (err && err.name === 'AbortError') return; }
+    try { await navigator.clipboard.writeText(url); toast('Kopyalandı'); track('share', { method: 'copy_link', content_type: 'page' }); }
+    catch { toast('Kopyalanamadı. Adres: ' + url); }
   });
 
-  const msgs = ['hâlâ buradasın.', 'gitmedin.', 'iyi.', 'ben de.', 'btylmz'];
-  let k = 0;
-  if (!reduce) {
-    setInterval(() => {
-      whisper.classList.add('swap');
-      setTimeout(() => { whisper.textContent = msgs[k++ % msgs.length]; whisper.classList.remove('swap'); }, 600);
-    }, 4200);
+  /* Kimlik değiştirme (ana sayfadakiyle aynı) */
+  const IDS = [['Batu Yılmaz', CALM], ['btylmz', ['#f59e0b', '#6366f1', '#ec4899']], ['hiç kimse', ['#10b981', '#0ea5e9', '#6366f1']]];
+  const CIPHER = Array.from('01∆◊§×÷=+#?');
+  let idn = 0, busy = false, base = CALM;
+  async function decrypt(text) {
+    busy = true;
+    nameEl.dataset.text = text; nameEl.setAttribute('aria-label', text);
+    const t = Array.from(text);
+    for (let st = 0; st < 9; st++) {
+      nameEl.textContent = t.map((c, i) => c === ' ' ? ' ' : (st >= 3 + i % 5 ? c : CIPHER[Math.floor(Math.random() * CIPHER.length)])).join('');
+      await sleep(36);
+    }
+    nameEl.textContent = text;
+    busy = false;
   }
+  const cycle = () => {
+    if (busy) return;
+    idn = (idn + 1) % IDS.length;
+    base = IDS[idn][1]; mood(...base);
+    buzz(12);
+    decrypt(IDS[idn][0]);
+  };
+  $('avatar').addEventListener('click', cycle);
+  nameEl.addEventListener('click', cycle);
+
+  /* Renk geçişi, ışık ve eğim (ana sayfadakiyle aynı) */
+  const btns = [...card.querySelectorAll('.btn')];
+  card.querySelectorAll('[data-mood]').forEach(el => {
+    const c = el.dataset.mood.split(',');
+    el.addEventListener('pointerenter', () => mood(c));
+    el.addEventListener('pointerleave', () => mood(base));
+  });
+  if (!reduce) {
+    let px = 0, py = 0, dirty = false;
+    addEventListener('pointermove', e => { px = e.clientX; py = e.clientY; if (!dirty) { dirty = true; requestAnimationFrame(() => {
+      dirty = false;
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (px - r.left) + 'px');
+      card.style.setProperty('--my', (py - r.top) + 'px');
+      btns.forEach(b => { const q = b.getBoundingClientRect(); b.style.setProperty('--bx', (px - q.left) + 'px'); b.style.setProperty('--by', (py - q.top) + 'px'); });
+    }); } }, { passive: true });
+    if (matchMedia('(hover: hover)').matches) {
+      btns.forEach(b => {
+        b.addEventListener('mousemove', e => {
+          const r = b.getBoundingClientRect();
+          const x = e.clientX - r.left - r.width / 2, y = e.clientY - r.top - r.height / 2;
+          b.style.transform = `perspective(1000px) rotateX(${(y / r.height * -10).toFixed(2)}deg) rotateY(${(x / r.width * 10).toFixed(2)}deg) scale3d(1.02,1.02,1.02)`;
+        });
+        b.addEventListener('mouseleave', () => { b.style.transform = ''; });
+      });
+    }
+  }
+
+  /* Alt yazı: daktilo */
+  if (reduce) {
+    bio.textContent = 'btylmz.';
+  } else {
+    bio.textContent = '';
+    (async () => {
+      const PH = ['hâlâ buradasın.', 'gitmedin.', 'iyi.', 'ben de.', 'btylmz.'];
+      await sleep(900);
+      for (let i = 0; ; i++) {
+        while (document.hidden) await sleep(400);
+        for (const ch of PH[i % PH.length]) { bio.textContent += ch; await sleep(55 * (.7 + Math.random() * .6)); }
+        await sleep(2300);
+        while (bio.textContent) { bio.textContent = bio.textContent.slice(0, -1); await sleep(22); }
+        await sleep(320);
+      }
+    })();
+  }
+
+  /* Sayaç */
+  const LABELS = ['ömründen eksilen:', 'bu an bir daha dönmeyecek:', 'fânîlikten geçen:'];
+  let li = 0;
+  const fmt = n => n < 60 ? n + ' sn' : Math.floor(n / 60) + ' dk ' + (n % 60) + ' sn';
+  $('timer').addEventListener('click', () => { $('timerLabel').textContent = LABELS[++li % LABELS.length]; });
+  setInterval(() => { $('timerVal').textContent = fmt(Math.floor((performance.now() - T0) / 1000)); }, 1000);
+
   track('ben_final', { via });
   if (via === 'complete') buzz([14, 50, 14]);
 }
