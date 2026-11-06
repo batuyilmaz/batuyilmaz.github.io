@@ -12,7 +12,8 @@
     </script>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="theme-color" content="#090f24">
     
     <!-- [DÜZENLE] Tarayıcı sekmesinde görünecek başlık -->
     <title>Batu Yılmaz | btylmz</title>
@@ -27,22 +28,20 @@
 
     <style>
         /* ==========================================================================
-           1. RENK PALETİ VE TEMEL AYARLAR
-           [DÜZENLE] Renk tonlarını buradan değiştirebilirsiniz.
+           1. RENK PALETİ VE TEMEL AYARLAR ("ben" sayfasıyla tam senkronize)
            ========================================================================== */
         :root {
-            --bg-base: #090f24;
-            --orb-1: #00b4d8;
-            --orb-2: #6366f1;
-            --orb-3: #10b981;
-            --main-card-bg: rgba(15, 23, 42, 0.45);
-            --main-card-border: rgba(255, 255, 255, 0.1);
-            --btn-bg: rgba(255, 255, 255, 0.05);
-            --btn-border: rgba(255, 255, 255, 0.12);
-            --btn-hover: rgba(255, 255, 255, 0.1);
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent-color: #38bdf8;
+            --bg: #090f24;
+            --o1: #00b4d8;
+            --o2: #6366f1;
+            --o3: #10b981;
+            --tx: #f8fafc;
+            --tx2: #94a3b8;
+            --ac: #38bdf8;
+            --bd: rgba(255, 255, 255, 0.12);
+            --bt: rgba(255, 255, 255, 0.05);
+            --bt-hover: rgba(255, 255, 255, 0.1);
+            --card-bg: rgba(11, 18, 38, 0.55);
             --youtube-color: #ff0033;
             --spotify-color: #1db954;
         }
@@ -51,48 +50,74 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            -webkit-tap-highlight-color: transparent; /* Mobilde tıklama mavisini kaldırır */
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            min-height: 100%;
         }
 
         body {
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg-base);
-            color: var(--text-primary);
+            background-color: var(--bg);
+            color: var(--tx);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            min-height: 100dvh; /* Mobil tarayıcı adres çubuğuna tam uyum */
-            padding: 20px;
+            min-height: 100dvh;
+            padding: calc(24px + env(safe-area-inset-top)) 20px calc(24px + env(safe-area-inset-bottom));
             overflow-x: hidden;
             position: relative;
             -webkit-font-smoothing: antialiased;
         }
 
         /* ==========================================================================
-           2. ANİMASYONLU ARKA PLAN (Aurora Işıkları + Mikro Izgara)
+           2. ANİMASYONLU ARKA PLAN (Aurora + Mikro Izgara + Scanline + Glow)
            ========================================================================== */
-        .animated-bg {
+        .bg {
             position: fixed;
             inset: 0;
             z-index: 0;
             overflow: hidden;
             background: linear-gradient(-45deg, #090f24, #16203a, #0b132b, #1b1742);
             background-size: 400% 400%;
-            animation: gradientFlow 18s ease infinite;
+            animation: flow 18s ease infinite;
         }
 
-        .bg-grid {
+        .grid {
             position: fixed;
             inset: 0;
             z-index: 1;
+            pointer-events: none;
             background-image: 
                 linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             background-size: 36px 36px;
-            mask-image: radial-gradient(circle at center, black 45%, transparent 95%);
-            -webkit-mask-image: radial-gradient(circle at center, black 45%, transparent 95%);
+            -webkit-mask-image: radial-gradient(circle, #000 45%, transparent 95%);
+            mask-image: radial-gradient(circle, #000 45%, transparent 95%);
+        }
+
+        .scan {
+            position: fixed;
+            inset: 0;
+            z-index: 2;
             pointer-events: none;
+            background: repeating-linear-gradient(rgba(255, 255, 255, 0.022) 0 1px, transparent 1px 3px);
+        }
+
+        .glow {
+            position: fixed;
+            z-index: 3;
+            left: 50%;
+            top: 50%;
+            width: 380px;
+            height: 380px;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.16), transparent 65%);
+            transition: left 0.35s ease-out, top 0.35s ease-out;
         }
 
         .orb {
@@ -101,182 +126,250 @@
             filter: blur(75px);
             -webkit-filter: blur(75px);
             opacity: 0.5;
-            will-change: transform;
+            transition: background-color 2.2s ease;
+            will-change: transform, background-color;
         }
 
-        .orb-1 {
-            width: 360px;
-            height: 360px;
-            background: var(--orb-1);
+        .o1 {
+            width: min(360px, 70vw);
+            height: min(360px, 70vw);
+            background-color: var(--o1);
             top: -8%;
             left: -8%;
-            animation: moveOrb1 14s infinite alternate ease-in-out;
+            animation: m1 14s infinite alternate ease-in-out;
         }
 
-        .orb-2 {
-            width: 340px;
-            height: 340px;
-            background: var(--orb-2);
+        .o2 {
+            width: min(340px, 65vw);
+            height: min(340px, 65vw);
+            background-color: var(--o2);
             bottom: -8%;
             right: -8%;
-            animation: moveOrb2 18s infinite alternate ease-in-out;
+            animation: m2 18s infinite alternate ease-in-out;
         }
 
-        .orb-3 {
-            width: 250px;
-            height: 250px;
-            background: var(--orb-3);
+        .o3 {
+            width: min(250px, 50vw);
+            height: min(250px, 50vw);
+            background-color: var(--o3);
             top: 42%;
             left: 52%;
             opacity: 0.3;
-            animation: moveOrb3 16s infinite alternate ease-in-out;
-        }
-
-        @keyframes gradientFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes moveOrb1 {
-            0% { transform: translate3d(0, 0, 0) scale(1); }
-            100% { transform: translate3d(100px, 70px, 0) scale(1.15); }
-        }
-
-        @keyframes moveOrb2 {
-            0% { transform: translate3d(0, 0, 0) scale(1); }
-            100% { transform: translate3d(-100px, -80px, 0) scale(1.1); }
-        }
-
-        @keyframes moveOrb3 {
-            0% { transform: translate3d(-60px, -30px, 0) scale(0.9); }
-            100% { transform: translate3d(50px, 60px, 0) scale(1.2); }
+            animation: m3 16s infinite alternate ease-in-out;
         }
 
         /* ==========================================================================
-           3. BUZLU CAM KARTVİZİT KONTEYNERİ VE PROFİL
+           3. BUZLU CAM KARTVİZİT KONTEYNERİ VE CONIC RING PROFİL
            ========================================================================== */
         .card-container {
+            position: relative;
             width: 100%;
             max-width: 400px;
-            padding: 44px 28px 36px 28px;
-            background: var(--main-card-bg);
-            border: 1px solid var(--main-card-border);
-            border-top: 1px solid rgba(255, 255, 255, 0.22); /* Üst ışık kırılması */
+            padding: 42px 28px 32px 28px;
+            background: var(--card-bg);
+            border: 1px solid var(--bd);
+            border-top: 1px solid rgba(255, 255, 255, 0.22);
             border-radius: 28px;
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.55),
                         inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
             align-items: center;
             z-index: 10;
-            animation: cardAppear 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            animation: lin 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            transition: opacity 0.45s ease, transform 0.45s ease, filter 0.45s ease;
         }
 
-        @keyframes cardAppear {
-            from { opacity: 0; transform: translateY(20px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+        /* Kart içi dinamik imleç parlama katmanı */
+        .card-container::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 28px;
+            pointer-events: none;
+            background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 0%), rgba(56, 189, 248, 0.08), transparent 70%);
+            z-index: -1;
         }
 
+        .card-container.out {
+            animation: lout 0.45s ease forwards;
+        }
+
+        /* Conic Ring Profil Çerçevesi ("ben" sayfası finalinden uyarlandı) */
         .profile-wrapper {
             position: relative;
+            width: 114px;
+            height: 114px;
             margin-bottom: 18px;
+            cursor: pointer;
+            user-select: none;
         }
 
-        .profile-pic {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid rgba(15, 23, 42, 0.8);
-            position: relative;
-            z-index: 2;
-            background-color: #0f172a;
-            display: block;
-        }
-
-        /* Dönen neon profil çerçevesi */
         .profile-wrapper::before {
             content: '';
             position: absolute;
             inset: -4px;
-            background: linear-gradient(45deg, var(--orb-1), var(--orb-2), var(--orb-3), var(--orb-1));
             border-radius: 50%;
+            background: conic-gradient(var(--o1), var(--o2), var(--o3), var(--o1));
+            animation: spin 5s linear infinite;
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
             z-index: 1;
-            background-size: 300% 300%;
-            animation: gradientFlow 6s linear infinite;
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
         }
 
+        .profile-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: #0b1226;
+            z-index: 1;
+        }
+
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #0b1226;
+            position: relative;
+            z-index: 2;
+            background-color: #0f172a;
+            display: block;
+            transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+        }
+
+        .profile-wrapper:hover .profile-pic {
+            transform: scale(0.96);
+        }
+
+        /* Nabız gibi atan aktiflik noktası */
+        .status-dot {
+            position: absolute;
+            z-index: 3;
+            right: 4px;
+            bottom: 4px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #0b1226;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+        }
+
+        .status-dot span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--ac);
+            animation: pulse 2.4s ease-in-out infinite;
+        }
+
+        /* ==========================================================================
+           4. GLITCH İSİM VE DAKTİLO / FISILTI ALANI
+           ========================================================================== */
         .profile-name {
-            font-size: 1.65rem;
+            font-size: clamp(1.55rem, 6vw, 1.8rem);
             font-weight: 800;
             margin-bottom: 6px;
             letter-spacing: -0.4px;
             text-align: center;
+            position: relative;
+            text-shadow: 0 2px 18px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            pointer-events: none;
+        }
+
+        .glitch::before {
+            color: #ff2d6f;
+            clip-path: inset(0 0 100% 0);
+            animation: g1 3.1s infinite steps(1);
+        }
+
+        .glitch::after {
+            color: #22d3ee;
+            clip-path: inset(100% 0 0 0);
+            animation: g2 2.6s infinite steps(1);
         }
 
         .profile-bio {
-            font-size: 0.92rem;
+            font-size: 0.94rem;
             font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
-            min-height: 22px;
+            color: var(--tx2);
+            margin-bottom: 30px;
+            min-height: 1.4em;
             text-align: center;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.4px;
         }
 
         .profile-bio::after {
-            content: '|';
-            margin-left: 3px;
-            color: var(--accent-color);
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+            content: '';
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            margin-left: 4px;
+            vertical-align: -0.12em;
+            background: var(--ac);
+            animation: blink 1s steps(1) infinite;
         }
 
         /* ==========================================================================
-           4. BAĞLANTI BUTONLARI ("Ben" ve "İletişim")
+           5. BAĞLANTI BUTONLARI ("Ben" ve "İletişim")
            ========================================================================== */
         .links-wrapper {
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 13px;
             perspective: 1000px;
         }
+
+        .btn-row {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            animation: fin 0.6s ease forwards;
+        }
+
+        .btn-row:nth-child(1) { animation-delay: 0.2s; }
+        .btn-row:nth-child(2) { animation-delay: 0.32s; }
 
         .link-btn {
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            padding: 17px 20px;
-            background: var(--btn-bg);
-            border: 1px solid var(--btn-border);
+            padding: 16px 20px;
+            background: var(--bt);
+            border: 1px solid var(--bd);
             border-radius: 16px;
-            color: var(--text-primary);
+            color: var(--tx);
             text-decoration: none;
             font-size: 1rem;
             font-weight: 600;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: background 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
             transform-style: preserve-3d;
-            
-            opacity: 0;
-            transform: translateY(15px);
-            animation: slideUp 0.5s ease forwards;
         }
-
-        .link-btn:nth-child(1) { animation-delay: 0.25s; }
-        .link-btn:nth-child(2) { animation-delay: 0.35s; }
 
         /* Parlama yansıması */
         .link-btn::before {
@@ -286,7 +379,7 @@
             left: -100%;
             width: 50%;
             height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.12), transparent);
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.11), transparent);
             transform: skewX(-25deg);
             transition: left 0.6s ease;
         }
@@ -295,36 +388,33 @@
             left: 150%;
         }
 
-        /* Sol İkon */
         .btn-icon-left {
-            font-size: 1.2rem;
-            color: var(--accent-color);
+            font-size: 1.15rem;
+            color: var(--ac);
             width: 28px;
             text-align: center;
             transition: transform 0.3s ease, color 0.3s ease;
         }
 
-        /* Ortadaki Metin */
         .link-btn span {
             flex-grow: 1;
             text-align: center;
             letter-spacing: 0.2px;
         }
 
-        /* Sağ Yönlendirme Oku */
         .btn-icon-right {
             font-size: 0.85rem;
-            color: var(--text-secondary);
+            color: var(--tx2);
             width: 28px;
             text-align: center;
-            opacity: 0.5;
+            opacity: 0.55;
             transition: transform 0.3s ease, opacity 0.3s ease, color 0.3s ease;
         }
 
         .link-btn:hover {
-            background: var(--btn-hover);
+            background: var(--bt-hover);
             border-color: rgba(56, 189, 248, 0.45);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25), 0 0 15px rgba(56, 189, 248, 0.15);
+            box-shadow: 0 0 18px rgba(56, 189, 248, 0.18);
         }
 
         .link-btn:hover .btn-icon-left {
@@ -334,43 +424,72 @@
 
         .link-btn:hover .btn-icon-right {
             opacity: 1;
-            color: var(--accent-color);
+            color: var(--ac);
             transform: translateX(4px);
         }
 
-        /* Mobil dokunma hissi */
         .link-btn:active {
             transform: scale(0.97) !important;
         }
 
+        /* E-posta Hızlı Kopyalama Butonu */
+        .copy-trigger {
+            position: absolute;
+            right: 12px;
+            z-index: 5;
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            background: transparent;
+            color: var(--tx2);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .copy-trigger:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.35);
+            color: var(--tx);
+        }
+
+        .copy-trigger:active {
+            transform: scale(0.9);
+        }
+
         /* ==========================================================================
-           5. YUVARLAK YOUTUBE & SPOTIFY İKON YUVALARI
+           6. YUVARLAK YOUTUBE & SPOTIFY İKON YUVALARI
            ========================================================================== */
         .social-icons {
             display: flex;
             gap: 18px;
-            margin-top: 32px;
+            margin-top: 28px;
             opacity: 0;
-            animation: slideUp 0.5s ease forwards 0.45s;
+            animation: fin 0.6s ease forwards 0.44s;
         }
 
         .social-icon {
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            background: var(--btn-bg);
-            border: 1px solid var(--btn-border);
+            background: var(--bt);
+            border: 1px solid var(--bd);
             display: flex;
             justify-content: center;
             align-items: center;
-            color: var(--text-secondary);
+            color: var(--tx2);
             font-size: 1.3rem;
             text-decoration: none;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
         }
 
-        /* YouTube Özel Parlama */
         .social-icon.youtube:hover {
             color: #ffffff;
             background: rgba(255, 0, 51, 0.15);
@@ -379,7 +498,6 @@
             box-shadow: 0 6px 20px rgba(255, 0, 51, 0.35);
         }
 
-        /* Spotify Özel Parlama */
         .social-icon.spotify:hover {
             color: #ffffff;
             background: rgba(29, 185, 84, 0.15);
@@ -392,146 +510,390 @@
             transform: scale(0.93);
         }
 
-        .footer-text {
-            margin-top: 28px;
-            font-size: 0.78rem;
-            color: rgba(148, 163, 184, 0.45);
-            text-align: center;
+        /* ==========================================================================
+           7. ALT BİLGİ, CANLI SÜRE SAYACI VE BİLDİRİM (TOAST)
+           ========================================================================== */
+        .footer-meta {
+            margin-top: 26px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
             opacity: 0;
-            animation: slideUp 0.5s ease forwards 0.55s;
+            animation: fin 0.6s ease forwards 0.55s;
         }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+        .session-timer {
+            font-size: 0.74rem;
+            font-weight: 500;
+            color: rgba(148, 163, 184, 0.6);
+            letter-spacing: 0.3px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .session-timer b {
+            color: var(--ac);
+            font-weight: 700;
+        }
+
+        .footer-text {
+            font-size: 0.76rem;
+            color: rgba(148, 163, 184, 0.4);
+            text-align: center;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: calc(22px + env(safe-area-inset-bottom));
+            left: 50%;
+            transform: translate(-50%, 16px);
+            padding: 10px 18px;
+            border-radius: 99px;
+            background: rgba(11, 18, 38, 0.85);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: var(--tx);
+            font-size: 0.82rem;
+            font-weight: 600;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px rgba(56, 189, 248, 0.15);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 50;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translate(-50%, 0);
         }
 
         /* ==========================================================================
-           6. MOBİL EKRAN UYUMLULUĞU (Responsive)
+           8. KEYFRAMES ("ben" sayfasıyla ortak animasyon motoru)
+           ========================================================================== */
+        @keyframes flow {
+            0%, 100% { background-position: 0 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        @keyframes m1 {
+            to { transform: translate3d(100px, 70px, 0) scale(1.15); }
+        }
+        @keyframes m2 {
+            to { transform: translate3d(-100px, -80px, 0) scale(1.1); }
+        }
+        @keyframes m3 {
+            0% { transform: translate3d(-60px, -30px, 0) scale(0.9); }
+            100% { transform: translate3d(50px, 60px, 0) scale(1.2); }
+        }
+        @keyframes lin {
+            from { opacity: 0; translate: 0 14px; filter: blur(6px); }
+            to { opacity: 1; translate: 0 0; filter: blur(0); }
+        }
+        @keyframes lout {
+            from { opacity: 1; filter: blur(0); }
+            to { opacity: 0; translate: 0 -10px; filter: blur(8px); }
+        }
+        @keyframes fin {
+            from { opacity: 0; translate: 0 14px; }
+            to { opacity: 1; translate: 0 0; }
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(0.75); opacity: 0.6; }
+            50% { transform: scale(1.25); opacity: 1; }
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        @keyframes g1 {
+            0%, 90%, 100% { clip-path: inset(0 0 100% 0); transform: none; }
+            91% { clip-path: inset(12% 0 58% 0); transform: translate(-4px, 0); }
+            94% { clip-path: inset(55% 0 20% 0); transform: translate(3px, 0); }
+            97% { clip-path: inset(30% 0 40% 0); transform: translate(-2px, 0); }
+        }
+        @keyframes g2 {
+            0%, 86%, 100% { clip-path: inset(100% 0 0 0); transform: none; }
+            88% { clip-path: inset(60% 0 8% 0); transform: translate(4px, 0); }
+            92% { clip-path: inset(8% 0 70% 0); transform: translate(-3px, 0); }
+            95% { clip-path: inset(40% 0 35% 0); transform: translate(2px, 0); }
+        }
+
+        /* ==========================================================================
+           9. MOBİL UYUMLULUK & HAREKET AZALTMA TERCİHİ
            ========================================================================== */
         @media screen and (max-width: 480px) {
             body {
-                padding: 16px;
+                padding: calc(16px + env(safe-area-inset-top)) 16px calc(16px + env(safe-area-inset-bottom));
             }
             .card-container {
-                padding: 36px 20px 30px 20px;
+                padding: 36px 20px 28px 20px;
                 border-radius: 24px;
             }
-            .profile-pic {
-                width: 100px;
-                height: 100px;
-            }
-            .profile-name {
-                font-size: 1.5rem;
+            .profile-wrapper {
+                width: 102px;
+                height: 102px;
             }
             .link-btn {
-                padding: 16px 18px;
+                padding: 15px 18px;
                 font-size: 0.96rem;
             }
-            .orb-1 { width: 240px; height: 240px; }
-            .orb-2 { width: 220px; height: 220px; }
-            .orb-3 { width: 160px; height: 160px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .bg, .orb, .glitch::before, .glitch::after, .profile-wrapper::before {
+                animation: none !important;
+            }
+            .glow {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- ARKA PLAN KATMANI -->
-    <div class="animated-bg">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
+    <!-- ARKA PLAN KATMANI ("ben" sayfasıyla birebir aynı mimari) -->
+    <div class="bg">
+        <div class="orb o1"></div>
+        <div class="orb o2"></div>
+        <div class="orb o3"></div>
     </div>
-    <div class="bg-grid"></div>
+    <div class="grid"></div>
+    <div class="scan"></div>
+    <div class="glow" id="glow"></div>
 
     <!-- ANA KARTVİZİT KUTUSU -->
-    <main class="card-container">
+    <main class="card-container" id="card">
         
-        <!-- [DÜZENLE] PROFİL FOTOĞRAFI: src="" kısmına kendi görsel yolunuzu yazabilirsiniz -->
-        <div class="profile-wrapper">
+        <!-- [DÜZENLE] PROFİL FOTOĞRAFI (Tıklandığında harf/tema etkileşimi tetikler) -->
+        <div class="profile-wrapper" id="avatarBtn" title="Dokun: atmosferi değiştir">
             <img src="https://ui-avatars.com/api/?name=BY&background=0f172a&color=38bdf8&size=200&font-size=0.4&bold=true" alt="Batu Yılmaz" class="profile-pic">
+            <div class="status-dot"><span></span></div>
         </div>
         
-        <!-- [DÜZENLE] İSİM ALANI -->
-        <h1 class="profile-name">Batu Yılmaz</h1>
+        <!-- [DÜZENLE] İSİM ALANI (Glitch efektli) -->
+        <h1 class="profile-name glitch" id="profileName" data-text="Batu Yılmaz">Batu Yılmaz</h1>
         
-        <!-- Alt metin (Aşağıdaki script kısmından harf harf yazdırılır) -->
+        <!-- Alt metin (Aşağıdaki script ile yazılıp silinen fısıltı satırı) -->
         <div class="profile-bio" id="typewriter"></div>
 
         <!-- [DÜZENLE] ANA BUTONLAR ("Ben" ve "İletişim") -->
         <div class="links-wrapper">
             
             <!-- 1. Buton: Ben -->
-            <a href="https://btylmz.com/ben" class="link-btn">
-                <i class="fa-solid fa-user btn-icon-left"></i>
-                <span>Ben</span>
-                <i class="fa-solid fa-chevron-right btn-icon-right"></i>
-            </a>
+            <div class="btn-row">
+                <a href="https://btylmz.com/ben" class="link-btn" id="btnBen" data-mood="#f59e0b,#6366f1,#ec4899">
+                    <i class="fa-solid fa-user btn-icon-left"></i>
+                    <span>Ben</span>
+                    <i class="fa-solid fa-chevron-right btn-icon-right"></i>
+                </a>
+            </div>
 
-            <!-- 2. Buton: İletişim (mailto: kısmına kendi e-posta adresinizi yazın) -->
-            <a href="mailto:btylmz8@gmail.com" class="link-btn">
-                <i class="fa-solid fa-envelope btn-icon-left"></i>
-                <span>İletişim</span>
-                <i class="fa-solid fa-chevron-right btn-icon-right"></i>
-            </a>
+            <!-- 2. Buton: İletişim + Hızlı Kopyalama -->
+            <div class="btn-row">
+                <a href="mailto:btylmz8@gmail.com" class="link-btn" id="btnMail" data-mood="#38bdf8,#8b5cf6,#22d3ee" style="padding-right: 48px;">
+                    <i class="fa-solid fa-envelope btn-icon-left"></i>
+                    <span>İletişim</span>
+                </a>
+                <button type="button" class="copy-trigger" id="copyEmail" aria-label="E-posta adresini kopyala" title="Adresi kopyala">
+                    <i class="fa-regular fa-copy"></i>
+                </button>
+            </div>
 
         </div>
 
-        <!-- [DÜZENLE] YUVARLAK YOUTUBE VE SPOTIFY LİNKLERİ: href="" içine kendi linklerinizi yapıştırın -->
+        <!-- [DÜZENLE] YUVARLAK YOUTUBE VE SPOTIFY LİNKLERİ -->
         <div class="social-icons">
             
             <!-- YouTube İkonu -->
-            <a href="https://www.youtube.com/@btylmz" class="social-icon youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <a href="https://www.youtube.com/@btylmz" class="social-icon youtube" data-mood="#ef4444,#f43f5e,#7c3aed" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
                 <i class="fa-brands fa-youtube"></i>
             </a>
 
             <!-- Spotify İkonu -->
-            <a href="https://open.spotify.com/user/lpq8eu1de9nyc91cpsnokgis8?si=13d0ce40cacb4962" class="social-icon spotify" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
+            <a href="https://open.spotify.com/user/lpq8eu1de9nyc91cpsnokgis8?si=13d0ce40cacb4962" class="social-icon spotify" data-mood="#10b981,#0ea5e9,#22c55e" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
                 <i class="fa-brands fa-spotify"></i>
             </a>
 
         </div>
 
-        <!-- [DÜZENLE] ALT BİLGİ -->
-        <div class="footer-text">
-            © 2026 Tüm hakları saklıdır.
+        <!-- ALT BİLGİ VE CANLI SÜRE SAYACI -->
+        <div class="footer-meta">
+            <div class="session-timer">buradasın: <b id="timerVal">0 sn</b></div>
+            <div class="footer-text">© 2026 Tüm hakları saklıdır.</div>
         </div>
 
     </main>
 
+    <!-- KOPYalama BİLDİRİMİ -->
+    <div class="toast" id="toast">btylmz8@gmail.com kopyalandı</div>
+
     <!-- ETKİLEŞİM SCRIPTİ -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // [DÜZENLE] İsim altında daktilo efektiyle yazılacak metin:
-            const bioText = "btylmz";
+        (() => {
+            'use strict';
+
+            const root = document.documentElement;
+            const glow = document.getElementById('glow');
+            const card = document.getElementById('card');
             const typeTarget = document.getElementById('typewriter');
-            let index = 0;
+            const profileName = document.getElementById('profileName');
+            const avatarBtn = document.getElementById('avatarBtn');
+            const copyBtn = document.getElementById('copyEmail');
+            const toast = document.getElementById('toast');
+            const timerVal = document.getElementById('timerVal');
+            const btnBen = document.getElementById('btnBen');
 
-            setTimeout(() => {
-                function typeEffect() {
-                    if (index < bioText.length) {
-                        typeTarget.textContent += bioText.charAt(index);
-                        index++;
-                        setTimeout(typeEffect, 85);
-                    }
+            const CALM = ['#00b4d8', '#6366f1', '#10b981'];
+            const T0 = performance.now();
+
+            /* 1. Sekme Başlığı Etkileşimi ("ben" sayfasıyla senkronize) */
+            const defaultTitle = document.title;
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    document.title = 'gitme.';
+                } else {
+                    document.title = 'geri geldin.';
+                    setTimeout(() => {
+                        if (!document.hidden) document.title = defaultTitle;
+                    }, 1600);
                 }
-                typeEffect();
-            }, 600);
+            });
 
-            // 3D Buton Eğim Efekti (Sadece fare kullanılan bilgisayarlarda çalışır, mobilde kaymayı engeller)
-            if (window.matchMedia("(hover: hover)").matches) {
-                const buttons = document.querySelectorAll('.link-btn');
+            /* 2. Arka Plan Küre Renklerini (Mood) Değiştirme */
+            const mood = (a, b, c) => {
+                root.style.setProperty('--o1', a);
+                root.style.setProperty('--o2', b);
+                root.style.setProperty('--o3', c);
+            };
 
-                buttons.forEach(btn => {
+            document.querySelectorAll('[data-mood]').forEach(el => {
+                const colors = el.dataset.mood.split(',');
+                el.addEventListener('pointerenter', () => mood(...colors));
+                el.addEventListener('pointerleave', () => mood(...CALM));
+                el.addEventListener('touchstart', () => mood(...colors), { passive: true });
+            });
+
+            /* 3. İmleç / Dokunuş Işık Takibi (Glow + Kart İçi Spotlight) */
+            const track = e => {
+                glow.style.left = e.clientX + 'px';
+                glow.style.top = e.clientY + 'px';
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
+                card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
+            };
+            window.addEventListener('pointermove', track, { passive: true });
+            window.addEventListener('pointerdown', track, { passive: true });
+
+            /* 4. Gelişmiş Daktilo ve Fısıltı Motoru ("ben" sayfasındaki retype mimarisi) */
+            const phrases = [
+                'btylmz.',
+                'hoş geldin.',
+                'buradasın.',
+                'buradayım.'
+            ];
+            const wait = ms => new Promise(res => setTimeout(res, ms));
+
+            async function typeText(text, speed = 65) {
+                for (const ch of text) {
+                    typeTarget.textContent += ch;
+                    await wait(speed * (0.7 + Math.random() * 0.6));
+                }
+            }
+
+            async function eraseText(speed = 28) {
+                while (typeTarget.textContent.length > 0) {
+                    typeTarget.textContent = typeTarget.textContent.slice(0, -1);
+                    await wait(speed);
+                }
+            }
+
+            (async function whisperLoop() {
+                await wait(500);
+                let i = 0;
+                while (true) {
+                    const current = phrases[i % phrases.length];
+                    await typeText(current, i % phrases.length === 0 ? 85 : 55);
+                    await wait(i % phrases.length === 0 ? 3800 : 2200);
+                    await eraseText(24);
+                    await wait(350);
+                    i++;
+                }
+            })();
+
+            /* 5. Profil / İsim Tıklama Sürprizi (Easter Egg) */
+            const moods = [
+                ['#f59e0b', '#6366f1', '#ec4899'],
+                ['#38bdf8', '#8b5cf6', '#22d3ee'],
+                ['#f472b6', '#6366f1', '#38bdf8'],
+                CALM
+            ];
+            let moodIdx = 0;
+            const toggleIdentity = () => {
+                mood(...moods[moodIdx++ % moods.length]);
+                const nextName = profileName.textContent === 'Batu Yılmaz' ? 'btylmz' : 'Batu Yılmaz';
+                profileName.textContent = nextName;
+                profileName.dataset.text = nextName;
+            };
+            avatarBtn.addEventListener('click', toggleIdentity);
+            profileName.addEventListener('click', toggleIdentity);
+
+            /* 6. E-posta Kopyalama & Toast Bildirimi */
+            let toastTimer = null;
+            copyBtn.addEventListener('click', async (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                try {
+                    await navigator.clipboard.writeText('btylmz8@gmail.com');
+                } catch {
+                    const ta = document.createElement('textarea');
+                    ta.value = 'btylmz8@gmail.com';
+                    document.body.appendChild(ta);
+                    ta.select();
+                    document.execCommand('copy');
+                    ta.remove();
+                }
+                const icon = copyBtn.querySelector('i');
+                icon.className = 'fa-solid fa-check';
+                toast.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => {
+                    toast.classList.remove('show');
+                    icon.className = 'fa-regular fa-copy';
+                }, 2200);
+            });
+
+            /* 7. Canlı Süre Sayacı ("ben" sayfasındaki 4. sahneye gönderme) */
+            setInterval(() => {
+                const sec = Math.floor((performance.now() - T0) / 1000);
+                timerVal.textContent = sec + ' sn';
+            }, 500);
+
+            /* 8. "Ben" Sayfasına Yumuşak Sahne Geçişi */
+            btnBen.addEventListener('click', (e) => {
+                if (e.ctrlKey || e.metaKey || e.shiftKey) return;
+                e.preventDefault();
+                const targetUrl = btnBen.getAttribute('href');
+                card.classList.add('out');
+                setTimeout(() => {
+                    window.location.href = targetUrl;
+                }, 380);
+            });
+
+            window.addEventListener('pageshow', (e) => {
+                if (e.persisted) card.classList.remove('out');
+            });
+
+            /* 9. 3D Buton Eğim Efekti (Sadece fare kullanılan cihazlarda) */
+            if (window.matchMedia('(hover: hover)').matches) {
+                document.querySelectorAll('.link-btn').forEach(btn => {
                     btn.addEventListener('mousemove', (e) => {
                         const rect = btn.getBoundingClientRect();
                         const x = e.clientX - rect.left - rect.width / 2;
                         const y = e.clientY - rect.top - rect.height / 2;
-                        
                         const tiltX = (y / rect.height) * -10;
                         const tiltY = (x / rect.width) * 10;
-
                         btn.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
                     });
 
@@ -540,7 +902,7 @@
                     });
                 });
             }
-        });
+        })();
     </script>
 
 </body>
