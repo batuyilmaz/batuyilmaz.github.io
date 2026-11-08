@@ -1,4 +1,4 @@
-/* btylmz — ortak betik: istatistik izni, Google Analytics, hafif mod */
+/* btylmz — ortak betik: Google Analytics (varsayılan açık, kapatılabilir), hafif mod */
 (() => {
 'use strict';
 
@@ -38,7 +38,7 @@ const store = {
 })();
 
 /* ==========================================================================
-   Google Analytics: yalnızca izin verilirse yüklenir
+   Google Analytics: varsayılan açık, kullanıcı kapatabilir
    ========================================================================== */
 window.dataLayer = window.dataLayer || [];
 function gtag() { window.dataLayer.push(arguments); }
@@ -90,7 +90,7 @@ window.buzz = p => {
   } catch { /* desteklenmiyor */ }
 };
 
-/* Olay gönderimi: izin yoksa sessizce hiçbir şey yapmaz */
+/* Olay gönderimi: kapalıysa sessizce hiçbir şey yapmaz */
 window.track = (name, params) => {
   if (state === 'granted' && loaded) gtag('event', name, params || {});
 };
@@ -104,14 +104,14 @@ function build() {
   el = document.createElement('section');
   el.className = 'cc';
   el.setAttribute('role', 'region');
-  el.setAttribute('aria-label', 'İstatistik izni');
+  el.setAttribute('aria-label', 'İstatistik tercihi');
   el.innerHTML =
-    '<p class="cc-title">İstatistik izni</p>' +
-    '<p>Sayfanın kaç kişi tarafından görüldüğünü anlamak için Google Analytics kullanıyorum. İzin vermezsen hiçbir istatistik verisi toplanmaz ve Google\'a istek gönderilmez. Seçimini alttaki “Çerez tercihleri” bağlantısından istediğin zaman değiştirebilirsin. ' +
+    '<p class="cc-title">İstatistik tercihi</p>' +
+    '<p>Bu sayfada ziyaretçi sayısını anlamak için Google Analytics kullanılıyor. İstersen kapatabilirsin; kapattığında Google\'a istek gönderilmez. Seçimini istediğin zaman buradan değiştirebilirsin. ' +
     '<a href="' + ROOT_URL + 'gizlilik">Aydınlatma metni</a></p>' +
     '<div class="cc-actions">' +
-    '<button type="button" class="cc-btn" data-v="denied">Reddet</button>' +
-    '<button type="button" class="cc-btn" data-v="granted">Kabul et</button>' +
+    '<button type="button" class="cc-btn" data-v="denied">Kapat</button>' +
+    '<button type="button" class="cc-btn" data-v="granted">Açık kalsın</button>' +
     '</div>';
   el.addEventListener('click', e => {
     const b = e.target.closest('.cc-btn');
@@ -148,12 +148,12 @@ function choose(v) {
   hide();
 }
 
-/* Başlangıç durumu: kayıtlı seçim → yoksa GPC/DNT sinyali → yoksa sor */
+/* Başlangıç durumu: kayıtlı seçim → GPC/DNT sinyali (kapalı) → varsayılan olarak açık.
+   Bant kendiliğinden açılmaz; alttaki "Çerez tercihleri" bağlantısıyla çağrılır. */
 const saved = store.get(KEY);
 const optOut = navigator.globalPrivacyControl === true || navigator.doNotTrack === '1';
-state = saved === 'granted' || saved === 'denied' ? saved : (optOut ? 'denied' : null);
+state = saved === 'granted' || saved === 'denied' ? saved : (optOut ? 'denied' : 'granted');
 if (state === 'granted') startGA();
-else if (state === null) setTimeout(() => { if (state === null) show(false); }, 1400);
 
 document.addEventListener('click', e => {
   const opener = e.target.closest('[data-consent-open]');
