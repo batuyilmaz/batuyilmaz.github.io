@@ -434,7 +434,7 @@ const greet = () => {
   const h = new Date().getHours();
   return h < 5 ? 'iyi geceler.' : h < 12 ? 'günaydın.' : h < 18 ? 'iyi günler.' : h < 22 ? 'iyi akşamlar.' : 'iyi geceler.';
 };
-const PHRASES = ['btylmz.', 'hoş geldin.', greet(), 'buradasın.', 'buradayım.', 'buradayız.'];
+const PHRASES = ['btylmz.', 'hoş geldin.', greet, 'buradasın.', 'buradayım.', 'buradayız.'];
 bio.textContent = '';
 if (reduce) {
   bio.textContent = PHRASES[0];
@@ -443,7 +443,8 @@ if (reduce) {
     await wait(700);
     for (let i = 0; ; i++) {
       await awake();
-      const p = PHRASES[i % PHRASES.length], first = i % PHRASES.length === 0;
+      const raw = PHRASES[i % PHRASES.length], first = i % PHRASES.length === 0;
+      const p = typeof raw === 'function' ? raw() : raw;
       for (const ch of p) { bio.textContent += ch; await wait((first ? 80 : 52) * (.7 + Math.random() * .6)); }
       await wait(first ? 3400 : 2300);
       while (bio.textContent) { bio.textContent = bio.textContent.slice(0, -1); await wait(22); }
